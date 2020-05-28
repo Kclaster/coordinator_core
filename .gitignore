@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Local ###
+/src/main/java/com/coordinator/core/dataSeeds/seedData.sql
