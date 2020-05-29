@@ -1,4 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS roles CASCADE;
 DROP TABLE IF EXISTS coordinators CASCADE;
@@ -23,7 +22,7 @@ CREATE TABLE desired_services
 
 CREATE TABLE venues
 (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    id uuid PRIMARY KEY NOT NULL,
     title varchar(30) NOT NULL,
     state varchar(2) NOT NULL,
     city varchar(30) NOT NULL,
@@ -34,7 +33,7 @@ CREATE TABLE venues
 
 CREATE TABLE events
 (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    id uuid PRIMARY KEY NOT NULL,
     event_date timestamptz,
     event_size integer,
     event_type_id integer NOT NULL REFERENCES event_types (id),
@@ -48,8 +47,6 @@ CREATE TABLE events
 
 CREATE TABLE users
 (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    first_name varchar(30) NOT NULL,
     last_name varchar(30) NOT NULL,
     role_id integer NOT NULL,
     contact_email varchar(30) NOT NULL,
