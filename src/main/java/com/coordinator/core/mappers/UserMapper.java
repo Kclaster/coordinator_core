@@ -11,8 +11,11 @@ public class UserMapper implements RowMapper<UserDto> {
         public UserDto mapRow(ResultSet rs, int i) throws SQLException {
             UserDto userDto = new UserDto();
             userDto.setId(UUID.fromString(rs.getString("id")));
-            userDto.setFirstName(rs.getString("firstName"));
-            userDto.setLastName(rs.getString("lastName"));
+            userDto.setName(String.format("%s %s", rs.getString("firstName"), rs.getString("lastName")));
+            userDto.setRoleId(rs.getInt("roleId"));
+            userDto.setContactEmail(rs.getString("contactEmail"));
+            userDto.setContactPhoneNumber(rs.getString("contactPhoneNumber"));
+            userDto.setEventId(UUID.fromString(rs.getString("eventId")));
             return userDto;
         }
 }
