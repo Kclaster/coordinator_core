@@ -36,8 +36,6 @@ public class BidsRepositoryImpl implements IBidsRepository {
                 "sortAsc", queryOptions.getIsAscending(),
                 "sortField", queryOptions.getSortField()
         );
-        System.out.println("WHAT THE FUCK");
-        System.out.println(params);
         String sql = SqlHelper.sql("select-all-coordinators-bids", queryOptions);
         return namedParameters.query(
                 sql,

@@ -3,6 +3,7 @@ package com.coordinator.core.models;
 import java.util.UUID;
 
 public class BidDto {
+    private EventDto event;
     private UUID id;
     private Integer bidStatusId;
     private String bidAmount;
@@ -56,5 +57,13 @@ public class BidDto {
 
     public void setCoordinatorId(UUID coordinatorId) {
         this.coordinatorId = coordinatorId;
+    }
+
+    public EventDto getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventDto event) {
+        this.event = event;
     }
 }
