@@ -6,7 +6,7 @@ public class BidDto {
     private EventDto event;
     private UUID id;
     private Integer bidStatusId;
-    private String bidAmount;
+    private Integer bidAmount;
     private String messageToUser;
     private UUID eventId;
     private UUID coordinatorId;
@@ -27,11 +27,11 @@ public class BidDto {
         this.bidStatusId = bidStatusId;
     }
 
-    public String getBidAmount() {
+    public Integer getBidAmount() {
         return bidAmount;
     }
 
-    public void setBidAmount(String bidAmount) {
+    public void setBidAmount(Integer bidAmount) {
         this.bidAmount = bidAmount;
     }
 

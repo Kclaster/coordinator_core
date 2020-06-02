@@ -90,7 +90,7 @@ CREATE TABLE bids
 (
     id uuid PRIMARY KEY NOT NULL,
     bid_status_id integer REFERENCES bid_statuses (id) NOT NULL,
-    bid_amount varchar(30) NOT NULL,
+    bid_amount integer NOT NULL,
     message_to_user varchar(300),
     event_id uuid REFERENCES events (id),
     coordinator_id uuid REFERENCES coordinators (id)

@@ -26,6 +26,7 @@ public class UserRepositoryImpl implements IUserRepository {
         return jdbcTemplate.query(
                 SqlHelper.sql(
                         "select-all-users"),
-                        new UserMapper());
+                        new UserMapper()
+        );
     }
 }

@@ -12,7 +12,7 @@ public class BidMapper implements RowMapper<BidDto> {
     public BidDto mapRow(ResultSet rs, int i) throws SQLException {
         BidDto bidDto = new BidDto();
         bidDto.setId(UUID.fromString(rs.getString("id")));
-        bidDto.setBidAmount(rs.getString("bidAmount"));
+        bidDto.setBidAmount(rs.getInt("bidAmount"));
         bidDto.setBidStatusId(rs.getInt("bidStatusId"));
         bidDto.setCoordinatorId(UUID.fromString(rs.getString("coordinatorId")));
         bidDto.setEventId(UUID.fromString(rs.getString("eventId")));
