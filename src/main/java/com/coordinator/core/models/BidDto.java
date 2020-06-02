@@ -8,7 +8,6 @@ public class BidDto {
     private Integer bidStatusId;
     private Integer bidAmount;
     private String messageToUser;
-    private UUID eventId;
     private UUID coordinatorId;
 
     public UUID getId() {
@@ -41,14 +40,6 @@ public class BidDto {
 
     public void setMessageToUser(String messageToUser) {
         this.messageToUser = messageToUser;
-    }
-
-    public UUID getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(UUID eventId) {
-        this.eventId = eventId;
     }
 
     public UUID getCoordinatorId() {
