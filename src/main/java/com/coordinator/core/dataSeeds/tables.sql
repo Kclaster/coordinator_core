@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS venues CASCADE;
 DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS desired_services CASCADE;
 DROP TABLE IF EXISTS event_types CASCADE;
+DROP TABLE IF EXISTS bid_statuses CASCADE;
+DROP TABLE IF EXISTS bids CASCADE;
 
 CREATE TABLE event_types
 (
@@ -31,6 +33,21 @@ CREATE TABLE venues
     is_meal_provided bool
 );
 
+CREATE TABLE coordinators
+(
+    id uuid PRIMARY KEY NOT NULL,
+    title varchar(30) NOT NULL,
+    office_state varchar(2) NOT NULL,
+    office_city varchar(30) NOT NULL,
+    office_address varchar(30) NOT NULL,
+    office_postal_code varchar(11) NOT NULL,
+    contact_email varchar(30) NOT NULL,
+    maximum_distance_to_client integer NOT NULL,
+    level_one_default_bid integer,
+    level_two_default_bid integer,
+    level_three_default_bid integer
+);
+
 CREATE TABLE events
 (
     id uuid PRIMARY KEY NOT NULL,
@@ -42,11 +59,14 @@ CREATE TABLE events
     venue_id uuid REFERENCES venues (id),
     desired_state varchar(2),
     desired_city varchar(30),
-    desired_postal_code varchar(9)
+    desired_postal_code varchar(9),
+    coordinator_id uuid REFERENCES coordinators (id)
 );
 
 CREATE TABLE users
 (
+    id uuid PRIMARY KEY NOT NULL,
+    first_name varchar(30) NOT NULL,
     last_name varchar(30) NOT NULL,
     role_id integer NOT NULL,
     contact_email varchar(30) NOT NULL,
@@ -58,4 +78,20 @@ CREATE TABLE roles
 (
     id integer PRIMARY KEY NOT NULL,
     title varchar(30) NOT NULL
+);
+
+CREATE TABLE bid_statuses
+(
+    id integer PRIMARY KEY NOT NULL,
+    title varchar(30) NOT NULL
+);
+
+CREATE TABLE bids
+(
+    id uuid PRIMARY KEY NOT NULL,
+    bid_status_id integer REFERENCES bid_statuses (id) NOT NULL,
+    bid_amount integer NOT NULL,
+    message_to_user varchar(300),
+    event_id uuid REFERENCES events (id),
+    coordinator_id uuid REFERENCES coordinators (id)
 );

@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfiguration {
-    @Value("${JDBC_DATABASE_URL}")
+    @Value("${JDBC_DATABASE_PASSWORD}")
     private String dbPasowrd;
 
     @Value("${JDBC_DATABASE_USERNAME}")
