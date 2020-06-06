@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Value.Immutable
-public class QueryOptions {
+@BuilderStyle
+public abstract class QueryOptions {
 
     @Value.Default
     public Integer getPage() { return 0; }
