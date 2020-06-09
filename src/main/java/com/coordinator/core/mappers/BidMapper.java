@@ -29,6 +29,7 @@ public class BidMapper implements RowMapper<BidDto> {
         event.setEventTypeId(rs.getInt("eventTypeId"));
         event.setId(UUID.fromString(rs.getString("id")));
         event.setVenueId(UUID.fromString(rs.getString("venueId")));
+        event.setArchived(rs.getBoolean("isArchived"));
         bidDto.setEvent(event);
 
 

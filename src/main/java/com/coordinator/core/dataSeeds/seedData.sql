@@ -7,24 +7,24 @@ INSERT INTO event_types (id, title, description) VALUES
 (1, 'Wedding', 'Getting hitched'),
 (2, 'Corporate', 'Celebrate that money');
 
-INSERT INTO venues (id, title, state, city, street_address, postal_code, is_meal_provided) VALUES
-('9e2d7974-a127-11ea-bb37-0242ac130002', 'Hogwarts', 'UK', 'London', '1234 Hogsmead', '4321', FALSE),
-('9e2d7974-a127-11ea-bb37-0242ac130012', 'The Woods', 'OK', 'Tulsa', '4323 JustUnderTheBridge', '7594', TRUE);
+INSERT INTO venues (id, title, state, city, street_address, postal_code, is_meal_provided, is_archived) VALUES
+('9e2d7974-a127-11ea-bb37-0242ac130002', 'Hogwarts', 'UK', 'London', '1234 Hogsmead', '4321', FALSE, FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130012', 'The Woods', 'OK', 'Tulsa', '4323 JustUnderTheBridge', '7594', TRUE, FALSE);
 
-INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid) VALUES
-('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200),
-('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200),
-('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2);
+INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid, is_archived, username) VALUES
+('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200, FALSE, 'bobsy234'),
+('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200, FALSE, 'merica'),
+('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, 'sooners');
 
-INSERT INTO events (id, event_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id) VALUES
-('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002'),
-('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002'),
-('9e2d7974-a127-11ea-bb37-0242ac130005', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002');
+INSERT INTO events (id, event_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
+('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130005', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);
 
-INSERT INTO users (id, last_name, first_name, role_id, contact_email, contact_phone_number, event_id) VALUES
-('8e2d7974-a127-11ea-bb37-0242ac130004', 'Chappell', 'Austin', 1, 'austin@gmail.com', '5555555555', '9e2d7974-a127-11ea-bb37-0242ac130003'),
-('7e2d7974-a127-11ea-bb37-0242ac130004', 'SomeCrazyAssName', 'Andrew', 2, 'andrew@gmail.com', '6666666666', '9e2d7974-a127-11ea-bb37-0242ac130004'),
-('6e2d7974-a127-11ea-bb37-0242ac130004', 'Khan', 'Adnan', 4, 'adnan@gmail.com', '4444444444', '9e2d7974-a127-11ea-bb37-0242ac130005');
+INSERT INTO users (id, last_name, first_name, role_id, contact_email, contact_phone_number, event_id, is_archived, username) VALUES
+('8e2d7974-a127-11ea-bb37-0242ac130004', 'Chappell', 'Austin', 1, 'austin@gmail.com', '5555555555', '9e2d7974-a127-11ea-bb37-0242ac130003', FALSE, 'hogs543'),
+('7e2d7974-a127-11ea-bb37-0242ac130004', 'SomeCrazyAssName', 'Andrew', 2, 'andrew@gmail.com', '6666666666', '9e2d7974-a127-11ea-bb37-0242ac130004', FALSE, 'princess987'),
+('6e2d7974-a127-11ea-bb37-0242ac130004', 'Khan', 'Adnan', 4, 'adnan@gmail.com', '4444444444', '9e2d7974-a127-11ea-bb37-0242ac130005', FALSE, 'karen');
 
 
 INSERT INTO roles (id, title) VALUES

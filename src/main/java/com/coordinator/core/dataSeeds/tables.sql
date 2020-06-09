@@ -30,22 +30,25 @@ CREATE TABLE venues
     city varchar(30) NOT NULL,
     street_address varchar(30) NOT NULL,
     postal_code varchar(9) NOT NULL,
-    is_meal_provided bool
+    is_meal_provided bool,
+    is_archived boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE coordinators
 (
     id uuid PRIMARY KEY NOT NULL,
-    title varchar(30) NOT NULL,
-    office_state varchar(2) NOT NULL,
-    office_city varchar(30) NOT NULL,
-    office_address varchar(30) NOT NULL,
-    office_postal_code varchar(11) NOT NULL,
-    contact_email varchar(30) NOT NULL,
-    maximum_distance_to_client integer NOT NULL,
+    title varchar(30),
+    office_state varchar(2),
+    office_city varchar(30),
+    office_address varchar(30),
+    office_postal_code varchar(11),
+    contact_email varchar(30),
+    maximum_distance_to_client integer,
     level_one_default_bid integer,
     level_two_default_bid integer,
-    level_three_default_bid integer
+    level_three_default_bid integer,
+    is_archived boolean NOT NULL DEFAULT FALSE,
+    username varchar(30) NOT NULL
 );
 
 CREATE TABLE events
@@ -60,7 +63,8 @@ CREATE TABLE events
     desired_state varchar(2),
     desired_city varchar(30),
     desired_postal_code varchar(9),
-    coordinator_id uuid REFERENCES coordinators (id)
+    coordinator_id uuid REFERENCES coordinators (id),
+    is_archived boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE users
@@ -71,7 +75,10 @@ CREATE TABLE users
     role_id integer NOT NULL,
     contact_email varchar(30) NOT NULL,
     contact_phone_number varchar(11) NOT NULL,
-    event_id uuid REFERENCES events (id)
+    event_id uuid REFERENCES events (id),
+    is_archived boolean NOT NULL DEFAULT FALSE,
+    username varchar(30) NOT NULL
+
 );
 
 CREATE TABLE roles
