@@ -1,5 +1,7 @@
 package com.coordinator.core.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -15,6 +17,7 @@ public class EventDto {
     private String desiredCity;
     private String desiredPostalCode;
     private UUID coordinatorId;
+    private boolean isArchived;
 
     public UUID getId() {
         return id;
@@ -102,5 +105,14 @@ public class EventDto {
 
     public void setCoordinatorId(UUID coordinatorId) {
         this.coordinatorId = coordinatorId;
+    }
+
+    @JsonProperty(value="isArchived")
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 }

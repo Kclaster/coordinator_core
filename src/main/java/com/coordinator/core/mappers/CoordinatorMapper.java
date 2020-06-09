@@ -19,6 +19,11 @@ public class CoordinatorMapper implements RowMapper<CoordinatorDto> {
         coordinatorDto.setMaxDistanceToClient(rs.getInt("maxDistanceToClient"));
         coordinatorDto.setOfficeAddress(rs.getString("officeAddress"));
         coordinatorDto.setTitle(rs.getString("title"));
+        coordinatorDto.setArchived(rs.getBoolean("isArchived"));
+        coordinatorDto.setUsername(rs.getString("username"));
+        coordinatorDto.setOfficePostalCode(rs.getString("officePostalCode"));
+        coordinatorDto.setOfficeState(rs.getString("officeState"));
+        coordinatorDto.setOfficeCity(rs.getString("officeCity"));
 
         return coordinatorDto;
     }

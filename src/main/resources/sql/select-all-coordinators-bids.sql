@@ -1,9 +1,9 @@
-SELECT B.id as id
-    , B.bid_status_id as bidStatusId
-    , B.bid_amount as bidAmount
-    , B.message_to_user as messageToUser
-    , B.event_id as eventId
-    , B.coordinator_id as coordinatorId
+SELECT b.id as id
+    , b.bid_status_id as bidStatusId
+    , b.bid_amount as bidAmount
+    , b.message_to_user as messageToUser
+    , b.event_id as eventId
+    , b.coordinator_id as coordinatorId
     , e.event_date as eventDate
     , e.event_size as eventSize
     , e.event_type_id as eventTypeId
@@ -14,8 +14,9 @@ SELECT B.id as id
     , e.desired_city as desiredCity
     , e.desired_postal_code as desiredPostalCode
     , e.coordinator_id as coordinatorId
-FROM bids B
-JOIN events E
-    ON E.id = B.event_id
-WHERE B.coordinator_id = :coordinator_id
+    , e.is_archived as isArchived
+FROM bids b
+JOIN events e
+    ON e.id = b.event_id
+WHERE b.coordinator_id = :coordinator_id
 

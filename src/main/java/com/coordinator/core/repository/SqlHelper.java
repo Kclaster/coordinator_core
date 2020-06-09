@@ -60,4 +60,10 @@ public class SqlHelper {
             return new String(in.readAllBytes());
         }
     }
+
+    public static String sqlUpdateTable(String fileName, String tableName) {
+        String sql = sql(fileName);
+
+        return String.format("UPDATE %s e %s", tableName, sql.trim());
+    }
 }
