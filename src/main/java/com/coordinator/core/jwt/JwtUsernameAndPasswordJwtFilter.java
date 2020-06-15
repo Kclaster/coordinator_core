@@ -53,7 +53,6 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
@@ -63,7 +62,5 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
                 .compact();
 
         response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
-
-        super.successfulAuthentication(request, response, chain, authResult);
     }
 }
