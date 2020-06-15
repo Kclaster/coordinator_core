@@ -1,6 +1,7 @@
-package com.coordinator.core.auth;
+package com.coordinator.core.repository.core;
 
 import com.coordinator.core.mappers.AuthUserMapper;
+import com.coordinator.core.models.ApplicationUser;
 import com.coordinator.core.repository.SqlHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

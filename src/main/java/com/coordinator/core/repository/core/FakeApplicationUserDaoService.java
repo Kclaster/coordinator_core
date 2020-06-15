@@ -1,6 +1,7 @@
-package com.coordinator.core.auth;
+package com.coordinator.core.repository.core;
 
-import com.coordinator.core.security.ApplicationUserRole;
+import com.coordinator.core.models.ApplicationUser;
+import com.coordinator.core.enums.ApplicationUserRole;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.coordinator.core.security.ApplicationUserRole.ADMIN;
-import static com.coordinator.core.security.ApplicationUserRole.USER;
+import static com.coordinator.core.enums.ApplicationUserRole.ADMIN;
+import static com.coordinator.core.enums.ApplicationUserRole.USER;
 
 @Repository("fake")
 public class FakeApplicationUserDaoService implements ApplicationUserDao {
@@ -30,8 +31,6 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                 .findFirst();
     }
 
-    // TODO: this seem unperformant with a large pool of auth_users
-    // TODO: password should be encoded in database
     private List<ApplicationUser> getApplicationUsers() {
             List<ApplicationUser> applicationUsers = Lists.newArrayList(
                     new ApplicationUser(

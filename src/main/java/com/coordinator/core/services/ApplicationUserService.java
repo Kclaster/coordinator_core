@@ -1,6 +1,6 @@
 package com.coordinator.core.services;
 
-import com.coordinator.core.auth.ApplicationUserDao;
+import com.coordinator.core.repository.core.ApplicationUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;

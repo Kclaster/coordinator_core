@@ -1,4 +1,6 @@
-package com.coordinator.core.auth;
+package com.coordinator.core.repository.core;
+
+import com.coordinator.core.models.ApplicationUser;
 
 import java.util.Optional;
 

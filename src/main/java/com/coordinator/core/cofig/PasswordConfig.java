@@ -1,4 +1,4 @@
-package com.coordinator.core.security;
+package com.coordinator.core.cofig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.coordinator.core.security;
+package com.coordinator.core.enums;
 
 public enum ApplicationUserPermission {
     COORDINATOR_READ("coordinator:read"),

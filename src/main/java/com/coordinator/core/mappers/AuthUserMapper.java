@@ -1,7 +1,7 @@
 package com.coordinator.core.mappers;
 
-import com.coordinator.core.auth.ApplicationUser;
-import com.coordinator.core.security.ApplicationUserRole;
+import com.coordinator.core.models.ApplicationUser;
+import com.coordinator.core.enums.ApplicationUserRole;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

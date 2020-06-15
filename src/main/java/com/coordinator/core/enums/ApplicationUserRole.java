@@ -1,4 +1,4 @@
-package com.coordinator.core.security;
+package com.coordinator.core.enums;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.coordinator.core.security.ApplicationUserPermission.*;
+import static com.coordinator.core.enums.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
 //    ADMIN has no roles for now.

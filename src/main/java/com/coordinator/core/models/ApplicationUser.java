@@ -1,4 +1,4 @@
-package com.coordinator.core.auth;
+package com.coordinator.core.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

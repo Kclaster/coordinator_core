@@ -1,6 +1,5 @@
-package com.coordinator.core.security;
+package com.coordinator.core.cofig;
 
-import com.coordinator.core.cofig.JwtConfig;
 import com.coordinator.core.filters.JwtTokenVerifier;
 import com.coordinator.core.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.services.ApplicationUserService;
@@ -18,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.crypto.SecretKey;
 
-import static com.coordinator.core.security.ApplicationUserRole.COORDINATOR;
+import static com.coordinator.core.enums.ApplicationUserRole.COORDINATOR;
 
 @Configuration
 @EnableWebSecurity
