@@ -47,3 +47,12 @@ INSERT INTO bids (id, bid_status_id, bid_amount, message_to_user, event_id, coor
 ('8e2d7974-a128-51ea-bb37-0242ac130004', 4, 350, 'I am so hungry', '9e2d7974-a127-11ea-bb37-0242ac130004', '9e2d7976-a127-11ea-bb37-0242ac130002');
 
 
+INSERT INTO auth_user_roles (id, title) VALUES
+(1, 'admin'),
+(2, 'user'),
+(3, 'coordinator');
+
+INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
+('8e2d7974-a138-11ea-bb37-0242ac130004', 'kyleIsCool', 'password', 1),
+('8e2d7974-a148-11ea-bb37-0242ac130004', 'chrisIsCool', 'password', 2),
+('8e2d7974-a158-11ea-bb37-0242ac130004', 'bobIsCool', 'password', 3);
