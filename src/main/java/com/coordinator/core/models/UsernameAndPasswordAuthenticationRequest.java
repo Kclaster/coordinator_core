@@ -1,4 +1,4 @@
-package com.coordinator.core.jwt;
+package com.coordinator.core.models;
 
 public class UsernameAndPasswordAuthenticationRequest {
     private String username;

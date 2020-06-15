@@ -1,4 +1,4 @@
-package com.coordinator.core.jwt;
+package com.coordinator.core.cofig;
 
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;

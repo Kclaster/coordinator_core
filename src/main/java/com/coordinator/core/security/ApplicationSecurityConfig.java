@@ -1,8 +1,8 @@
 package com.coordinator.core.security;
 
-import com.coordinator.core.jwt.JwtConfig;
-import com.coordinator.core.jwt.JwtTokenVerifier;
-import com.coordinator.core.jwt.JwtUsernameAndPasswordJwtFilter;
+import com.coordinator.core.cofig.JwtConfig;
+import com.coordinator.core.filters.JwtTokenVerifier;
+import com.coordinator.core.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.services.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

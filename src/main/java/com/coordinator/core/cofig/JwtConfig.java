@@ -1,4 +1,4 @@
-package com.coordinator.core.jwt;
+package com.coordinator.core.cofig;
 
 import com.google.common.net.HttpHeaders;
 import org.springframework.boot.context.properties.ConfigurationProperties;

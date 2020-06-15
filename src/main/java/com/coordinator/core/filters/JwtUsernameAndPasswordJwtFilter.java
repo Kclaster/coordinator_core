@@ -1,5 +1,7 @@
-package com.coordinator.core.jwt;
+package com.coordinator.core.filters;
 
+import com.coordinator.core.cofig.JwtConfig;
+import com.coordinator.core.models.UsernameAndPasswordAuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
