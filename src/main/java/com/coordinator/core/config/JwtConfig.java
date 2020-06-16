@@ -1,4 +1,4 @@
-package com.coordinator.core.cofig;
+package com.coordinator.core.config;
 
 import com.google.common.net.HttpHeaders;
 import org.springframework.boot.context.properties.ConfigurationProperties;

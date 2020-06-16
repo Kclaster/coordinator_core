@@ -17,8 +17,6 @@ public class CoordinatorController {
     @Autowired
     private ICoordinator iCoordinator;
 
-    // PreAuthorize -- hasRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
-
     @GetMapping
     @RequestMapping("{coordinatorId}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_COORDINATOR, ROLE_USER')")

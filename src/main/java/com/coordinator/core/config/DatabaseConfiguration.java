@@ -1,4 +1,4 @@
-package com.coordinator.core.cofig;
+package com.coordinator.core.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

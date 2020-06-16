@@ -1,6 +1,6 @@
 package com.coordinator.core.filters;
 
-import com.coordinator.core.cofig.JwtConfig;
+import com.coordinator.core.config.JwtConfig;
 import com.coordinator.core.models.UsernameAndPasswordAuthenticationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;

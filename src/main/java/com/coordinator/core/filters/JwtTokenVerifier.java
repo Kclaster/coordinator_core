@@ -1,6 +1,6 @@
 package com.coordinator.core.filters;
 
-import com.coordinator.core.cofig.JwtConfig;
+import com.coordinator.core.config.JwtConfig;
 import com.google.common.base.Strings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
