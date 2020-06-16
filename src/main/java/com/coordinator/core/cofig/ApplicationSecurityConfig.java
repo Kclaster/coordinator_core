@@ -47,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey))
+                .addFilter(jwtAuthorizationFilter())
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordJwtFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
@@ -67,6 +67,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(applicationUserService);
         return provider;
+    }
+
+    public JwtUsernameAndPasswordJwtFilter jwtAuthorizationFilter() throws Exception {
+        JwtUsernameAndPasswordJwtFilter jwtAuthenticationFilter = new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
+        return jwtAuthenticationFilter;
     }
 
 }

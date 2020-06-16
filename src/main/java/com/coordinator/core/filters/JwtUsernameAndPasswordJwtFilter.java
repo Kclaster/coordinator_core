@@ -50,6 +50,7 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
         }
     }
 
+
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
