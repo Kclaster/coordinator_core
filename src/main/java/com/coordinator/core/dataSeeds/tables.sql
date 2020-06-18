@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS desired_services CASCADE;
 DROP TABLE IF EXISTS event_types CASCADE;
 DROP TABLE IF EXISTS bid_statuses CASCADE;
 DROP TABLE IF EXISTS bids CASCADE;
+DROP TABLE IF EXISTS auth_user_roles CASCADE;
+DROP TABLE IF EXISTS auth_users CASCADE;
 
 CREATE TABLE event_types
 (
@@ -30,7 +32,7 @@ CREATE TABLE venues
     city varchar(30) NOT NULL,
     street_address varchar(30) NOT NULL,
     postal_code varchar(9) NOT NULL,
-    is_meal_provided bool,
+    is_meal_provided boolean,
     is_archived boolean NOT NULL DEFAULT FALSE
 );
 
@@ -101,4 +103,22 @@ CREATE TABLE bids
     message_to_user varchar(300),
     event_id uuid REFERENCES events (id),
     coordinator_id uuid REFERENCES coordinators (id)
+);
+
+CREATE TABLE auth_user_roles
+(
+    id int PRIMARY KEY NOT NULL,
+    title varchar(30) NOT NULL
+);
+
+CREATE TABLE auth_users
+(
+    id uuid PRIMARY KEY NOT NULL,
+    username varchar(30) NOT NULL,
+    password varchar(30) NOT NULL,
+    auth_user_role_id int REFERENCES auth_user_roles (id),
+    is_expired boolean NOT NULL DEFAULT TRUE,
+    is_locked boolean NOT NULL DEFAULT TRUE,
+    is_credentials_expired boolean NOT NULL DEFAULT TRUE,
+    is_enabled boolean NOT NULL DEFAULT TRUE
 );

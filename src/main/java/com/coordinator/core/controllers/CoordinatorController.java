@@ -6,6 +6,7 @@ import com.coordinator.core.models.CoordinatorPutRequest;
 import com.coordinator.core.services.ICoordinator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,12 +19,14 @@ public class CoordinatorController {
 
     @GetMapping
     @RequestMapping("{coordinatorId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_COORDINATOR, ROLE_USER')")
     public ResponseEntity<CoordinatorDto> getCoordinator(@PathVariable(value = "coordinatorId") String coordinatorId) {
         return ResponseEntity.ok(iCoordinator.getCoordinator(UUID.fromString(coordinatorId)));
     }
 
     @DeleteMapping
     @RequestMapping("{coordinatorId}/delete")
+    @PreAuthorize("hasRole('ROLE_COORDINATOR')")
     public ResponseEntity updateArchiveCoordinator(@PathVariable(value = "coordinatorId") String coordinatorId) {
         try {
             iCoordinator.updateArchiveCoordinator(UUID.fromString(coordinatorId));
@@ -35,12 +38,15 @@ public class CoordinatorController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_COORDINATOR')")
     public ResponseEntity<CoordinatorDto> createCoordinator(@RequestBody final CoordinatorPostRequest coordinatorPostRequest) {
         return ResponseEntity.ok(iCoordinator.createCoordinator(coordinatorPostRequest.getUsername()));
     }
 
     @PutMapping
     @RequestMapping("{coordinatorId}/update")
+    @PreAuthorize("hasRole('ROLE_COORDINATOR')")
+
     public ResponseEntity<CoordinatorDto> updateCoordinator(@PathVariable(value = "coordinatorId") String coordinatorId,
                                                             @RequestBody CoordinatorPutRequest coordinatorPutRequest) {
 
