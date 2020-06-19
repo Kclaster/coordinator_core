@@ -1,6 +1,6 @@
 package com.coordinator.core.mappers;
 
-import com.coordinator.core.models.ApplicationUser;
+import com.coordinator.core.models.AuthUser;
 import com.coordinator.core.enums.ApplicationUserRole;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthUserMapper implements RowMapper<ApplicationUser> {
+public class AuthUserMapper implements RowMapper<AuthUser> {
     private final PasswordEncoder passwordEncoder;
 
     public AuthUserMapper(PasswordEncoder passwordEncoder) {
@@ -16,8 +16,8 @@ public class AuthUserMapper implements RowMapper<ApplicationUser> {
     }
 
 
-    public ApplicationUser mapRow(ResultSet rs, int i) throws SQLException {
-        ApplicationUser applicationUser = new ApplicationUser(
+    public AuthUser mapRow(ResultSet rs, int i) throws SQLException {
+        AuthUser authUser = new AuthUser(
                 rs.getString("username"),
                 passwordEncoder.encode(rs.getString("password")),
                 ApplicationUserRole.valueOf(rs.getInt("authUserRoleId")).get().getGrantedAuthorities(),
@@ -26,6 +26,6 @@ public class AuthUserMapper implements RowMapper<ApplicationUser> {
                 rs.getBoolean("isCredentialsExpired"),
                 rs.getBoolean("isEnabled"));
 
-        return applicationUser;
+        return authUser;
     }
 }

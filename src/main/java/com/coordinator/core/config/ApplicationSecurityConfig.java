@@ -2,7 +2,7 @@ package com.coordinator.core.config;
 
 import com.coordinator.core.filters.JwtTokenVerifier;
 import com.coordinator.core.filters.JwtUsernameAndPasswordJwtFilter;
-import com.coordinator.core.services.ApplicationUserService;
+import com.coordinator.core.services.AuthUserServiceImpl;
 import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,17 +30,17 @@ import static com.coordinator.core.enums.ApplicationUserRole.COORDINATOR;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
+    private final AuthUserServiceImpl authUserServiceImpl;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
 
     @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
-                                     ApplicationUserService applicationUserService,
+                                     AuthUserServiceImpl authUserServiceImpl,
                                      SecretKey secretKey,
                                      JwtConfig jwtConfig) {
         this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
+        this.authUserServiceImpl = authUserServiceImpl;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
     }
@@ -57,7 +57,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(jwtAuthorizationFilter())
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordJwtFilter.class)
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/", "index", "/css/*", "/js/*", "/api/v1/auth/register").permitAll()
                 .antMatchers("/api/**").hasRole(COORDINATOR.name())
                 .anyRequest()
                 .authenticated();
@@ -85,7 +85,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(applicationUserService);
+        provider.setUserDetailsService(authUserServiceImpl);
         return provider;
     }
 
