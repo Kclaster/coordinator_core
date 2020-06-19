@@ -1,5 +1,7 @@
 package com.coordinator.core.config;
 
+import com.coordinator.core.filters.AccessDeniedFilter;
+import com.coordinator.core.filters.AuthenticationEntryPointFilter;
 import com.coordinator.core.filters.JwtTokenVerifier;
 import com.coordinator.core.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.services.AuthUserServiceImpl;
@@ -33,27 +35,38 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthUserServiceImpl authUserServiceImpl;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
+    private final AccessDeniedFilter accessDeniedFilter;
+    private final AuthenticationEntryPointFilter authenticationEntryPointFilter;
 
     @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
                                      AuthUserServiceImpl authUserServiceImpl,
                                      SecretKey secretKey,
-                                     JwtConfig jwtConfig) {
+                                     JwtConfig jwtConfig,
+                                     AccessDeniedFilter accessDeniedFilter,
+                                     AuthenticationEntryPointFilter authenticationEntryPointFilter) {
         this.passwordEncoder = passwordEncoder;
         this.authUserServiceImpl = authUserServiceImpl;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
+        this.accessDeniedFilter = accessDeniedFilter;
+        this.authenticationEntryPointFilter = authenticationEntryPointFilter;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors()
-                .and()
-                .csrf().disable()
+                    .and()
+                .csrf()
+                    .disable()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                    .and()
+                .exceptionHandling()
+                    .accessDeniedHandler(accessDeniedFilter)
+                    .authenticationEntryPoint(authenticationEntryPointFilter)
+                    .and()
                 .addFilter(jwtAuthorizationFilter())
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordJwtFilter.class)
                 .authorizeRequests()

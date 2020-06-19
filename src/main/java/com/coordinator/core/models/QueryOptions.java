@@ -1,5 +1,6 @@
 package com.coordinator.core.models;
 
+import com.coordinator.core.annotations.BuilderStyle;
 import org.immutables.value.Value;
 
 import java.util.ArrayList;

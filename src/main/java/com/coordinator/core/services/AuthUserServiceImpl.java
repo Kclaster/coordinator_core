@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
+
 @Service
 public class AuthUserServiceImpl implements IAuthUser {
     private final PasswordEncoder passwordEncoder;
@@ -34,16 +36,16 @@ public class AuthUserServiceImpl implements IAuthUser {
     @Transactional
     @Override
     public AuthUser registerNewUserAccount(AuthUserRequest authUserRequest)
-            throws Exception {
+            throws ConstraintViolationException {
 
         if (usernameExist(authUserRequest.getUsername())) {
-            throw new Exception(
+            throw new NullPointerException(
                     "There is an account with that email address: "
                             +  authUserRequest.getUsername());
         }
         iAuthUserRepository.saveAuthUser(authUserRequest);
 
-        return iAuthUserRepository.selectApplicationUserByUsername("kyleIsCool").get();
+        return iAuthUserRepository.selectApplicationUserByUsername(authUserRequest.getUsername()).get();
     }
 
     private boolean usernameExist(String username) {

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -21,18 +21,15 @@ public class AuthenticationController {
     private IAuthUser iAuthUser;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthUserRequest> registerUserAccount(
-            @RequestBody @Valid AuthUserRequest authUserRequest,
-            HttpServletRequest request, Errors errors) {
-
-        try {
+    public ResponseEntity<?> registerUserAccount(
+            @Valid @RequestBody AuthUserRequest authUserRequest,
+            Errors errors) throws NullPointerException {
+            if (errors.hasErrors()) {
+                return ResponseEntity.badRequest().body(errors.getFieldError());
+            }
             AuthUser registered = iAuthUser.registerNewUserAccount(authUserRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();        }
+            URI location = URI.create(String.format("api/v1/auth/login", registered.getUsername()));
 
-        return ResponseEntity.ok(authUserRequest);
-    }
-
-
+            return ResponseEntity.created(location).build();
+        }
 }
