@@ -1,7 +1,8 @@
 package com.coordinator.core.repository.core;
 
-import com.coordinator.core.models.ApplicationUser;
+import com.coordinator.core.models.AuthUser;
 import com.coordinator.core.enums.ApplicationUserRole;
+import com.coordinator.core.models.AuthUserRequest;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,26 +15,26 @@ import static com.coordinator.core.enums.ApplicationUserRole.ADMIN;
 import static com.coordinator.core.enums.ApplicationUserRole.USER;
 
 @Repository("fake")
-public class FakeApplicationUserDaoService implements ApplicationUserDao {
+public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public FakeApplicationUserDaoService(PasswordEncoder passwordEncoder) {
+    public FakeIAuthUserRepositoryService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
 
     @Override
-    public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
+    public Optional<AuthUser> selectApplicationUserByUsername(String username) {
         return getApplicationUsers()
                 .stream()
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
     }
 
-    private List<ApplicationUser> getApplicationUsers() {
-            List<ApplicationUser> applicationUsers = Lists.newArrayList(
-                    new ApplicationUser(
+    private List<AuthUser> getApplicationUsers() {
+            List<AuthUser> authUsers = Lists.newArrayList(
+                    new AuthUser(
                             "bobIsCool",
                             passwordEncoder.encode("password"),
                             ApplicationUserRole.valueOf(3).get().getGrantedAuthorities(),
@@ -42,7 +43,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                             true,
                             true
                     ),
-                    new ApplicationUser(
+                    new AuthUser(
                             "Chris",
                             passwordEncoder.encode("password"),
                             ADMIN.getGrantedAuthorities(),
@@ -51,7 +52,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                             true,
                             true
                     ),
-                    new ApplicationUser(
+                    new AuthUser(
                             "Bob",
                             passwordEncoder.encode("password"),
                             USER.getGrantedAuthorities(),
@@ -62,6 +63,10 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                     )
             );
 
-            return applicationUsers;
+            return authUsers;
+    }
+
+    @Override
+    public void saveAuthUser(AuthUserRequest authUserRequest) {
     }
 }

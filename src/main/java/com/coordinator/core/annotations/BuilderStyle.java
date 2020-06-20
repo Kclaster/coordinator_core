@@ -1,4 +1,4 @@
-package com.coordinator.core.models;
+package com.coordinator.core.annotations;
 
 import org.immutables.value.Value;
 

@@ -7,8 +7,10 @@ import com.coordinator.core.services.ICoordinator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -39,7 +41,10 @@ public class CoordinatorController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_COORDINATOR')")
-    public ResponseEntity<CoordinatorDto> createCoordinator(@RequestBody final CoordinatorPostRequest coordinatorPostRequest) {
+    public ResponseEntity<CoordinatorDto> createCoordinator(@Valid @RequestBody final CoordinatorPostRequest coordinatorPostRequest, Errors errors) {
+        if (errors.hasErrors()) {
+            ResponseEntity.badRequest().body(errors.getFieldError());
+        }
         return ResponseEntity.ok(iCoordinator.createCoordinator(coordinatorPostRequest.getUsername()));
     }
 
