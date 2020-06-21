@@ -15,6 +15,7 @@ import javax.validation.ConstraintViolationException;
 
 @Service
 public class AuthUserServiceImpl implements IAuthUser {
+    @Autowired
     private final PasswordEncoder passwordEncoder;
     private final IAuthUserRepository iAuthUserRepository;
 
@@ -43,6 +44,8 @@ public class AuthUserServiceImpl implements IAuthUser {
                     "There is an account with that email address: "
                             +  authUserRequest.getUsername());
         }
+
+        authUserRequest.setPassword(passwordEncoder.encode(authUserRequest.getPassword()));
         iAuthUserRepository.saveAuthUser(authUserRequest);
 
         return iAuthUserRepository.selectApplicationUserByUsername(authUserRequest.getUsername()).get();

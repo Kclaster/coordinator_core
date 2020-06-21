@@ -53,6 +53,6 @@ INSERT INTO auth_user_roles (id, title) VALUES
 (3, 'coordinator');
 
 INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
-('8e2d7974-a138-11ea-bb37-0242ac130004', 'kyleIsCool', 'password', 1),
-('8e2d7974-a148-11ea-bb37-0242ac130004', 'chrisIsCool', 'password', 2),
-('8e2d7974-a158-11ea-bb37-0242ac130004', 'bobIsCool', 'password', 3);
+('8e2d7974-a138-11ea-bb37-0242ac130004', 'kyleIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 1),
+('8e2d7974-a148-11ea-bb37-0242ac130004', 'chrisIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
+('8e2d7974-a158-11ea-bb37-0242ac130004', 'bobIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3);

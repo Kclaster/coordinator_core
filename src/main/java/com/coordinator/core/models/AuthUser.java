@@ -3,7 +3,6 @@ package com.coordinator.core.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Set;
 
 public class AuthUser implements UserDetails {
@@ -27,7 +26,7 @@ public class AuthUser implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
     }
 

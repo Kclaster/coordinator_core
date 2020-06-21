@@ -31,8 +31,8 @@ import static com.coordinator.core.enums.ApplicationUserRole.COORDINATOR;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
     private final AuthUserServiceImpl authUserServiceImpl;
+    private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
     private final AccessDeniedFilter accessDeniedFilter;
@@ -60,6 +60,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .csrf()
                     .disable()
+                .authorizeRequests()
+                    .antMatchers("/", "index", "/css/*", "/js/*", "/api/v1/auth/register").permitAll()
+                    .antMatchers("/api/**").hasRole(COORDINATOR.name())
+                    .anyRequest()
+                    .authenticated()
+                    .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
@@ -68,12 +74,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(authenticationEntryPointFilter)
                     .and()
                 .addFilter(jwtAuthorizationFilter())
-                .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordJwtFilter.class)
-                .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*", "/api/v1/auth/register").permitAll()
-                .antMatchers("/api/**").hasRole(COORDINATOR.name())
-                .anyRequest()
-                .authenticated();
+                .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordJwtFilter.class);
     }
 
     @Override
@@ -97,8 +98,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(authUserServiceImpl);
+        provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
 

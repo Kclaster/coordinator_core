@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,15 +17,13 @@ import java.util.UUID;
 
 @Repository("postgres")
 public class AuthUserRepositoryImpl implements IAuthUserRepository {
-    private final PasswordEncoder passwordEncoder;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public AuthUserRepositoryImpl(PasswordEncoder passwordEncoder, @Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.passwordEncoder = passwordEncoder;
+    public AuthUserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
@@ -36,7 +33,7 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
         String sql = SqlHelper.sql("select-auth-user");
         List<AuthUser> authUsers = jdbcTemplate.query(
                 sql,
-                new AuthUserMapper(passwordEncoder),
+                new AuthUserMapper(),
                 username
                 );
         if (authUsers.size() == 1) {
