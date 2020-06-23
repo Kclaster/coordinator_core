@@ -17,8 +17,8 @@ INSERT INTO coordinators (id, title, office_state, office_city, office_address, 
 ('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, 'sooners');
 
 INSERT INTO events (id, event_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
-('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
-('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '10 days', 12, 1, 1,'all red', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '310 days', 500, 1, 1,'all blue', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
 ('9e2d7974-a127-11ea-bb37-0242ac130005', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);
 
 INSERT INTO users (id, last_name, first_name, role_id, contact_email, contact_phone_number, event_id, is_archived, username) VALUES
@@ -53,6 +53,6 @@ INSERT INTO auth_user_roles (id, title) VALUES
 (3, 'coordinator');
 
 INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
-('8e2d7974-a138-11ea-bb37-0242ac130004', 'kyleIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 1),
-('8e2d7974-a148-11ea-bb37-0242ac130004', 'chrisIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
-('8e2d7974-a158-11ea-bb37-0242ac130004', 'bobIsCool', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3);
+('8e2d7974-a138-11ea-bb37-0242ac130004', 'admin', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 1),
+('8e2d7974-a148-11ea-bb37-0242ac130004', 'user', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
+('8e2d7974-a158-11ea-bb37-0242ac130004', 'coordinator', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3);

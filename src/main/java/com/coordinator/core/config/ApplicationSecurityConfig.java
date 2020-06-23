@@ -24,7 +24,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import javax.crypto.SecretKey;
 import java.util.Arrays;
 
+import static com.coordinator.core.enums.ApplicationUserRole.ADMIN;
 import static com.coordinator.core.enums.ApplicationUserRole.COORDINATOR;
+import static com.coordinator.core.enums.ApplicationUserRole.USER;
+
 
 @Configuration
 @EnableWebSecurity
@@ -62,7 +65,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                 .authorizeRequests()
                     .antMatchers("/", "index", "/css/*", "/js/*", "/api/v1/auth/register").permitAll()
-                    .antMatchers("/api/**").hasRole(COORDINATOR.name())
+                .antMatchers("/api/**").hasAnyRole(COORDINATOR.name(), ADMIN.name(), USER.name())
                     .anyRequest()
                     .authenticated()
                     .and()

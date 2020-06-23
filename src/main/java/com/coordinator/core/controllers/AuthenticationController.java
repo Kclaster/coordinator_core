@@ -28,7 +28,7 @@ public class AuthenticationController {
                 return ResponseEntity.badRequest().body(errors.getFieldError());
             }
             AuthUser registered = iAuthUser.registerNewUserAccount(authUserRequest);
-            URI location = URI.create(String.format("api/v1/auth/login", registered.getUsername()));
+            URI location = URI.create("api/v1/auth/login");
 
             return ResponseEntity.created(location).build();
         }
