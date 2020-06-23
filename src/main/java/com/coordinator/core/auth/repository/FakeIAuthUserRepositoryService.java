@@ -1,0 +1,72 @@
+package com.coordinator.core.auth.repository;
+
+import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.ApplicationUserRole;
+import com.coordinator.core.auth.models.AuthUserRequest;
+import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import static com.coordinator.core.auth.ApplicationUserRole.ADMIN;
+import static com.coordinator.core.auth.ApplicationUserRole.USER;
+
+@Repository("fake")
+public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public FakeIAuthUserRepositoryService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
+    @Override
+    public Optional<AuthUserEntity> selectApplicationUserByUsername(String username) {
+        return getApplicationUsers()
+                .stream()
+                .filter(applicationUser -> username.equals(applicationUser.getUsername()))
+                .findFirst();
+    }
+
+    private List<AuthUserEntity> getApplicationUsers() {
+            List<AuthUserEntity> authUserEntities = Lists.newArrayList(
+                    new AuthUserEntity(
+                            "bobIsCool",
+                            passwordEncoder.encode("password"),
+                            ApplicationUserRole.valueOf(3).get().getGrantedAuthorities(),
+                            true,
+                            true,
+                            true,
+                            true
+                    ),
+                    new AuthUserEntity(
+                            "Chris",
+                            passwordEncoder.encode("password"),
+                            ADMIN.getGrantedAuthorities(),
+                            true,
+                            true,
+                            true,
+                            true
+                    ),
+                    new AuthUserEntity(
+                            "Bob",
+                            passwordEncoder.encode("password"),
+                            USER.getGrantedAuthorities(),
+                            true,
+                            true,
+                            true,
+                            true
+                    )
+            );
+
+            return authUserEntities;
+    }
+
+    @Override
+    public void saveAuthUser(AuthUserRequest authUserRequest) {
+    }
+}
