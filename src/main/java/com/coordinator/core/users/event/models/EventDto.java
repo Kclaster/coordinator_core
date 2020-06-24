@@ -1,4 +1,4 @@
-package com.coordinator.core.general.models;
+package com.coordinator.core.users.event.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
 package com.coordinator.core.coordinator.bid.models;
 
-import com.coordinator.core.general.models.EventDto;
+import com.coordinator.core.users.event.models.EventDto;
 
 import java.util.UUID;
 
