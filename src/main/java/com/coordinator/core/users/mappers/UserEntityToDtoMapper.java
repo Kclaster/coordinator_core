@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class UserMapper implements RowMapper<UserDto> {
+public class UserEntityToDtoMapper implements RowMapper<UserDto> {
         public UserDto mapRow(ResultSet rs, int i) throws SQLException {
             UserDto userDto = new UserDto();
             userDto.setId(UUID.fromString(rs.getString("id")));

@@ -1,6 +1,6 @@
 package com.coordinator.core.auth.controller;
 
-import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.service.IAuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AuthenticationController {
             if (errors.hasErrors()) {
                 return ResponseEntity.badRequest().body(errors.getFieldError());
             }
-            AuthUserEntity registered = iAuthUser.registerNewUserAccount(authUserRequest);
+            AuthUserDto registered = iAuthUser.registerNewUserAccount(authUserRequest);
             URI location = URI.create(String.format("api/v1/auth/login", registered.getUsername()));
 
             return ResponseEntity.created(location).build();

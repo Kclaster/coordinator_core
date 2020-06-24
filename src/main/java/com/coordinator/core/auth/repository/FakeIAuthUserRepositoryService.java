@@ -1,6 +1,6 @@
 package com.coordinator.core.auth.repository;
 
-import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.ApplicationUserRole;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.google.common.collect.Lists;
@@ -25,16 +25,16 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
 
 
     @Override
-    public Optional<AuthUserEntity> selectApplicationUserByUsername(String username) {
+    public Optional<AuthUserDto> selectApplicationUserByUsername(String username) {
         return getApplicationUsers()
                 .stream()
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
     }
 
-    private List<AuthUserEntity> getApplicationUsers() {
-            List<AuthUserEntity> authUserEntities = Lists.newArrayList(
-                    new AuthUserEntity(
+    private List<AuthUserDto> getApplicationUsers() {
+            List<AuthUserDto> authUserEntities = Lists.newArrayList(
+                    new AuthUserDto(
                             "bobIsCool",
                             passwordEncoder.encode("password"),
                             ApplicationUserRole.valueOf(3).get().getGrantedAuthorities(),
@@ -43,7 +43,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true,
                             true
                     ),
-                    new AuthUserEntity(
+                    new AuthUserDto(
                             "Chris",
                             passwordEncoder.encode("password"),
                             ADMIN.getGrantedAuthorities(),
@@ -52,7 +52,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true,
                             true
                     ),
-                    new AuthUserEntity(
+                    new AuthUserDto(
                             "Bob",
                             passwordEncoder.encode("password"),
                             USER.getGrantedAuthorities(),

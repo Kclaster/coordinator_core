@@ -1,5 +1,7 @@
 package com.coordinator.core.users.event.service;
 
+import com.coordinator.core.general.models.QueryOptions;
+import com.coordinator.core.users.event.models.EventDto;
 import com.coordinator.core.users.event.models.EventPostRequest;
 import com.coordinator.core.users.event.models.ImmutableEventEntity;
 import com.coordinator.core.users.event.repository.IEventsRepository;
@@ -14,6 +16,11 @@ import static com.coordinator.core.users.event.mappers.EventRequestToEntityMappe
 public class EventImpl implements IEvent {
     @Autowired
     private IEventsRepository iEventsRepository;
+
+    @Override
+    public EventDto getEvent(UUID userID) {
+        return iEventsRepository.getEvent(userID);
+    }
 
     @Override
     public void createEvent(UUID userId, EventPostRequest eventPostRequest) {

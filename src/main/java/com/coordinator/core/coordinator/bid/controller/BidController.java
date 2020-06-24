@@ -1,7 +1,7 @@
 package com.coordinator.core.coordinator.bid.controller;
 
 import com.coordinator.core.coordinator.bid.models.BidDto;
-import com.coordinator.core.coordinator.service.IBid;
+import com.coordinator.core.coordinator.bid.service.IBid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

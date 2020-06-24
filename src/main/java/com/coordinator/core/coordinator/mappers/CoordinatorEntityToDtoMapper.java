@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class CoordinatorMapper implements RowMapper<CoordinatorDto> {
+public class CoordinatorEntityToDtoMapper implements RowMapper<CoordinatorDto> {
     public CoordinatorDto mapRow(ResultSet rs, int i) throws SQLException {
         CoordinatorDto coordinatorDto = new CoordinatorDto();
         coordinatorDto.setId(UUID.fromString(rs.getString("id")));

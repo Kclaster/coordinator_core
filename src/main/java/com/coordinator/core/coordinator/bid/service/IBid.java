@@ -1,4 +1,4 @@
-package com.coordinator.core.coordinator.service;
+package com.coordinator.core.coordinator.bid.service;
 
 import com.coordinator.core.coordinator.bid.models.BidDto;
 import com.coordinator.core.general.models.QueryOptions;

@@ -1,6 +1,6 @@
 package com.coordinator.core.auth.service;
 
-import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.repository.IAuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class AuthUserServiceImpl implements IAuthUser {
 
     @Transactional
     @Override
-    public AuthUserEntity registerNewUserAccount(AuthUserRequest authUserRequest)
+    public AuthUserDto registerNewUserAccount(AuthUserRequest authUserRequest)
             throws ConstraintViolationException {
 
         if (usernameExist(authUserRequest.getUsername())) {

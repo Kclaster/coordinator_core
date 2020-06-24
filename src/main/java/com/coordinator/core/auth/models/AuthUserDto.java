@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
-public class AuthUserEntity implements UserDetails {
+public class AuthUserDto implements UserDetails {
 
     private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
@@ -15,7 +15,7 @@ public class AuthUserEntity implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public AuthUserEntity(String username, String password, Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public AuthUserDto(String username, String password, Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
         this.username = username;

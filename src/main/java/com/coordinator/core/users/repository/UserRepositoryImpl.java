@@ -1,6 +1,6 @@
 package com.coordinator.core.users.repository;
 
-import com.coordinator.core.users.mappers.UserMapper;
+import com.coordinator.core.users.mappers.UserEntityToDtoMapper;
 import com.coordinator.core.users.models.UserDto;
 import com.coordinator.core.general.helpers.SqlHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements IUserRepository {
         return jdbcTemplate.query(
                 SqlHelper.sql(
                         "select-all-users"),
-                        new UserMapper()
+                        new UserEntityToDtoMapper()
         );
     }
 }

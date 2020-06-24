@@ -1,16 +1,16 @@
 package com.coordinator.core.auth.mappers;
 
 import com.coordinator.core.auth.ApplicationUserRole;
-import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.models.AuthUserDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthUserMapper implements RowMapper<AuthUserEntity> {
+public class AuthUserEntityToDtoMapper implements RowMapper<AuthUserDto> {
 
-    public AuthUserEntity mapRow(ResultSet rs, int i) throws SQLException {
-        AuthUserEntity authUserEntity = new AuthUserEntity(
+    public AuthUserDto mapRow(ResultSet rs, int i) throws SQLException {
+        AuthUserDto authUserDto = new AuthUserDto(
                 rs.getString("username"),
                 rs.getString("password"),
                 ApplicationUserRole.valueOf(rs.getInt("authUserRoleId")).get().getGrantedAuthorities(),
@@ -19,6 +19,6 @@ public class AuthUserMapper implements RowMapper<AuthUserEntity> {
                 rs.getBoolean("isCredentialsExpired"),
                 rs.getBoolean("isEnabled"));
 
-        return authUserEntity;
+        return authUserDto;
     }
 }

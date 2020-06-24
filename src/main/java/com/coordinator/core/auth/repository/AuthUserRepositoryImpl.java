@@ -1,7 +1,7 @@
 package com.coordinator.core.auth.repository;
 
-import com.coordinator.core.auth.mappers.AuthUserMapper;
-import com.coordinator.core.auth.models.AuthUserEntity;
+import com.coordinator.core.auth.mappers.AuthUserEntityToDtoMapper;
+import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.general.helpers.SqlHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,11 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
     }
 
     @Override
-    public Optional<AuthUserEntity> selectApplicationUserByUsername(String username) {
+    public Optional<AuthUserDto> selectApplicationUserByUsername(String username) {
         String sql = SqlHelper.sql("select-auth-user");
-        List<AuthUserEntity> authUserEntities = jdbcTemplate.query(
+        List<AuthUserDto> authUserEntities = jdbcTemplate.query(
                 sql,
-                new AuthUserMapper(),
+                new AuthUserEntityToDtoMapper(),
                 username
                 );
         if (authUserEntities.size() == 1) {

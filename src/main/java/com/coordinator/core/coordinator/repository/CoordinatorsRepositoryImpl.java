@@ -1,6 +1,6 @@
 package com.coordinator.core.coordinator.repository;
 
-import com.coordinator.core.coordinator.mappers.CoordinatorMapper;
+import com.coordinator.core.coordinator.mappers.CoordinatorEntityToDtoMapper;
 import com.coordinator.core.coordinator.models.CoordinatorDto;
 import com.coordinator.core.coordinator.models.CoordinatorPutRequest;
 import com.coordinator.core.general.helpers.SqlHelper;
@@ -36,7 +36,7 @@ public class CoordinatorsRepositoryImpl implements ICoordinatorsRepository {
         return namedParameterJdbcTemplate.queryForObject(
                 sql,
                 params,
-                new CoordinatorMapper()
+                new CoordinatorEntityToDtoMapper()
         );
     }
 

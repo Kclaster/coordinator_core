@@ -10,7 +10,7 @@ import static com.coordinator.core.general.helpers.GeneralHelper.CastStringToDat
 public class EventRequestToEntityMapper {
     public static ImmutableEventEntity mapEventRequestToEntity(EventPostRequest eventPostRequest) {
         ImmutableEventEntity eventEntity = ImmutableEventEntity.builder()
-                .eventId(UUID.randomUUID())
+                .id(UUID.randomUUID())
                 .eventDate(CastStringToDate(eventPostRequest.getEventDate()))
                 .eventSize(eventPostRequest.getEventSize())
                 .eventTypeId(eventPostRequest.getEventTypeId())
@@ -20,6 +20,7 @@ public class EventRequestToEntityMapper {
                 .desiredCity(eventPostRequest.getDesiredCity())
                 .desiredPostalCode(eventPostRequest.getDesiredPostalCode())
                 .venueId(eventPostRequest.getVenueId())
+                .coordinatorId(eventPostRequest.getCoordinatorId())
                 .build();
 
         return eventEntity;

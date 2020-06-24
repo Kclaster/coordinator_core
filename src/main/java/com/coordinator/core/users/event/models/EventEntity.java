@@ -8,17 +8,32 @@ import java.util.UUID;
 
 @Value.Immutable
 public abstract class EventEntity {
-    public abstract UUID getEventId();
-    public abstract @Nullable
-    Date getEventDate();
-    public abstract Integer getEventSize();
+    public abstract UUID getId();
     public abstract Integer getEventTypeId();
-    public abstract Integer getDesiredServiceId();
-    public abstract String getAdditionalUserComments();
-    public abstract @Nullable UUID getVenueId();
     public abstract String getDesiredState();
     public abstract String getDesiredCity();
     public abstract String getDesiredPostalCode();
-    public abstract  @Nullable UUID getCoordinatorId();
-    public abstract Boolean getIsArchived();
+    public abstract @Nullable Date getEventDate();
+    public abstract @Nullable UUID getVenueId();
+    public abstract @Nullable UUID getCoordinatorId();
+
+    @Value.Default
+    public int getDesiredServiceId() {
+        return 0;
+    }
+
+    @Value.Default
+    public int getEventSize() {
+        return 0;
+    }
+
+    @Value.Default
+    public String getAdditionalUserComments() {
+        return "";
+    }
+
+    @Value.Default
+    public Boolean getIsArchived() {
+        return false;
+    }
 }
