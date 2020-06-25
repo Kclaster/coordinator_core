@@ -1,8 +1,9 @@
 package com.coordinator.core.auth.service;
 
-import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.repository.IAuthUserRepository;
+import com.coordinator.core.general.mappers.BaseEntityToDtoMapper;
+import com.coordinator.core.general.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
+import java.util.UUID;
 
 @Service
 public class AuthUserServiceImpl implements IAuthUser {
@@ -36,8 +37,8 @@ public class AuthUserServiceImpl implements IAuthUser {
 
     @Transactional
     @Override
-    public AuthUserDto registerNewUserAccount(AuthUserRequest authUserRequest)
-            throws ConstraintViolationException {
+    public BaseDto registerNewUserAccount(AuthUserRequest authUserRequest)
+            throws Exception {
 
         if (usernameExist(authUserRequest.getUsername())) {
             throw new NullPointerException(
@@ -46,9 +47,13 @@ public class AuthUserServiceImpl implements IAuthUser {
         }
 
         authUserRequest.setPassword(passwordEncoder.encode(authUserRequest.getPassword()));
-        iAuthUserRepository.saveAuthUser(authUserRequest);
+        try {
+            UUID id = iAuthUserRepository.saveAuthUser(authUserRequest);
 
-        return iAuthUserRepository.selectApplicationUserByUsername(authUserRequest.getUsername()).get();
+           return BaseEntityToDtoMapper.mapEntityToDto(id);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     private boolean usernameExist(String username) {

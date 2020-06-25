@@ -1,8 +1,8 @@
 package com.coordinator.core.auth.controller;
 
-import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.service.IAuthUser;
+import com.coordinator.core.general.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -27,9 +26,12 @@ public class AuthenticationController {
             if (errors.hasErrors()) {
                 return ResponseEntity.badRequest().body(errors.getFieldError());
             }
-            AuthUserDto registered = iAuthUser.registerNewUserAccount(authUserRequest);
-            URI location = URI.create(String.format("api/v1/auth/login", registered.getUsername()));
+            try {
+                BaseDto baseDto = iAuthUser.registerNewUserAccount(authUserRequest);
 
-            return ResponseEntity.created(location).build();
+                return ResponseEntity.ok(baseDto);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
         }
 }

@@ -43,16 +43,23 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
     }
 
     @Override
-    public void saveAuthUser(AuthUserRequest authUserRequest) {
+    public UUID saveAuthUser(AuthUserRequest authUserRequest) throws  Exception {
         String sql = SqlHelper.sql("insert-auth-user");
+        UUID newAuthUserId = UUID.randomUUID();
 
         Map<String, Object> params = Map.of(
-                "coordinatorId", UUID.randomUUID(),
+                "id", newAuthUserId,
                 "username", authUserRequest.getUsername(),
                 "password", authUserRequest.getPassword(),
                 "authUserRoleId", authUserRequest.getRoleId()
         );
-        namedParameterJdbcTemplate.update(sql, params);
+        try {
+            namedParameterJdbcTemplate.update(sql, params);
+
+            return newAuthUserId;
+        } catch (Exception e) {
+            throw e;
+        }
 
     }
 }

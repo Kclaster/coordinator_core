@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.coordinator.core.auth.ApplicationUserRole.ADMIN;
 import static com.coordinator.core.auth.ApplicationUserRole.USER;
@@ -67,6 +68,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
     }
 
     @Override
-    public void saveAuthUser(AuthUserRequest authUserRequest) {
+    public UUID saveAuthUser(AuthUserRequest authUserRequest) {
+        return null;
     }
 }
