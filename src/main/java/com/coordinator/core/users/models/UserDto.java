@@ -5,7 +5,6 @@ import java.util.UUID;
 public class UserDto {
     private UUID id;
     private String name;
-    private Integer roleId;
     private String contactEmail;
     private String contactPhoneNumber;
     private UUID eventId;
@@ -16,14 +15,6 @@ public class UserDto {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 
     public String getContactEmail() {

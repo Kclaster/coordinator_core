@@ -21,10 +21,10 @@ INSERT INTO events (id, event_date, event_size, event_type_id, desired_service_i
 ('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
 ('9e2d7974-a127-11ea-bb37-0242ac130005', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);
 
-INSERT INTO users (id, last_name, first_name, role_id, contact_email, contact_phone_number, event_id, is_archived, username) VALUES
-('8e2d7974-a127-11ea-bb37-0242ac130004', 'Chappell', 'Austin', 1, 'austin@gmail.com', '5555555555', '9e2d7974-a127-11ea-bb37-0242ac130003', FALSE, 'hogs543'),
-('7e2d7974-a127-11ea-bb37-0242ac130004', 'SomeCrazyAssName', 'Andrew', 2, 'andrew@gmail.com', '6666666666', '9e2d7974-a127-11ea-bb37-0242ac130004', FALSE, 'princess987'),
-('6e2d7974-a127-11ea-bb37-0242ac130004', 'Khan', 'Adnan', 4, 'adnan@gmail.com', '4444444444', '9e2d7974-a127-11ea-bb37-0242ac130005', FALSE, 'karen');
+INSERT INTO users (id, name, contact_email, contact_phone_number, event_id, is_archived) VALUES
+('8e2d7974-a127-11ea-bb37-0242ac130004', 'Austin', 'austin@gmail.com', '5555555555', '9e2d7974-a127-11ea-bb37-0242ac130003', FALSE),
+('7e2d7974-a127-11ea-bb37-0242ac130004', 'Andrew', 'andrew@gmail.com', '6666666666', '9e2d7974-a127-11ea-bb37-0242ac130004', FALSE),
+('6e2d7974-a127-11ea-bb37-0242ac130004', 'Adnan', 'adnan@gmail.com', '4444444444', '9e2d7974-a127-11ea-bb37-0242ac130005', FALSE);
 
 
 INSERT INTO roles (id, title) VALUES

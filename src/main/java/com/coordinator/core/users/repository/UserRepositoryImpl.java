@@ -1,23 +1,46 @@
 package com.coordinator.core.users.repository;
 
-import com.coordinator.core.users.mappers.UserEntityToDtoMapper;
-import com.coordinator.core.users.models.UserDto;
 import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.users.mappers.UserEntityToDtoMapper;
+import com.coordinator.core.users.models.ImmutableUserEntity;
+import com.coordinator.core.users.models.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements IUserRepository {
-    @Autowired
     private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
 
     @Autowired
-    public UserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate) {
+    public UserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate,
+                              NamedParameterJdbcTemplate namedParameterJdbcTemplate
+    ) {
         this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
+    @Override
+    public UserDto getUser(UUID userId) {
+        Map<String, Object> params = Map.of(
+                "userId", userId
+        );
+
+        String sql = SqlHelper.sql("select-user");
+        return namedParameterJdbcTemplate.queryForObject(
+                sql,
+                params,
+                new UserEntityToDtoMapper()
+        );
     }
 
     @Override
@@ -28,5 +51,17 @@ public class UserRepositoryImpl implements IUserRepository {
                         "select-all-users"),
                         new UserEntityToDtoMapper()
         );
+    }
+
+    @Override
+    public void createUser(ImmutableUserEntity immutableUserEntity) {
+        String sql = SqlHelper.sql("insert-user");
+
+        var params = new HashMap<String, Object>();
+        params.put("userId", immutableUserEntity.getId());
+        params.put("authUserId", immutableUserEntity.getAuthUserId());
+        params.put("contactEmail", immutableUserEntity.getContactEmail());
+
+        namedParameterJdbcTemplate.update(sql, params);
     }
 }

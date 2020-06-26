@@ -36,6 +36,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
     private List<AuthUserDto> getApplicationUsers() {
             List<AuthUserDto> authUserEntities = Lists.newArrayList(
                     new AuthUserDto(
+                            UUID.randomUUID(),
                             "bobIsCool",
                             passwordEncoder.encode("password"),
                             ApplicationUserRole.valueOf(3).get().getGrantedAuthorities(),
@@ -45,6 +46,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true
                     ),
                     new AuthUserDto(
+                            UUID.randomUUID(),
                             "Chris",
                             passwordEncoder.encode("password"),
                             ADMIN.getGrantedAuthorities(),
@@ -54,6 +56,7 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true
                     ),
                     new AuthUserDto(
+                            UUID.randomUUID(),
                             "Bob",
                             passwordEncoder.encode("password"),
                             USER.getGrantedAuthorities(),

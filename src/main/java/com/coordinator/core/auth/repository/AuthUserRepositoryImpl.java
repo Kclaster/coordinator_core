@@ -23,10 +23,10 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public AuthUserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public AuthUserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate,
+                                  NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate; }
 
     @Override
     public Optional<AuthUserDto> selectApplicationUserByUsername(String username) {
@@ -60,6 +60,5 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
         } catch (Exception e) {
             throw e;
         }
-
     }
 }

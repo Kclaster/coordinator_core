@@ -1,6 +1,5 @@
 package com.coordinator.core.users.event.service;
 
-import com.coordinator.core.general.models.QueryOptions;
 import com.coordinator.core.users.event.models.EventDto;
 import com.coordinator.core.users.event.models.EventPostRequest;
 import com.coordinator.core.users.event.models.ImmutableEventEntity;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static com.coordinator.core.users.event.mappers.EventRequestToEntityMapper.mapEventRequestToEntity;
+import static com.coordinator.core.users.event.mappers.EventPostRequestToEntityMapper.mapEventRequestToEntity;
 
 @Service
 public class EventImpl implements IEvent {

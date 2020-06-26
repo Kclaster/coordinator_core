@@ -1,4 +1,5 @@
-SELECT AU.username as username
+SELECT AU.id as id
+    , AU.username as username
     , AU.password as password
     , AU.auth_user_role_id as authUserRoleId
     , AU.is_expired as isExpired
