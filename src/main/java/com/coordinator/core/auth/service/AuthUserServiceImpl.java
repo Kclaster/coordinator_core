@@ -13,21 +13,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 @Service
 public class AuthUserServiceImpl implements IAuthUser {
     @Autowired
+    private final HttpServletRequest servletRequest;
     private final PasswordEncoder passwordEncoder;
     private final IAuthUserRepository iAuthUserRepository;
     private final IUser iUser;
 
     @Autowired
     public AuthUserServiceImpl(@Qualifier("postgres") IAuthUserRepository iAuthUserRepository,
+                               HttpServletRequest servletRequest,
                                IUser iUser,
                                PasswordEncoder passwordEncoder
     ) {
         this.iAuthUserRepository = iAuthUserRepository;
+        this.servletRequest = servletRequest;
         this.passwordEncoder = passwordEncoder;
         this.iUser = iUser;
     }
@@ -55,10 +60,18 @@ public class AuthUserServiceImpl implements IAuthUser {
         authUserRequest.setPassword(passwordEncoder.encode(authUserRequest.getPassword()));
         try {
             UUID newAuthUserId = iAuthUserRepository.saveAuthUser(authUserRequest);
+            // AutoLogin
 
+            try {
+                servletRequest.login(authUserRequest.getUsername(), authUserRequest.getPassword());
+            } catch (ServletException e) {
+                System.out.println("Error while login " + e);
+            }
             // TODO: 3 should be USER enum... why is this so hard
             if (authUserRequest.getRoleId() == 3) {
-                iUser.postUser(newAuthUserId, authUserRequest.getUsername());
+                // TODO: this could return a UUID here, but we need to have the userId on every login.
+                // So it should be in the token response...
+                return iUser.postUser(newAuthUserId, authUserRequest.getUsername());
             }
 
            return BaseEntityToDtoMapper.mapEntityToDto(newAuthUserId);
