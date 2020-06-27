@@ -71,7 +71,6 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
     }
 
     @Override
-    public UUID saveAuthUser(AuthUserRequest authUserRequest) {
-        return null;
+    public void saveAuthUser(AuthUserRequest authUserRequest) {
     }
 }

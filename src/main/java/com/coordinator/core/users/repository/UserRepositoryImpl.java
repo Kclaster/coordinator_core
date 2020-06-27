@@ -1,6 +1,8 @@
 package com.coordinator.core.users.repository;
 
 import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.general.mappers.BaseEntityToBaseDtoMapper;
+import com.coordinator.core.general.models.BaseDto;
 import com.coordinator.core.users.mappers.UserEntityToDtoMapper;
 import com.coordinator.core.users.models.ImmutableUserEntity;
 import com.coordinator.core.users.models.UserDto;
@@ -40,6 +42,20 @@ public class UserRepositoryImpl implements IUserRepository {
                 sql,
                 params,
                 new UserEntityToDtoMapper()
+        );
+    }
+
+    @Override
+    public BaseDto getUserFromAuthUserId(UUID authUserId) {
+        Map<String, Object> params = Map.of(
+                "authUserId", authUserId
+        );
+
+        String sql = SqlHelper.sql("select-user-from-auth-user-id");
+        return namedParameterJdbcTemplate.queryForObject(
+                sql,
+                params,
+                new BaseEntityToBaseDtoMapper()
         );
     }
 

@@ -5,6 +5,7 @@ import com.coordinator.core.auth.filters.AuthenticationEntryPointFilter;
 import com.coordinator.core.auth.filters.JwtTokenVerifier;
 import com.coordinator.core.auth.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.auth.service.AuthUserServiceImpl;
+import com.coordinator.core.users.repository.IUserRepository;
 import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,7 @@ import static com.coordinator.core.auth.ApplicationUserRole.USER;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthUserServiceImpl authUserServiceImpl;
+    private final IUserRepository iUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
@@ -46,13 +48,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                                      SecretKey secretKey,
                                      JwtConfig jwtConfig,
                                      AccessDeniedFilter accessDeniedFilter,
-                                     AuthenticationEntryPointFilter authenticationEntryPointFilter) {
+                                     AuthenticationEntryPointFilter authenticationEntryPointFilter,
+                                     IUserRepository iUserRepository) {
         this.passwordEncoder = passwordEncoder;
         this.authUserServiceImpl = authUserServiceImpl;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
         this.accessDeniedFilter = accessDeniedFilter;
         this.authenticationEntryPointFilter = authenticationEntryPointFilter;
+        this.iUserRepository = iUserRepository;
     }
 
     @Override
@@ -106,7 +110,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public JwtUsernameAndPasswordJwtFilter jwtAuthorizationFilter() throws Exception {
-        JwtUsernameAndPasswordJwtFilter jwtAuthenticationFilter = new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey);
+        JwtUsernameAndPasswordJwtFilter jwtAuthenticationFilter = new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey, iUserRepository);
         jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
         return jwtAuthenticationFilter;
     }

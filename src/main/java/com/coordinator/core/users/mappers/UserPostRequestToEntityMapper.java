@@ -5,7 +5,7 @@ import com.coordinator.core.users.models.ImmutableUserEntity;
 import java.util.UUID;
 
 public class UserPostRequestToEntityMapper {
-    public static ImmutableUserEntity mapEventRequestToEntity(UUID authUserId, String contactEmail) {
+    public static ImmutableUserEntity mapUserRequestToEntity(UUID authUserId, String contactEmail) {
         ImmutableUserEntity userEntity = ImmutableUserEntity.builder()
                 .id(UUID.randomUUID())
                 .authUserId(authUserId)

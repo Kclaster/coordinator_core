@@ -28,6 +28,10 @@ public class AuthUserDto implements UserDetails {
         this.isEnabled = isEnabled;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;

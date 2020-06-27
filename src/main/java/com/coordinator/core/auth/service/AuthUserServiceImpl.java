@@ -2,8 +2,6 @@ package com.coordinator.core.auth.service;
 
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.repository.IAuthUserRepository;
-import com.coordinator.core.general.mappers.BaseEntityToDtoMapper;
-import com.coordinator.core.general.models.BaseDto;
 import com.coordinator.core.users.service.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
 
 @Service
 public class AuthUserServiceImpl implements IAuthUser {
@@ -48,9 +45,8 @@ public class AuthUserServiceImpl implements IAuthUser {
 
     @Transactional
     @Override
-    public BaseDto registerNewUserAccount(AuthUserRequest authUserRequest)
+    public void registerNewUserAccount(AuthUserRequest authUserRequest)
             throws Exception {
-
         if (usernameExist(authUserRequest.getUsername())) {
             throw new NullPointerException(
                     "There is an account with that email address: "
@@ -59,24 +55,17 @@ public class AuthUserServiceImpl implements IAuthUser {
 
         authUserRequest.setPassword(passwordEncoder.encode(authUserRequest.getPassword()));
         try {
-            UUID newAuthUserId = iAuthUserRepository.saveAuthUser(authUserRequest);
-            // AutoLogin
+            iAuthUserRepository.saveAuthUser(authUserRequest);
 
-            try {
-                servletRequest.login(authUserRequest.getUsername(), authUserRequest.getPassword());
-            } catch (ServletException e) {
-                System.out.println("Error while login " + e);
-            }
-            // TODO: 3 should be USER enum... why is this so hard
-            if (authUserRequest.getRoleId() == 3) {
-                // TODO: this could return a UUID here, but we need to have the userId on every login.
-                // So it should be in the token response...
-                return iUser.postUser(newAuthUserId, authUserRequest.getUsername());
-            }
-
-           return BaseEntityToDtoMapper.mapEntityToDto(newAuthUserId);
         } catch (Exception e) {
             throw e;
+        }
+
+        // AutoLogin
+        try {
+            servletRequest.login(authUserRequest.getUsername(), authUserRequest.getPassword());
+        } catch (ServletException e) {
+            System.out.println("Error while login " + e);
         }
     }
 
