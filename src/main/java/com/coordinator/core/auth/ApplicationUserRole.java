@@ -28,6 +28,10 @@ public enum ApplicationUserRole {
         return permissions;
     }
 
+    public Integer getValue() {
+        return value;
+    }
+
     public Set<SimpleGrantedAuthority> getGrantedAuthorities() {
         Set<SimpleGrantedAuthority> permissions = getPermissions().stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))

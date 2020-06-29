@@ -1,5 +1,6 @@
 package com.coordinator.core.auth.repository;
 
+import com.coordinator.core.auth.ApplicationUserRole;
 import com.coordinator.core.auth.mappers.AuthUserEntityToDtoMapper;
 import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
@@ -65,7 +66,7 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
         }
 
         // If ROLE_USER
-        if (authUserRequest.getRoleId() == 3) {
+        if (authUserRequest.getRoleId() == ApplicationUserRole.USER.getValue()) {
             ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, authUserRequest.getUsername());
             iUserRepository.createUser(immutableUserEntity);
         }
