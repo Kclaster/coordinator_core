@@ -17,7 +17,16 @@ public class AuthUserDto implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public AuthUserDto(UUID id, String username, String password, Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public AuthUserDto(
+            UUID id,
+            String username,
+            String password,
+            Set<? extends GrantedAuthority> grantedAuthorities,
+            boolean isAccountNonExpired,
+            boolean isAccountNonLocked,
+            boolean isCredentialsNonExpired,
+            boolean isEnabled
+    ) {
         this.id = id;
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;

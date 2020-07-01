@@ -55,7 +55,6 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
             throw new RuntimeException(e);
         }
     }
-// TODO: KYLE YOU THINK YOU ARE HERE, the seeded user {admin, password} has no corresponding authUser. Dumbass
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,

@@ -58,6 +58,4 @@ public class EventsRepositoryImpl implements IEventsRepository {
 
         namedParameterJdbcTemplate.update(sql, params);
     }
-
-
 }
