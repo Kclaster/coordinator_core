@@ -5,7 +5,7 @@ INSERT INTO auth_users (
     , auth_user_role_id
     )
     VALUES (
-    :coordinatorId
+    :id
     , :username
     , :password
     , :authUserRoleId
