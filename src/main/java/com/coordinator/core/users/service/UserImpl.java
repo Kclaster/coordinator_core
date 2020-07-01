@@ -15,4 +15,6 @@ public class UserImpl implements IUser {
     public List<UserDto> getAllUsers() {
         return iUserRepository.getAllUsers();
     }
+
+
 }

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import static com.coordinator.core.general.helpers.GeneralHelper.CastStringToDate;
 
-public class EventRequestToEntityMapper {
+public class EventPostRequestToEntityMapper {
     public static ImmutableEventEntity mapEventRequestToEntity(EventPostRequest eventPostRequest) {
         ImmutableEventEntity eventEntity = ImmutableEventEntity.builder()
                 .id(UUID.randomUUID())

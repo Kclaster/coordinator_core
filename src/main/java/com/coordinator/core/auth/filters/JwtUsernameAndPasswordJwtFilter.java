@@ -1,7 +1,10 @@
 package com.coordinator.core.auth.filters;
 
 import com.coordinator.core.auth.config.JwtConfig;
+import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.UsernameAndPasswordAuthenticationRequest;
+import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.users.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,13 +26,16 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
     private final AuthenticationManager authenticationManager;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
+    private final IUserRepository iUserRepository;
 
     public JwtUsernameAndPasswordJwtFilter(AuthenticationManager authenticationManager,
                                            JwtConfig jwtConfig,
-                                           SecretKey secretKey) {
+                                           SecretKey secretKey,
+                                           IUserRepository iUserRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
+        this.iUserRepository = iUserRepository;
     }
 
     @Override
@@ -50,15 +56,17 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
         }
     }
 
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
+        AuthUserDto userDetails = (AuthUserDto) authResult.getPrincipal();
+        BaseDto userBaseDto = iUserRepository.getUserFromAuthUserId(userDetails.getId());
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
+                .claim("roleId", userBaseDto.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
                 .signWith(secretKey)

@@ -5,5 +5,5 @@ import com.coordinator.core.users.models.UserDto;
 import java.util.List;
 
 public interface IUser {
-    public List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers();
 }

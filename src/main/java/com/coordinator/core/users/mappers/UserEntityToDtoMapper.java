@@ -11,8 +11,7 @@ public class UserEntityToDtoMapper implements RowMapper<UserDto> {
         public UserDto mapRow(ResultSet rs, int i) throws SQLException {
             UserDto userDto = new UserDto();
             userDto.setId(UUID.fromString(rs.getString("id")));
-            userDto.setName(String.format("%s %s", rs.getString("firstName"), rs.getString("lastName")));
-            userDto.setRoleId(rs.getInt("roleId"));
+            userDto.setName(rs.getString("name"));
             userDto.setContactEmail(rs.getString("contactEmail"));
             userDto.setContactPhoneNumber(rs.getString("contactPhoneNumber"));
             userDto.setEventId(UUID.fromString(rs.getString("eventId")));

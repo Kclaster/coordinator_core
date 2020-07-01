@@ -3,4 +3,5 @@ SELECT U.id as id
     , U.contact_email as contactEmail
     , U.contact_phone_number as contactPhoneNumber
     , U.event_id as eventId
- FROM users U
+ from users U
+WHERE U.id = :userId

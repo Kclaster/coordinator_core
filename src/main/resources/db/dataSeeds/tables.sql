@@ -69,18 +69,33 @@ CREATE TABLE events
     is_archived boolean NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE auth_user_roles
+(
+    id int PRIMARY KEY NOT NULL,
+    title varchar(30) NOT NULL
+);
+
+CREATE TABLE auth_users
+(
+    id uuid PRIMARY KEY NOT NULL,
+    username varchar(30) NOT NULL,
+    password varchar(60) NOT NULL,
+    auth_user_role_id int REFERENCES auth_user_roles (id),
+    is_expired boolean NOT NULL DEFAULT TRUE,
+    is_locked boolean NOT NULL DEFAULT TRUE,
+    is_credentials_expired boolean NOT NULL DEFAULT TRUE,
+    is_enabled boolean NOT NULL DEFAULT TRUE
+);
+
 CREATE TABLE users
 (
     id uuid PRIMARY KEY NOT NULL,
-    first_name varchar(30) NOT NULL,
-    last_name varchar(30) NOT NULL,
-    role_id integer NOT NULL,
+    name varchar(30),
     contact_email varchar(30) NOT NULL,
-    contact_phone_number varchar(11) NOT NULL,
+    contact_phone_number varchar(11),
     event_id uuid REFERENCES events (id),
     is_archived boolean NOT NULL DEFAULT FALSE,
-    username varchar(30) NOT NULL
-
+    auth_user_id uuid REFERENCES auth_users (id)
 );
 
 CREATE TABLE roles
@@ -105,20 +120,3 @@ CREATE TABLE bids
     coordinator_id uuid REFERENCES coordinators (id)
 );
 
-CREATE TABLE auth_user_roles
-(
-    id int PRIMARY KEY NOT NULL,
-    title varchar(30) NOT NULL
-);
-
-CREATE TABLE auth_users
-(
-    id uuid PRIMARY KEY NOT NULL,
-    username varchar(30) NOT NULL,
-    password varchar(60) NOT NULL,
-    auth_user_role_id int REFERENCES auth_user_roles (id),
-    is_expired boolean NOT NULL DEFAULT TRUE,
-    is_locked boolean NOT NULL DEFAULT TRUE,
-    is_credentials_expired boolean NOT NULL DEFAULT TRUE,
-    is_enabled boolean NOT NULL DEFAULT TRUE
-);

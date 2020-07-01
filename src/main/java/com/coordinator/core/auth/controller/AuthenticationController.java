@@ -2,7 +2,6 @@ package com.coordinator.core.auth.controller;
 
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.service.IAuthUser;
-import com.coordinator.core.general.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -27,9 +26,9 @@ public class AuthenticationController {
                 return ResponseEntity.badRequest().body(errors.getFieldError());
             }
             try {
-                BaseDto baseDto = iAuthUser.registerNewUserAccount(authUserRequest);
+                iAuthUser.registerNewUserAccount(authUserRequest);
 
-                return ResponseEntity.ok(baseDto);
+                return ResponseEntity.ok().build();
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
             }

@@ -4,9 +4,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class AuthUserDto implements UserDetails {
 
+    private final UUID id;
     private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
     private final String username;
@@ -15,7 +17,17 @@ public class AuthUserDto implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public AuthUserDto(String username, String password, Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public AuthUserDto(
+            UUID id,
+            String username,
+            String password,
+            Set<? extends GrantedAuthority> grantedAuthorities,
+            boolean isAccountNonExpired,
+            boolean isAccountNonLocked,
+            boolean isCredentialsNonExpired,
+            boolean isEnabled
+    ) {
+        this.id = id;
         this.grantedAuthorities = grantedAuthorities;
         this.password = password;
         this.username = username;
@@ -23,6 +35,10 @@ public class AuthUserDto implements UserDetails {
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     @Override
