@@ -10,16 +10,16 @@ import java.util.UUID;
 @Value.Immutable
 public class EventPostRequest {
     private UUID id;
-    @NotNull
+    @NotNull(message="EventTypeId is required.")
     private Integer eventTypeId;
-    @NotNull
-    @NotEmpty
+    @NotNull(message="State is required.")
+    @NotEmpty(message="State is required.")
     private String desiredState;
-    @NotNull
-    @NotEmpty
+    @NotNull(message="City is required.")
+    @NotEmpty(message="City is required.")
     private String desiredCity;
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Postal code is required.")
+    @NotEmpty(message="Postal code is required.")
     private String desiredPostalCode;
     private String eventDate;
     private UUID venueId;

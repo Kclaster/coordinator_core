@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public class UserPostRequest {
     private UUID id;
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Email address is required.")
+    @NotEmpty(message="Email address is required.")
     private String contactEmail;
     private UUID authUserId;
 
