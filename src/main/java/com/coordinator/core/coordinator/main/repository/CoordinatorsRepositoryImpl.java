@@ -1,8 +1,8 @@
-package com.coordinator.core.coordinator.repository;
+package com.coordinator.core.coordinator.main.repository;
 
-import com.coordinator.core.coordinator.mappers.CoordinatorEntityToDtoMapper;
-import com.coordinator.core.coordinator.models.CoordinatorDto;
-import com.coordinator.core.coordinator.models.CoordinatorPutRequest;
+import com.coordinator.core.coordinator.main.mappers.CoordinatorEntityToDtoMapper;
+import com.coordinator.core.coordinator.main.models.CoordinatorDto;
+import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
 import com.coordinator.core.general.helpers.SqlHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,4 +1,4 @@
-package com.coordinator.core.coordinator.models;
+package com.coordinator.core.coordinator.main.models;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

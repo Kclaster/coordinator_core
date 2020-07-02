@@ -13,7 +13,8 @@ public abstract class EventEntity {
     public abstract String getDesiredState();
     public abstract String getDesiredCity();
     public abstract String getDesiredPostalCode();
-    public abstract @Nullable Date getEventDate();
+    public abstract @Nullable Date getEventStartDate();
+    public abstract @Nullable Date getEventEndDate();
     public abstract @Nullable UUID getVenueId();
     public abstract @Nullable UUID getCoordinatorId();
 

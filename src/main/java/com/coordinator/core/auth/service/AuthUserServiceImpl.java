@@ -2,7 +2,7 @@ package com.coordinator.core.auth.service;
 
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.auth.repository.IAuthUserRepository;
-import com.coordinator.core.users.service.IUser;
+import com.coordinator.core.users.main.service.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;

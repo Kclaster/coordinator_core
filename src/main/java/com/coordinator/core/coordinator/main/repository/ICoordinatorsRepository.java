@@ -1,7 +1,7 @@
-package com.coordinator.core.coordinator.repository;
+package com.coordinator.core.coordinator.main.repository;
 
-import com.coordinator.core.coordinator.models.CoordinatorDto;
-import com.coordinator.core.coordinator.models.CoordinatorPutRequest;
+import com.coordinator.core.coordinator.main.models.CoordinatorDto;
+import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
 
 import java.util.UUID;
 

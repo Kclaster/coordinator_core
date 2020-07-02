@@ -16,7 +16,7 @@ INSERT INTO coordinators (id, title, office_state, office_city, office_address, 
 ('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200, FALSE, 'merica'),
 ('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, 'sooners');
 
-INSERT INTO events (id, event_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
+INSERT INTO events (id, event_start_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
 ('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
 ('9e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
 ('9e2d7974-a127-11ea-bb37-0242ac130005', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);

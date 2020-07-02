@@ -5,7 +5,7 @@ import com.coordinator.core.auth.filters.AuthenticationEntryPointFilter;
 import com.coordinator.core.auth.filters.JwtTokenVerifier;
 import com.coordinator.core.auth.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.auth.service.AuthUserServiceImpl;
-import com.coordinator.core.users.repository.IUserRepository;
+import com.coordinator.core.users.main.repository.IUserRepository;
 import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

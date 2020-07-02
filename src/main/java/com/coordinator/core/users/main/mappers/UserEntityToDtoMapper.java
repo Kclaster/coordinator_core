@@ -1,6 +1,6 @@
-package com.coordinator.core.users.mappers;
+package com.coordinator.core.users.main.mappers;
 
-import com.coordinator.core.users.models.UserDto;
+import com.coordinator.core.users.main.models.UserDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

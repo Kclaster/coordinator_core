@@ -1,6 +1,7 @@
 INSERT INTO events (
     id
-    , event_date
+    , event_start_date
+    , event_end_date
     , event_size
     , event_type_id
     , desired_service_id
@@ -13,7 +14,8 @@ INSERT INTO events (
     )
     VALUES (
     :eventId
-    , :eventDate
+    , :eventStartDate
+    , :eventEndDate
     , :eventSize
     , :eventTypeId
     , :desiredServiceId
@@ -23,5 +25,4 @@ INSERT INTO events (
     , :desiredPostalCode
     , :venueId
     , 'false'
-
 )
