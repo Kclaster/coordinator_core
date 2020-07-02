@@ -11,10 +11,10 @@ INSERT INTO venues (id, title, state, city, street_address, postal_code, is_meal
 ('9e2d7974-a127-11ea-bb37-0242ac130002', 'Hogwarts', 'UK', 'London', '1234 Hogsmead', '4321', FALSE, FALSE),
 ('9e2d7974-a127-11ea-bb37-0242ac130012', 'The Woods', 'OK', 'Tulsa', '4323 JustUnderTheBridge', '7594', TRUE, FALSE);
 
-INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid, is_archived, username) VALUES
-('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200, FALSE, 'bobsy234'),
-('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200, FALSE, 'merica'),
-('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, 'sooners');
+INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid, is_archived, auth_user_id) VALUES
+('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200, FALSE, '8e2d7576-a148-11ea-bb37-0242ac130004'),
+('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200, FALSE, '8e2d7376-a148-11ea-bb37-0242ac130004'),
+('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, '8e2d7476-a148-11ea-bb37-0242ac130004');
 
 INSERT INTO events (id, event_start_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
 ('9e2d7974-a127-11ea-bb37-0242ac130003', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
@@ -28,7 +28,9 @@ INSERT INTO auth_user_roles (id, title) VALUES
 
 INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
 ('8e2d7974-a138-11ea-bb37-0242ac130004', 'admin', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 1),
-('8e2d7974-a148-11ea-bb37-0242ac130004', 'coordinator', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
+('8e2d7576-a148-11ea-bb37-0242ac130004', 'coordinator', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
+('8e2d7376-a148-11ea-bb37-0242ac130004', 'coordinatorbob', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
+('8e2d7476-a148-11ea-bb37-0242ac130004', 'coordinatorsam', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
 ('8e2d7974-a158-11ea-bb37-0242ac130004', 'user', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3),
 ('8e2d7974-a148-11ea-bb37-1242ac130004', 'userbob', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3),
 ('8e2d7974-a158-11ea-bb37-2342ac130004', 'usersam', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 3);

@@ -50,7 +50,8 @@ CREATE TABLE coordinators
     level_two_default_bid integer,
     level_three_default_bid integer,
     is_archived boolean NOT NULL DEFAULT FALSE,
-    username varchar(30) NOT NULL
+    auth_user_id uuid REFERENCES auth_users (id)
+
 );
 
 CREATE TABLE events

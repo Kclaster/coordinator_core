@@ -65,10 +65,20 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
             throw e;
         }
 
-        // If ROLE_USER
-        if (authUserRequest.getRoleId() == ApplicationUserRole.USER.getValue()) {
-            ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, authUserRequest.getUsername());
-            iUserRepository.createUser(immutableUserEntity);
+        createRoleId(newAuthUserId, authUserRequest.getUsername(), authUserRequest.getRoleId());
+
+    }
+
+    private void createRoleId(UUID newAuthUserId, String username, Integer roleId) {
+        switch (roleId) {
+            case ApplicationUserRole.USER.getValue():
+                ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, username);
+                iUserRepository.createUser(immutableUserEntity);
+                break;
+            case ApplicationUserRole.COORDINATOR.getValue():
+                break;
+            case ApplicationUserRole.ADMIN.getValue():
+                break;
         }
     }
 }
