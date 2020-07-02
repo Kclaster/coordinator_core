@@ -21,7 +21,8 @@ public class EventPostRequest {
     @NotNull
     @NotEmpty
     private String desiredPostalCode;
-    private String eventDate;
+    private Long eventStartDate;
+    private Long eventEndDate;
     private UUID venueId;
     private UUID coordinatorId;
     private int desiredServiceId;
@@ -69,12 +70,20 @@ public class EventPostRequest {
         this.desiredPostalCode = desiredPostalCode;
     }
 
-    public String getEventDate() {
-        return eventDate;
+    public Long getEventStartDate() {
+        return eventStartDate;
     }
 
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEventStartDate(Long eventStartDate) {
+        this.eventStartDate = eventStartDate;
+    }
+
+    public Long getEventEndDate() {
+        return eventEndDate;
+    }
+
+    public void setEventEndDate(Long eventEndDate) {
+        this.eventEndDate = eventEndDate;
     }
 
     public UUID getVenueId() {

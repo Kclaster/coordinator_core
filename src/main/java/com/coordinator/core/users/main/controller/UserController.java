@@ -1,7 +1,7 @@
-package com.coordinator.core.users.controller;
+package com.coordinator.core.users.main.controller;
 
-import com.coordinator.core.users.models.UserDto;
-import com.coordinator.core.users.service.IUser;
+import com.coordinator.core.users.main.models.UserDto;
+import com.coordinator.core.users.main.service.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

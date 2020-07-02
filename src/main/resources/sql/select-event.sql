@@ -1,5 +1,6 @@
 SELECT e.id as id
-    , event_date as eventDate
+    , event_start_date as eventStartDate
+    , event_end_date as eventEndDate
     , event_size as eventSize
     , event_type_id as eventTypeId
     , desired_service_id as desiredServiceId

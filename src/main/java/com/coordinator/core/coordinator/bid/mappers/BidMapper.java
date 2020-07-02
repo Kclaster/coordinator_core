@@ -24,7 +24,8 @@ public class BidMapper implements RowMapper<BidDto> {
         event.setCoordinatorId(UUID.fromString(rs.getString("coordinatorId")));
         event.setDesiredServiceId(rs.getInt("desiredServiceId"));
         event.setDesiredState(rs.getString("desiredState"));
-        event.setEventDate(rs.getTimestamp("eventDate").toInstant());
+        event.setEventStartDate(rs.getTimestamp("eventStartDate").toInstant().toEpochMilli());
+        event.setEventEndDate(rs.getTimestamp("eventEndDate").toInstant().toEpochMilli());
         event.setEventSize(rs.getInt("eventSize"));
         event.setEventTypeId(rs.getInt("eventTypeId"));
         event.setId(UUID.fromString(rs.getString("id")));

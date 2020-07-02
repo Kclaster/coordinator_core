@@ -2,12 +2,12 @@ package com.coordinator.core.users.event.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.Instant;
 import java.util.UUID;
 
 public class EventDto {
     private UUID id;
-    private Instant eventDate;
+    private Long eventStartDate;
+    private Long eventEndDate;
     private Integer eventSize;
     private Integer eventTypeId;
     private Integer desiredServiceId;
@@ -27,16 +27,24 @@ public class EventDto {
         this.id = id;
     }
 
-    public Instant getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Instant eventDate) {
-        this.eventDate = eventDate;
-    }
-
     public Integer getEventSize() {
         return eventSize;
+    }
+
+    public Long getEventStartDate() {
+        return eventStartDate;
+    }
+
+    public void setEventStartDate(Long eventStartDate) {
+        this.eventStartDate = eventStartDate;
+    }
+
+    public Long getEventEndDate() {
+        return eventEndDate;
+    }
+
+    public void setEventEndDate(Long eventEndDate) {
+        this.eventEndDate = eventEndDate;
     }
 
     public void setEventSize(Integer eventSize) {

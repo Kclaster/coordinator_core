@@ -26,7 +26,5 @@ public class EventImpl implements IEvent {
         ImmutableEventEntity eventEntity = mapEventRequestToEntity(eventPostRequest);
 
         iEventsRepository.createEvent(userId, eventEntity);
-
-        // TODO: return event here
     }
 }
