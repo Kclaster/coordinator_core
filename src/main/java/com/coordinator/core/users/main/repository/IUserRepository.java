@@ -1,8 +1,8 @@
-package com.coordinator.core.users.repository;
+package com.coordinator.core.users.main.repository;
 
 import com.coordinator.core.general.models.BaseDto;
-import com.coordinator.core.users.models.ImmutableUserEntity;
-import com.coordinator.core.users.models.UserDto;
+import com.coordinator.core.users.main.models.ImmutableUserEntity;
+import com.coordinator.core.users.main.models.UserDto;
 
 import java.util.List;
 import java.util.UUID;

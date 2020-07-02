@@ -5,8 +5,8 @@ import com.coordinator.core.auth.mappers.AuthUserEntityToDtoMapper;
 import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.general.helpers.SqlHelper;
-import com.coordinator.core.users.models.ImmutableUserEntity;
-import com.coordinator.core.users.repository.IUserRepository;
+import com.coordinator.core.users.main.models.ImmutableUserEntity;
+import com.coordinator.core.users.main.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-import static com.coordinator.core.users.mappers.UserPostRequestToEntityMapper.mapUserRequestToEntity;
+import static com.coordinator.core.users.main.mappers.UserPostRequestToEntityMapper.mapUserRequestToEntity;
 
 @Repository("postgres")
 public class AuthUserRepositoryImpl implements IAuthUserRepository {

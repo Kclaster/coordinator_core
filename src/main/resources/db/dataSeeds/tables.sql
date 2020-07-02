@@ -56,7 +56,8 @@ CREATE TABLE coordinators
 CREATE TABLE events
 (
     id uuid PRIMARY KEY NOT NULL,
-    event_date timestamptz,
+    event_end_date timestamptz,
+    event_start_date timestamptz,
     event_size integer,
     event_type_id integer NOT NULL REFERENCES event_types (id),
     desired_service_id integer REFERENCES desired_services (id),

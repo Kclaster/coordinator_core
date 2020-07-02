@@ -1,4 +1,4 @@
-package com.coordinator.core.users.models;
+package com.coordinator.core.users.main.models;
 
 import java.util.UUID;
 

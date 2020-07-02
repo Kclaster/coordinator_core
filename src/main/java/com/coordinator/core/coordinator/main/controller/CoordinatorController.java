@@ -1,9 +1,9 @@
-package com.coordinator.core.coordinator.controller;
+package com.coordinator.core.coordinator.main.controller;
 
-import com.coordinator.core.coordinator.models.CoordinatorDto;
-import com.coordinator.core.coordinator.models.CoordinatorPostRequest;
-import com.coordinator.core.coordinator.models.CoordinatorPutRequest;
-import com.coordinator.core.coordinator.service.ICoordinator;
+import com.coordinator.core.coordinator.main.models.CoordinatorDto;
+import com.coordinator.core.coordinator.main.models.CoordinatorPostRequest;
+import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
+import com.coordinator.core.coordinator.main.service.ICoordinator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

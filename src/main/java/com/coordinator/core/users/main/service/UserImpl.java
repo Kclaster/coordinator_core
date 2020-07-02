@@ -1,7 +1,7 @@
-package com.coordinator.core.users.service;
+package com.coordinator.core.users.main.service;
 
-import com.coordinator.core.users.models.UserDto;
-import com.coordinator.core.users.repository.IUserRepository;
+import com.coordinator.core.users.main.models.UserDto;
+import com.coordinator.core.users.main.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

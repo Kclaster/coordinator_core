@@ -45,7 +45,8 @@ public class EventsRepositoryImpl implements IEventsRepository {
 
         var params = new HashMap<String, Object>();
         params.put("eventId", eventEntity.getId());
-        params.put("eventDate", eventEntity.getEventDate());
+        params.put("eventStartDate", eventEntity.getEventStartDate());
+        params.put("eventEndDate", eventEntity.getEventEndDate());
         params.put("eventSize", eventEntity.getEventSize());
         params.put("eventTypeId", eventEntity.getEventTypeId());
         params.put("desiredServiceId", eventEntity.getDesiredServiceId());

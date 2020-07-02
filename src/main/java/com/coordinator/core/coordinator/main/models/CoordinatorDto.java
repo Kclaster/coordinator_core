@@ -1,20 +1,23 @@
-package com.coordinator.core.coordinator.models;
+package com.coordinator.core.coordinator.main.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.UUID;
 
-public class CoordinatorPutRequest {
+public class CoordinatorDto {
     private UUID id;
     private String title;
     private String officeState;
     private String officeAddress;
-    private String officePostalCode;
     private String officeCity;
+    private String officePostalCode;
     private String contactEmail;
-    private Integer maximumDistanceToClient;
+    private String username;
+    private Integer maxDistanceToClient;
     private Integer levelOneDefaultBid;
     private Integer levelTwoDefaultBid;
     private Integer levelThreeDefaultBid;
-    private String username;
+    private boolean isArchived;
 
     public UUID getId() {
         return id;
@@ -48,14 +51,6 @@ public class CoordinatorPutRequest {
         this.officeAddress = officeAddress;
     }
 
-    public String getOfficePostalCode() {
-        return officePostalCode;
-    }
-
-    public void setOfficePostalCode(String officePostalCode) {
-        this.officePostalCode = officePostalCode;
-    }
-
     public String getContactEmail() {
         return contactEmail;
     }
@@ -64,12 +59,12 @@ public class CoordinatorPutRequest {
         this.contactEmail = contactEmail;
     }
 
-    public Integer getMaximumDistanceToClient() {
-        return maximumDistanceToClient;
+    public Integer getMaxDistanceToClient() {
+        return maxDistanceToClient;
     }
 
-    public void setMaximumDistanceToClient(Integer maximumDistanceToClient) {
-        this.maximumDistanceToClient = maximumDistanceToClient;
+    public void setMaxDistanceToClient(Integer maxDistanceToClient) {
+        this.maxDistanceToClient = maxDistanceToClient;
     }
 
     public Integer getLevelOneDefaultBid() {
@@ -95,6 +90,24 @@ public class CoordinatorPutRequest {
     public void setLevelThreeDefaultBid(Integer levelThreeDefaultBid) {
         this.levelThreeDefaultBid = levelThreeDefaultBid;
     }
+
+    @JsonProperty(value="isArchived")
+    public boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public String getOfficePostalCode() {
+        return officePostalCode;
+    }
+
+    public void setOfficePostalCode(String officePostalCode) {
+        this.officePostalCode = officePostalCode;
+    }
+
 
     public String getUsername() {
         return username;

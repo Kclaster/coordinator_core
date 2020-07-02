@@ -1,4 +1,4 @@
-package com.coordinator.core.users.models;
+package com.coordinator.core.users.main.models;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

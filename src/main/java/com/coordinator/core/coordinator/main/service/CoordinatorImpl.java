@@ -1,8 +1,8 @@
-package com.coordinator.core.coordinator.service;
+package com.coordinator.core.coordinator.main.service;
 
-import com.coordinator.core.coordinator.models.CoordinatorPutRequest;
-import com.coordinator.core.coordinator.repository.ICoordinatorsRepository;
-import com.coordinator.core.coordinator.models.CoordinatorDto;
+import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
+import com.coordinator.core.coordinator.main.repository.ICoordinatorsRepository;
+import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
