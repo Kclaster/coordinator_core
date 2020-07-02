@@ -23,7 +23,7 @@ public class AuthenticationController {
             @Valid @RequestBody AuthUserRequest authUserRequest,
             Errors errors) throws NullPointerException {
             if (errors.hasErrors()) {
-                return ResponseEntity.badRequest().body(errors.getFieldError());
+                return ResponseEntity.badRequest().body(errors.getAllErrors());
             }
             try {
                 iAuthUser.registerNewUserAccount(authUserRequest);

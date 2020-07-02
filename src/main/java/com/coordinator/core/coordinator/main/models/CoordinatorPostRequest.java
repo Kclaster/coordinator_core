@@ -4,8 +4,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class CoordinatorPostRequest {
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Email address is required.")
+    @NotEmpty(message="Email address is required.")
     private String username;
 
     public String getUsername() {

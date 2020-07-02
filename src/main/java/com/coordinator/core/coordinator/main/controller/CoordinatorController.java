@@ -43,7 +43,7 @@ public class CoordinatorController {
     @PreAuthorize("hasRole('ROLE_COORDINATOR')")
     public ResponseEntity<CoordinatorDto> createCoordinator(@Valid @RequestBody final CoordinatorPostRequest coordinatorPostRequest, Errors errors) {
         if (errors.hasErrors()) {
-            ResponseEntity.badRequest().body(errors.getFieldError());
+            ResponseEntity.badRequest().body(errors.getFieldErrors());
         }
         return ResponseEntity.ok(iCoordinator.createCoordinator(coordinatorPostRequest.getUsername()));
     }

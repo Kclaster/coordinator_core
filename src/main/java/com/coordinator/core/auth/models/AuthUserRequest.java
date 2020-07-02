@@ -9,20 +9,20 @@ import javax.validation.constraints.NotNull;
 
 @PasswordMatches
 public class AuthUserRequest {
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Email address is required.")
+    @NotEmpty(message="Email address is required.")
     @ValidEmail
     private String username;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Password is required.")
+    @NotEmpty(message="Password is required.")
     private String password;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message="Matching password is required.")
+    @NotEmpty(message="Matching password is required.")
     private String matchingPassword;
 
-    @NotNull
+    @NotNull(message="RoleId is required.")
     private Integer roleId;
 
     public String getUsername() {
