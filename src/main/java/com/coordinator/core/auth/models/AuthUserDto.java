@@ -16,6 +16,7 @@ public class AuthUserDto implements UserDetails {
     private final boolean isAccountNonLocked;
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
+    private final Integer roleId;
 
     public AuthUserDto(
             UUID id,
@@ -25,7 +26,8 @@ public class AuthUserDto implements UserDetails {
             boolean isAccountNonExpired,
             boolean isAccountNonLocked,
             boolean isCredentialsNonExpired,
-            boolean isEnabled
+            boolean isEnabled,
+            Integer roleId
     ) {
         this.id = id;
         this.grantedAuthorities = grantedAuthorities;
@@ -35,6 +37,7 @@ public class AuthUserDto implements UserDetails {
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
+        this.roleId = roleId;
     }
 
     public UUID getId() {
@@ -76,4 +79,11 @@ public class AuthUserDto implements UserDetails {
         return isEnabled;
     }
 
+    public Set<? extends GrantedAuthority> getGrantedAuthorities() {
+        return grantedAuthorities;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
 }

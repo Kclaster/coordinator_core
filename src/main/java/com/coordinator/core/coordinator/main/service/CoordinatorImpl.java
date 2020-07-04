@@ -1,7 +1,7 @@
 package com.coordinator.core.coordinator.main.service;
 
 import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
-import com.coordinator.core.coordinator.main.repository.ICoordinatorsRepository;
+import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import static com.coordinator.core.general.helpers.GeneralHelper.FirstOrDefault;
 @Service
 public class CoordinatorImpl implements ICoordinator {
     @Autowired
-    private ICoordinatorsRepository iCoordinatorsRepository;
+    private ICoordinatorRepository iCoordinatorsRepository;
 
     @Override
     public CoordinatorDto getCoordinator(UUID coordinatorId) {
@@ -23,14 +23,6 @@ public class CoordinatorImpl implements ICoordinator {
     @Override
     public void updateArchiveCoordinator(UUID coordinatorId) throws IllegalStateException {
         iCoordinatorsRepository.updateArchiveCoordinator(coordinatorId);
-    }
-
-    @Override
-    public CoordinatorDto createCoordinator(String username) {
-        UUID coordinatorId = UUID.randomUUID();
-        iCoordinatorsRepository.createCoordinator(coordinatorId, username);
-
-       return iCoordinatorsRepository.getCoordinator(coordinatorId);
     }
 
     @Override

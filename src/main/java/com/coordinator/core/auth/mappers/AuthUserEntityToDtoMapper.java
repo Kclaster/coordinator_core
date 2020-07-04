@@ -19,7 +19,8 @@ public class AuthUserEntityToDtoMapper implements RowMapper<AuthUserDto> {
                 rs.getBoolean("isExpired"),
                 rs.getBoolean("isLocked"),
                 rs.getBoolean("isCredentialsExpired"),
-                rs.getBoolean("isEnabled"));
+                rs.getBoolean("isEnabled"),
+                rs.getInt("authUserRoleId"));
 
         return authUserDto;
     }

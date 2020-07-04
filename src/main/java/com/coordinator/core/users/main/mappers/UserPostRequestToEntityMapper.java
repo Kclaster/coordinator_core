@@ -1,7 +1,7 @@
 package com.coordinator.core.users.main.mappers;
 
 
-import com.coordinator.core.users.models.ImmutableUserEntity;
+import com.coordinator.core.users.main.models.ImmutableUserEntity;
 
 import java.util.UUID;
 

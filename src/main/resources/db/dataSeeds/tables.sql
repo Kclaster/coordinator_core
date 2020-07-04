@@ -36,6 +36,24 @@ CREATE TABLE venues
     is_archived boolean NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE auth_user_roles
+(
+    id int PRIMARY KEY NOT NULL,
+    title varchar(30) NOT NULL
+);
+
+CREATE TABLE auth_users
+(
+    id uuid PRIMARY KEY NOT NULL,
+    username varchar(30) NOT NULL,
+    password varchar(60) NOT NULL,
+    auth_user_role_id int REFERENCES auth_user_roles (id),
+    is_expired boolean NOT NULL DEFAULT TRUE,
+    is_locked boolean NOT NULL DEFAULT TRUE,
+    is_credentials_expired boolean NOT NULL DEFAULT TRUE,
+    is_enabled boolean NOT NULL DEFAULT TRUE
+);
+
 CREATE TABLE coordinators
 (
     id uuid PRIMARY KEY NOT NULL,
@@ -69,24 +87,6 @@ CREATE TABLE events
     desired_postal_code varchar(9),
     coordinator_id uuid REFERENCES coordinators (id),
     is_archived boolean NOT NULL DEFAULT FALSE
-);
-
-CREATE TABLE auth_user_roles
-(
-    id int PRIMARY KEY NOT NULL,
-    title varchar(30) NOT NULL
-);
-
-CREATE TABLE auth_users
-(
-    id uuid PRIMARY KEY NOT NULL,
-    username varchar(30) NOT NULL,
-    password varchar(60) NOT NULL,
-    auth_user_role_id int REFERENCES auth_user_roles (id),
-    is_expired boolean NOT NULL DEFAULT TRUE,
-    is_locked boolean NOT NULL DEFAULT TRUE,
-    is_credentials_expired boolean NOT NULL DEFAULT TRUE,
-    is_enabled boolean NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE users
