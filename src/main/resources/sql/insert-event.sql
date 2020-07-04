@@ -11,6 +11,7 @@ INSERT INTO events (
     , desired_postal_code
     , venue_id
     , is_archived
+    , user_id
     )
     VALUES (
     :eventId
@@ -25,4 +26,5 @@ INSERT INTO events (
     , :desiredPostalCode
     , :venueId
     , 'false'
+    , :userId
 )

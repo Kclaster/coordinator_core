@@ -56,6 +56,7 @@ public class EventsRepositoryImpl implements IEventsRepository {
         params.put("desiredPostalCode", eventEntity.getDesiredPostalCode());
         params.put("venueId", eventEntity.getVenueId());
         params.put("coordinatorId", eventEntity.getCoordinatorId());
+        params.put("userId", userId);
 
         namedParameterJdbcTemplate.update(sql, params);
     }
