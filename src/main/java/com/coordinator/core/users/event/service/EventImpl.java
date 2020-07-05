@@ -22,9 +22,18 @@ public class EventImpl implements IEvent {
     }
 
     @Override
-    public void createEvent(UUID userId, EventPostRequest eventPostRequest) {
+    public EventDto createEvent(UUID userId, EventPostRequest eventPostRequest) {
+        boolean eventExists = iEventsRepository.getEvent(userId) != null;
+        if (eventExists) {
+            throw new NullPointerException(
+                    "An event has already been registered for: "
+                            +  userId);
+        }
+
         ImmutableEventEntity eventEntity = mapEventRequestToEntity(eventPostRequest);
 
         iEventsRepository.createEvent(userId, eventEntity);
+
+        return iEventsRepository.getEvent(userId);
     }
 }

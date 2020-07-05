@@ -36,8 +36,8 @@ public class EventController {
         if (errors.hasErrors()) {
             ResponseEntity.badRequest().body(errors.getFieldErrors());
         }
-        iEvent.createEvent(UUID.fromString(userId), eventPostRequest);
+       EventDto eventDto = iEvent.createEvent(UUID.fromString(userId), eventPostRequest);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(eventDto);
     }
 }

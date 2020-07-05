@@ -6,7 +6,7 @@ import com.coordinator.core.users.event.models.EventPostRequest;
 import java.util.UUID;
 
 public interface IEvent {
-    void createEvent(UUID userId, EventPostRequest eventPostRequest);
+    EventDto createEvent(UUID userId, EventPostRequest eventPostRequest);
 
     EventDto getEvent(UUID userID);
 }
