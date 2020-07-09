@@ -12,12 +12,19 @@ import static com.coordinator.core.auth.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
 //    ADMIN has no roles for now.
-    ADMIN(Sets.newHashSet(), 1),
-    USER(Sets.newHashSet(EVENT_WRITE, EVENT_READ, COORDINATOR_READ), 2),
-    COORDINATOR(Sets.newHashSet(COORDINATOR_READ, COORDINATOR_WRITE, EVENT_READ), 3);
+    ADMIN(Sets.newHashSet(), Constants.ROLE_ADMIN),
+    USER(Sets.newHashSet(EVENT_WRITE, EVENT_READ, COORDINATOR_READ), Constants.ROLE_COORDINATOR),
+    COORDINATOR(Sets.newHashSet(COORDINATOR_READ, COORDINATOR_WRITE, EVENT_READ), Constants.ROLE_USER);
 
     private final int value;
     private final Set<ApplicationUserPermission> permissions;
+
+    public static class Constants {
+        public static final int ROLE_ADMIN = 1;
+        public static final int ROLE_USER = 2;
+        public static final int ROLE_COORDINATOR =3;
+    }
+
 
     ApplicationUserRole(Set<ApplicationUserPermission> permissions, int value) {
         this.permissions = permissions;

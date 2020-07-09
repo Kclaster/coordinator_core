@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
@@ -61,12 +60,6 @@ public class AuthUserServiceImpl implements IAuthUser {
             throw e;
         }
 
-        // AutoLogin
-        try {
-            servletRequest.login(authUserRequest.getUsername(), authUserRequest.getPassword());
-        } catch (ServletException e) {
-            System.out.println("Error while login " + e);
-        }
     }
 
     private boolean usernameExist(String username) {

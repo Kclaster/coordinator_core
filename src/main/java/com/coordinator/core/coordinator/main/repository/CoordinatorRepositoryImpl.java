@@ -3,7 +3,10 @@ package com.coordinator.core.coordinator.main.repository;
 import com.coordinator.core.coordinator.main.mappers.CoordinatorEntityToDtoMapper;
 import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
+import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
 import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.general.mappers.BaseEntityToBaseDtoMapper;
+import com.coordinator.core.general.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,13 +18,13 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class CoordinatorsRepositoryImpl implements ICoordinatorsRepository {
+public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
     @Autowired
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public CoordinatorsRepositoryImpl(@Qualifier("coreJdbcTemplate")org.springframework.jdbc.core.JdbcTemplate jdbcTemplate) {
+    public CoordinatorRepositoryImpl(@Qualifier("coreJdbcTemplate")org.springframework.jdbc.core.JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
@@ -56,13 +59,30 @@ public class CoordinatorsRepositoryImpl implements ICoordinatorsRepository {
     }
 
     @Override
-    public void createCoordinator(UUID coordinatorId, String username) {
+    public void createCoordinator(ImmutableCoordinatorEntity immutableCoordinatorEntity) {
         String sql = SqlHelper.sql("insert-coordinator");
-        Map<String, Object> params = Map.of(
-             "coordinatorId", coordinatorId,
-             "username", username
-        );
+
+
+        var params = new HashMap<String, Object>();
+        params.put("coordinatorId", immutableCoordinatorEntity.getId());
+        params.put("authUserId", immutableCoordinatorEntity.getAuthUserId());
+        params.put("contactEmail", immutableCoordinatorEntity.getContactEmail());
+
         namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public BaseDto getCoordinatorFromAuthUserId(UUID authUserId) {
+        Map<String, Object> params = Map.of(
+                "authUserId", authUserId
+        );
+
+        String sql = SqlHelper.sql("select-coordinator-from-auth-user-id");
+        return namedParameterJdbcTemplate.queryForObject(
+                sql,
+                params,
+                new BaseEntityToBaseDtoMapper()
+        );
     }
 
     @Override

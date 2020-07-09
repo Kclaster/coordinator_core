@@ -30,7 +30,7 @@ public class AuthenticationController {
 
                 return ResponseEntity.ok().build();
             } catch (Exception e) {
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
 }

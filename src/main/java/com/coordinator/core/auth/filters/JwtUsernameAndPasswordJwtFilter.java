@@ -1,8 +1,10 @@
 package com.coordinator.core.auth.filters;
 
+import com.coordinator.core.auth.ApplicationUserRole;
 import com.coordinator.core.auth.config.JwtConfig;
 import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.UsernameAndPasswordAuthenticationRequest;
+import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinator.core.general.models.BaseDto;
 import com.coordinator.core.users.main.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,21 +23,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
     private final IUserRepository iUserRepository;
+    private final ICoordinatorRepository iCoordinatorRepository;
 
     public JwtUsernameAndPasswordJwtFilter(AuthenticationManager authenticationManager,
                                            JwtConfig jwtConfig,
                                            SecretKey secretKey,
-                                           IUserRepository iUserRepository) {
+                                           IUserRepository iUserRepository,
+                                           ICoordinatorRepository iCoordinatorRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
         this.iUserRepository = iUserRepository;
+        this.iCoordinatorRepository = iCoordinatorRepository;
     }
 
     @Override
@@ -62,7 +68,8 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
         AuthUserDto userDetails = (AuthUserDto) authResult.getPrincipal();
-        BaseDto userBaseDto = iUserRepository.getUserFromAuthUserId(userDetails.getId());
+        BaseDto userBaseDto = getRoleId(userDetails.getRoleId(), userDetails.getId());
+
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
@@ -74,4 +81,16 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
 
         response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
     }
+
+    private BaseDto getRoleId(Integer roleId, UUID authUserId) {
+        switch(roleId) {
+            case ApplicationUserRole
+                    .Constants.ROLE_USER:
+                return iUserRepository.getUserFromAuthUserId(authUserId);
+            default:
+                return iCoordinatorRepository.getCoordinatorFromAuthUserId(authUserId);
+        }
+    }
+
+
 }

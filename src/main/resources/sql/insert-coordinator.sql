@@ -1,8 +1,10 @@
 INSERT INTO coordinators (
     id
-    , username
+    , contact_email
+    , auth_user_id
     )
     VALUES (
     :coordinatorId
-    , :username
+    , :contactEmail
+    , :authUserId
 )

@@ -5,6 +5,7 @@ import com.coordinator.core.auth.filters.AuthenticationEntryPointFilter;
 import com.coordinator.core.auth.filters.JwtTokenVerifier;
 import com.coordinator.core.auth.filters.JwtUsernameAndPasswordJwtFilter;
 import com.coordinator.core.auth.service.AuthUserServiceImpl;
+import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinator.core.users.main.repository.IUserRepository;
 import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthUserServiceImpl authUserServiceImpl;
     private final IUserRepository iUserRepository;
+    private final ICoordinatorRepository iCoordinatorRepository;
     private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
@@ -49,7 +51,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                                      JwtConfig jwtConfig,
                                      AccessDeniedFilter accessDeniedFilter,
                                      AuthenticationEntryPointFilter authenticationEntryPointFilter,
-                                     IUserRepository iUserRepository) {
+                                     IUserRepository iUserRepository,
+                                     ICoordinatorRepository iCoordinatorRepository) {
         this.passwordEncoder = passwordEncoder;
         this.authUserServiceImpl = authUserServiceImpl;
         this.secretKey = secretKey;
@@ -57,6 +60,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.accessDeniedFilter = accessDeniedFilter;
         this.authenticationEntryPointFilter = authenticationEntryPointFilter;
         this.iUserRepository = iUserRepository;
+        this.iCoordinatorRepository = iCoordinatorRepository;
     }
 
     @Override
@@ -110,7 +114,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public JwtUsernameAndPasswordJwtFilter jwtAuthorizationFilter() throws Exception {
-        JwtUsernameAndPasswordJwtFilter jwtAuthenticationFilter = new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey, iUserRepository);
+        JwtUsernameAndPasswordJwtFilter jwtAuthenticationFilter = new JwtUsernameAndPasswordJwtFilter(authenticationManager(), jwtConfig, secretKey, iUserRepository, iCoordinatorRepository);
         jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
         return jwtAuthenticationFilter;
     }

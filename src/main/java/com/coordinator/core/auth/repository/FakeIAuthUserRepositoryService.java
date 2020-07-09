@@ -43,7 +43,8 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true,
                             true,
                             true,
-                            true
+                            true,
+                            3
                     ),
                     new AuthUserDto(
                             UUID.randomUUID(),
@@ -53,7 +54,8 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true,
                             true,
                             true,
-                            true
+                            true,
+                            1
                     ),
                     new AuthUserDto(
                             UUID.randomUUID(),
@@ -63,7 +65,8 @@ public class FakeIAuthUserRepositoryService implements IAuthUserRepository {
                             true,
                             true,
                             true,
-                            true
+                            true,
+                            1
                     )
             );
 

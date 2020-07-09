@@ -8,6 +8,5 @@ import java.util.UUID;
 public interface ICoordinator {
     CoordinatorDto getCoordinator(UUID id);
     void updateArchiveCoordinator(UUID coordinatorId) throws IllegalStateException;
-    CoordinatorDto createCoordinator(String username);
     CoordinatorDto updateCoordinator(UUID coordinatorId, CoordinatorPutRequest coordinatorPutRequest) throws IllegalStateException;
 }

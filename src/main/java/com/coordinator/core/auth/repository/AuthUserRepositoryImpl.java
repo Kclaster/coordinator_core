@@ -4,6 +4,8 @@ import com.coordinator.core.auth.ApplicationUserRole;
 import com.coordinator.core.auth.mappers.AuthUserEntityToDtoMapper;
 import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
+import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
+import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinator.core.general.helpers.SqlHelper;
 import com.coordinator.core.users.main.models.ImmutableUserEntity;
 import com.coordinator.core.users.main.repository.IUserRepository;
@@ -13,8 +15,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
+import static com.coordinator.core.coordinator.main.mappers.CoordinatorPostRequestToEntityMapper.mapCoordinatorRequestToEntity;
 import static com.coordinator.core.users.main.mappers.UserPostRequestToEntityMapper.mapUserRequestToEntity;
 
 @Repository("postgres")
@@ -22,15 +28,18 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
     private final IUserRepository iUserRepository;
+    private final ICoordinatorRepository iCoordinatorRepository;
 
     @Autowired
     public AuthUserRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate,
                                   NamedParameterJdbcTemplate namedParameterJdbcTemplate,
-                                  IUserRepository iUserRepository
+                                  IUserRepository iUserRepository,
+                                  ICoordinatorRepository iCoordinatorRepository
     ) {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.iUserRepository = iUserRepository;
+        this.iCoordinatorRepository = iCoordinatorRepository;
     }
 
     @Override
@@ -65,10 +74,25 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
             throw e;
         }
 
-        // If ROLE_USER
-        if (authUserRequest.getRoleId() == ApplicationUserRole.USER.getValue()) {
-            ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, authUserRequest.getUsername());
-            iUserRepository.createUser(immutableUserEntity);
+        createRoleId(newAuthUserId, authUserRequest.getUsername(), authUserRequest.getRoleId());
+
+    }
+
+    private void createRoleId(UUID newAuthUserId, String username, Integer roleId) {
+        switch (roleId) {
+            case ApplicationUserRole
+                    .Constants.ROLE_USER:
+                ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, username);
+                iUserRepository.createUser(immutableUserEntity);
+                break;
+            case ApplicationUserRole
+                    .Constants.ROLE_COORDINATOR:
+                ImmutableCoordinatorEntity immutableCoordinatorEntity = mapCoordinatorRequestToEntity(newAuthUserId, username);
+                iCoordinatorRepository.createCoordinator(immutableCoordinatorEntity);
+                break;
+            case ApplicationUserRole
+                    .Constants.ROLE_ADMIN:
+                break;
         }
     }
 }
