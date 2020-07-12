@@ -18,17 +18,21 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.crypto.SecretKey;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 
-import static com.coordinator.core.auth.ApplicationUserRole.COORDINATOR;
-import static com.coordinator.core.auth.ApplicationUserRole.ADMIN;
-import static com.coordinator.core.auth.ApplicationUserRole.USER;
+import static com.coordinator.core.auth.ApplicationUserRole.*;
 
 @Configuration
 @EnableWebSecurity
@@ -83,6 +87,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .accessDeniedHandler(accessDeniedFilter)
                     .authenticationEntryPoint(authenticationEntryPointFilter)
                     .and()
+                .logout()
+                .logoutUrl("/api/v1/auth/logout")
+                .logoutSuccessHandler(new LogoutSuccessHandler() {
+
+                    @Override
+                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
+                                                Authentication authentication) throws IOException, ServletException {}
+                })
+                .and()
                 .addFilter(jwtAuthorizationFilter())
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordJwtFilter.class);
     }

@@ -69,7 +69,16 @@ CREATE TABLE coordinators
     level_three_default_bid integer,
     is_archived boolean NOT NULL DEFAULT FALSE,
     auth_user_id uuid REFERENCES auth_users (id)
+);
 
+CREATE TABLE users
+(
+    id uuid PRIMARY KEY NOT NULL,
+    name varchar(30),
+    contact_email varchar(30) NOT NULL,
+    contact_phone_number varchar(11),
+    is_archived boolean NOT NULL DEFAULT FALSE,
+    auth_user_id uuid REFERENCES auth_users (id)
 );
 
 CREATE TABLE events
@@ -78,6 +87,7 @@ CREATE TABLE events
     event_end_date timestamptz,
     event_start_date timestamptz,
     event_size integer,
+    user_id UUID NOT NULL REFERENCES users (id),
     event_type_id integer NOT NULL REFERENCES event_types (id),
     desired_service_id integer REFERENCES desired_services (id),
     additional_user_comments varchar(300),
@@ -87,17 +97,6 @@ CREATE TABLE events
     desired_postal_code varchar(9),
     coordinator_id uuid REFERENCES coordinators (id),
     is_archived boolean NOT NULL DEFAULT FALSE
-);
-
-CREATE TABLE users
-(
-    id uuid PRIMARY KEY NOT NULL,
-    name varchar(30),
-    contact_email varchar(30) NOT NULL,
-    contact_phone_number varchar(11),
-    event_id uuid REFERENCES events (id),
-    is_archived boolean NOT NULL DEFAULT FALSE,
-    auth_user_id uuid REFERENCES auth_users (id)
 );
 
 CREATE TABLE roles

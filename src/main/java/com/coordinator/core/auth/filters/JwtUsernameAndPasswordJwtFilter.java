@@ -69,11 +69,13 @@ public class JwtUsernameAndPasswordJwtFilter extends UsernamePasswordAuthenticat
                                             Authentication authResult) throws IOException, ServletException {
         AuthUserDto userDetails = (AuthUserDto) authResult.getPrincipal();
         BaseDto userBaseDto = getRoleId(userDetails.getRoleId(), userDetails.getId());
+        Integer role = userDetails.getRoleId();
 
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
+                .claim("operatorId", userBaseDto.getId())
                 .claim("authorities", authResult.getAuthorities())
-                .claim("roleId", userBaseDto.getId())
+                .claim("roleId", role)
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
                 .signWith(secretKey)

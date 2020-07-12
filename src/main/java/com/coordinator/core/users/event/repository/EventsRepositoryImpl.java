@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,11 +33,17 @@ public class EventsRepositoryImpl implements IEventsRepository {
         );
 
         String sql = SqlHelper.sql("select-event");
-        return namedParameterJdbcTemplate.queryForObject(
+        List<EventDto> events = namedParameterJdbcTemplate.query(
                 sql,
                 params,
                 new EventEntityToDtoMapper()
         );
+
+        if (events.size() == 1) {
+            return events.get(0);
+        }
+
+        return null;
     }
 
     @Override
@@ -56,6 +63,7 @@ public class EventsRepositoryImpl implements IEventsRepository {
         params.put("desiredPostalCode", eventEntity.getDesiredPostalCode());
         params.put("venueId", eventEntity.getVenueId());
         params.put("coordinatorId", eventEntity.getCoordinatorId());
+        params.put("userId", userId);
 
         namedParameterJdbcTemplate.update(sql, params);
     }

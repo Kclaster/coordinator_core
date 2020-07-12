@@ -11,6 +11,4 @@ SELECT e.id as id
     , desired_postal_code as desiredPostalCode
     , coordinator_id as coordinatorId
 FROM events e
-    JOIN users u
-    ON u.event_id = e.id
-WHERE u.id = :userId
+WHERE user_id = :userId
