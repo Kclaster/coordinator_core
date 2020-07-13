@@ -25,10 +25,20 @@ INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
 ('8e2d7974-a148-11ea-bb37-1242ac130004', 'userbob', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2),
 ('8e2d7974-a158-11ea-bb37-2342ac130004', 'usersam', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2);
 
+INSERT INTO zip_codes (id, title) VALUES
+(1, '75149'),
+(2, '76036');
+
 INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid, is_archived, auth_user_id) VALUES
 ('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200, FALSE, '8e2d7576-a148-11ea-bb37-0242ac130004'),
 ('9e2d7975-a127-11ea-bb37-0242ac130002', 'Hitched', 'CA', 'Modesto', '6789 Martin RD', '74321', 'hitched@gmail.com', 1000, 4900, 4500, 4200, FALSE, '8e2d7376-a148-11ea-bb37-0242ac130004'),
 ('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, '8e2d7476-a148-11ea-bb37-0242ac130004');
+
+INSERT INTO coordinators_zip_codes (id, coordinator_id, zip_code_id) VALUES
+(1, '9e2d7973-a127-11ea-bb37-0242ac130002', 1),
+(2, '9e2d7973-a127-11ea-bb37-0242ac130002', 2),
+(3, '9e2d7975-a127-11ea-bb37-0242ac130002', 1),
+(4, '9e2d7976-a127-11ea-bb37-0242ac130002', 2);
 
 INSERT INTO users (id, name, contact_email, contact_phone_number, is_archived, auth_user_id) VALUES
 ('8e2d7974-a127-11ea-bb37-0242ac130004', 'Austin', 'austin@gmail.com', '5555555555', FALSE, '8e2d7974-a158-11ea-bb37-0242ac130004'),

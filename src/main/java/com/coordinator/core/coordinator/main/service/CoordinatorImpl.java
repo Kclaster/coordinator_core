@@ -27,6 +27,17 @@ public class CoordinatorImpl implements ICoordinator {
 
     @Override
     public CoordinatorDto updateCoordinator(UUID coordinatorId, CoordinatorPutRequest coordinatorPutRequest) throws IllegalStateException {
+        /* Check if distance or initial zipcode changed
+            if yes {
+             get list of zipcodes within distance of initialZipcode
+
+                loop through each and check if zip exists/ insert otherwise
+                insert into join table
+            }
+
+
+            ** This shouldn't mess with the get Coordinator. The Get zipcodes within distance should only be used for checking if event is valid.
+        */
         CoordinatorDto currentCoordinator = iCoordinatorsRepository.getCoordinator(coordinatorId);
         coordinatorPutRequest.setTitle(FirstOrDefault(coordinatorPutRequest.getTitle(), currentCoordinator.getTitle()));
         coordinatorPutRequest.setOfficeState(FirstOrDefault(coordinatorPutRequest.getOfficeState(), currentCoordinator.getOfficeState()));
