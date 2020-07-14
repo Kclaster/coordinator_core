@@ -3,7 +3,7 @@ package com.coordinator.core.coordinator.main.repository;
 import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
 import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.models.BaseDto;
 
 import java.util.UUID;
 

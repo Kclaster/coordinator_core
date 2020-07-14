@@ -1,6 +1,6 @@
-package com.coordinator.core.general.Interceptors;
+package com.coordinator.core.general.main.Interceptors;
 
-import com.coordinator.core.general.models.ExceptionMessage;
+import com.coordinator.core.general.main.models.ExceptionMessage;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;

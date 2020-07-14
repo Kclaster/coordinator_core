@@ -9,5 +9,4 @@ UPDATE coordinators SET
     , level_one_default_bid = :levelOneDefaultBid
     , level_two_default_bid = :levelTwoDefaultBid
     , level_three_default_bid = :levelThreeDefaultBid
-    , username = :username
 WHERE id = :coordinatorId

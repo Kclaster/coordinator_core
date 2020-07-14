@@ -1,6 +1,6 @@
 package com.coordinator.core.users.main.repository;
 
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.models.BaseDto;
 import com.coordinator.core.users.main.models.ImmutableUserEntity;
 import com.coordinator.core.users.main.models.UserDto;
 

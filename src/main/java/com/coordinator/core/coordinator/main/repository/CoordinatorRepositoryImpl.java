@@ -4,9 +4,9 @@ import com.coordinator.core.coordinator.main.mappers.CoordinatorEntityToDtoMappe
 import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
 import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
-import com.coordinator.core.general.helpers.SqlHelper;
-import com.coordinator.core.general.mappers.BaseEntityToBaseDtoMapper;
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.helpers.SqlHelper;
+import com.coordinator.core.general.main.mappers.BaseEntityToBaseDtoMapper;
+import com.coordinator.core.general.main.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -100,7 +100,6 @@ public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
         params.put("levelOneDefaultBid", coordinatorPutRequest.getLevelOneDefaultBid());
         params.put("levelTwoDefaultBid", coordinatorPutRequest.getLevelTwoDefaultBid());
         params.put("levelThreeDefaultBid", coordinatorPutRequest.getLevelThreeDefaultBid());
-        params.put("username", coordinatorPutRequest.getUsername());
 
         int numberOfRowsUpdated = namedParameterJdbcTemplate.update(sql, params);
 

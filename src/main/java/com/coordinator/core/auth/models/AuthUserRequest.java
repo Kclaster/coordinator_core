@@ -2,7 +2,7 @@ package com.coordinator.core.auth.models;
 
 
 import com.coordinator.core.auth.annotations.PasswordMatches;
-import com.coordinator.core.general.annotations.ValidEmail;
+import com.coordinator.core.general.main.annotations.ValidEmail;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

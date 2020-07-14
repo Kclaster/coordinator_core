@@ -1,4 +1,4 @@
-package com.coordinator.core.general.annotations;
+package com.coordinator.core.general.main.annotations;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

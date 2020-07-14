@@ -1,6 +1,6 @@
-package com.coordinator.core.general.mappers;
+package com.coordinator.core.general.main.mappers;
 
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.models.BaseDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

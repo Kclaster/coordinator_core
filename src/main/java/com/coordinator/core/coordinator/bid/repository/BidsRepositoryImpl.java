@@ -2,8 +2,8 @@ package com.coordinator.core.coordinator.bid.repository;
 
 import com.coordinator.core.coordinator.bid.mappers.BidMapper;
 import com.coordinator.core.coordinator.bid.models.BidDto;
-import com.coordinator.core.general.models.QueryOptions;
-import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.general.main.models.QueryOptions;
+import com.coordinator.core.general.main.helpers.SqlHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;

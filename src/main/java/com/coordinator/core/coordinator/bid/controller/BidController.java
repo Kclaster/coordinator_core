@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.coordinator.core.general.helpers.QueryOptionsHelper.fromQueryParameters;
+import static com.coordinator.core.general.main.helpers.QueryOptionsHelper.fromQueryParameters;
 
 @RestController
 @RequestMapping("/api/v1/coordinators/{coordinatorId}/bids")

@@ -1,4 +1,4 @@
-package com.coordinator.core.coordinator.main.models;
+package com.coordinator.core.general.zipcodes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

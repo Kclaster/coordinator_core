@@ -14,7 +14,6 @@ public class UserEntityToDtoMapper implements RowMapper<UserDto> {
             userDto.setName(rs.getString("name"));
             userDto.setContactEmail(rs.getString("contactEmail"));
             userDto.setContactPhoneNumber(rs.getString("contactPhoneNumber"));
-            userDto.setEventId(UUID.fromString(rs.getString("eventId")));
             return userDto;
         }
 }

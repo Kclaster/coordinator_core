@@ -1,4 +1,4 @@
-package com.coordinator.core.general.models;
+package com.coordinator.core.general.main.models;
 
 public class BaseDto {
     private String id;

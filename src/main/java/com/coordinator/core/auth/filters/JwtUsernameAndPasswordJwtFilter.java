@@ -5,7 +5,7 @@ import com.coordinator.core.auth.config.JwtConfig;
 import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.UsernameAndPasswordAuthenticationRequest;
 import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.models.BaseDto;
 import com.coordinator.core.users.main.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;

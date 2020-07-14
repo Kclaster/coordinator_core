@@ -7,7 +7,6 @@ public class UserDto {
     private String name;
     private String contactEmail;
     private String contactPhoneNumber;
-    private UUID eventId;
 
     public UUID getId() {
         return id;
@@ -39,13 +38,5 @@ public class UserDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public UUID getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(UUID eventId) {
-        this.eventId = eventId;
     }
 }

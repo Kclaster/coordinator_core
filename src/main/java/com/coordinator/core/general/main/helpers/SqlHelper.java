@@ -1,6 +1,6 @@
-package com.coordinator.core.general.helpers;
+package com.coordinator.core.general.main.helpers;
 
-import com.coordinator.core.general.models.QueryOptions;
+import com.coordinator.core.general.main.models.QueryOptions;
 
 import java.io.IOException;
 import java.io.InputStream;

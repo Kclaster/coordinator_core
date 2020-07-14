@@ -1,7 +1,7 @@
 package com.coordinator.core.coordinator.bid.service;
 
 import com.coordinator.core.coordinator.bid.models.BidDto;
-import com.coordinator.core.general.models.QueryOptions;
+import com.coordinator.core.general.main.models.QueryOptions;
 
 import java.util.List;
 import java.util.UUID;

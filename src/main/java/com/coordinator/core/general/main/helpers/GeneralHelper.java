@@ -1,4 +1,4 @@
-package com.coordinator.core.general.helpers;
+package com.coordinator.core.general.main.helpers;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
