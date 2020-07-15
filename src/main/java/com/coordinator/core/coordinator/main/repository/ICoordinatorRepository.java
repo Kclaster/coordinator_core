@@ -13,4 +13,10 @@ public interface ICoordinatorRepository {
     void createCoordinator(ImmutableCoordinatorEntity immutableCoordinatorEntity);
     void updateCoordinator(UUID coordinatorId, CoordinatorPutRequest coordinatorDto);
     BaseDto getCoordinatorFromAuthUserId(UUID authUserId);
+    void createCoordinatorsZipCodes(
+            UUID joinTableId,
+            UUID zipCodeId,
+            UUID coordinatorId
+    );
+    void deleteCoordinatorsZipCodes(UUID coordinatorId);
 }

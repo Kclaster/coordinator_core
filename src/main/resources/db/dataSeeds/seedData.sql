@@ -26,8 +26,8 @@ INSERT INTO auth_users (id, username, password, auth_user_role_id) VALUES
 ('8e2d7974-a158-11ea-bb37-2342ac130004', 'usersam', '$2a$10$VAMuUkcmL.BQzacV4afFfu7Z6jQDGYVo4RpKdrbu7tZOg4CkSnbPO', 2);
 
 INSERT INTO zip_codes (id, title) VALUES
-(1, '75149'),
-(2, '76036');
+('c6e17c26-9e40-4e19-8339-28772ef184d1', '75149'),
+('c6e17c26-9e40-4e19-8339-28772ef184d2', '76036');
 
 INSERT INTO coordinators (id, title, office_state, office_city, office_address, office_postal_code, contact_email, maximum_distance_to_client, level_one_default_bid, level_two_default_bid, level_three_default_bid, is_archived, auth_user_id) VALUES
 ('9e2d7973-a127-11ea-bb37-0242ac130002', 'Best Weddings', 'TX', 'Dallas', '4731 Inchester RD', '74321', 'best_weddings@gmail.com', 30, 900, 500, 200, FALSE, '8e2d7576-a148-11ea-bb37-0242ac130004'),
@@ -35,10 +35,10 @@ INSERT INTO coordinators (id, title, office_state, office_city, office_address, 
 ('9e2d7976-a127-11ea-bb37-0242ac130002', 'I Am Hungry', 'TX', 'Dallas', '4731 Martin Luther St.', '74321', 'please@gmail.com', 5, 9, 5, 2, FALSE, '8e2d7476-a148-11ea-bb37-0242ac130004');
 
 INSERT INTO coordinators_zip_codes (id, coordinator_id, zip_code_id) VALUES
-(1, '9e2d7973-a127-11ea-bb37-0242ac130002', 1),
-(2, '9e2d7973-a127-11ea-bb37-0242ac130002', 2),
-(3, '9e2d7975-a127-11ea-bb37-0242ac130002', 1),
-(4, '9e2d7976-a127-11ea-bb37-0242ac130002', 2);
+('9e3d7973-a127-11ea-bb37-0242bc130002', '9e2d7973-a127-11ea-bb37-0242ac130002', 'c6e17c26-9e40-4e19-8339-28772ef184d1'),
+('9e2d7973-a127-11ea-bb37-0242ac142002', '9e2d7973-a127-11ea-bb37-0242ac130002', 'c6e17c26-9e40-4e19-8339-28772ef184d2'),
+('9e2a6973-a127-11ea-bb37-0242ac130002', '9e2d7975-a127-11ea-bb37-0242ac130002', 'c6e17c26-9e40-4e19-8339-28772ef184d1'),
+('9e2a3273-a127-11ea-bb37-0242ac130002', '9e2d7976-a127-11ea-bb37-0242ac130002', 'c6e17c26-9e40-4e19-8339-28772ef184d2');
 
 INSERT INTO users (id, name, contact_email, contact_phone_number, is_archived, auth_user_id) VALUES
 ('8e2d7974-a127-11ea-bb37-0242ac130004', 'Austin', 'austin@gmail.com', '5555555555', FALSE, '8e2d7974-a158-11ea-bb37-0242ac130004'),
@@ -68,4 +68,3 @@ INSERT INTO bids (id, bid_status_id, bid_amount, message_to_user, event_id, coor
 ('8e2d7974-a128-31ea-bb37-0242ac130004', 1, 1000, 'Here is what I will give you.', '9e2d7974-a127-11ea-bb37-0242ac130003', '9e2d7976-a127-11ea-bb37-0242ac130002'),
 ('8e2d7974-a128-41ea-bb37-0242ac130004', 3, 350, 'I am america and so can you.', '9e2d7974-a127-11ea-bb37-0242ac130004', '9e2d7975-a127-11ea-bb37-0242ac130002'),
 ('8e2d7974-a128-51ea-bb37-0242ac130004', 4, 350, 'I am so hungry', '9e2d7974-a127-11ea-bb37-0242ac130004', '9e2d7976-a127-11ea-bb37-0242ac130002');
-

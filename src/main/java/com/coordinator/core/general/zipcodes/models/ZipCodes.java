@@ -3,18 +3,19 @@ package com.coordinator.core.general.zipcodes.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ZipCodes {
     @JsonProperty("zip_codes")
-    private Collection<ZipCode> zipCodes;
+    private ZipCode[] zipCodes;
 
-    public Collection<ZipCode> getZipCodes() {
-        return zipCodes;
+    public List<ZipCode> getZipCodes() {
+        return Arrays.asList(zipCodes);
     }
 
-    public void setZipCodes(Collection<ZipCode> zipCodes) {
+    public void setZipCodes(ZipCode[] zipCodes) {
         this.zipCodes = zipCodes;
     }
 }

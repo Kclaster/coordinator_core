@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS auth_users CASCADE;
 DROP TABLE IF EXISTS zip_codes CASCADE;
 DROP TABLE IF EXISTS coordinators_zip_codes CASCADE;
 
+
 CREATE TABLE event_types
 (
     id integer PRIMARY KEY NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE auth_users
 );
 
 CREATE TABLE zip_codes (
-    id int PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY NOT NULL,
     title varchar(9)
 );
 
@@ -80,9 +81,9 @@ CREATE TABLE coordinators
 
 CREATE TABLE coordinators_zip_codes
 (
-    id int PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY NOT NULL,
     coordinator_id uuid REFERENCES coordinators (id),
-    zip_code_id int REFERENCES zip_codes (id)
+    zip_code_id uuid REFERENCES zip_codes (id)
 );
 
 CREATE TABLE users
