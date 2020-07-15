@@ -4,7 +4,8 @@ SELECT b.id as id
     , b.message_to_user as messageToUser
     , b.event_id as eventId
     , b.coordinator_id as coordinatorId
-    , e.event_date as eventDate
+    , e.event_start_date as eventStartDate
+    , e.event_end_date as eventEndDate
     , e.event_size as eventSize
     , e.event_type_id as eventTypeId
     , e.desired_service_id as desiredServiceId
