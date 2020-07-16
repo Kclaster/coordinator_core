@@ -15,7 +15,9 @@ public class BidIml implements IBid {
     private IBidsRepository iBidsRepository;
 
     @Override
-    public List<BidDto> getAllCoordinatorsBids(UUID coordinatorId, QueryOptions queryOptions) {
+    public List<BidDto> getAllCoordinatorsBids(
+            UUID coordinatorId,
+            QueryOptions queryOptions) {
         return iBidsRepository.getAllCoordinatorsBids(coordinatorId, queryOptions);
     }
 }

@@ -1,7 +1,7 @@
-package com.coordinator.core.coordinator.bid.mappers;
+package com.coordinator.core.coordinator.events.mappers;
 
-import com.coordinator.core.coordinator.bid.models.BidDto;
-import com.coordinator.core.users.event.models.EventDto;
+import com.coordinator.core.coordinator.events.models.BidDto;
+import com.coordinator.core.coordinator.events.models.CoordinatorEventDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -9,21 +9,15 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class BidMapper implements RowMapper<BidDto> {
-    public BidDto mapRow(ResultSet rs, int i) throws SQLException {
+public class CoordinatorEventEntityToCoordinatorEventDtoMapper implements RowMapper<CoordinatorEventDto> {
+    public CoordinatorEventDto mapRow(ResultSet rs, int i) throws SQLException {
         Timestamp eventStartDate = rs.getTimestamp("eventStartDate");
         Timestamp eventEndDate = rs.getTimestamp("eventEndDate");
         String coordinatorId = rs.getString("coordinatorId");
         String venueId = rs.getString("venueId");
+        String bidId = rs.getString("bidId");
 
-        BidDto bidDto = new BidDto();
-        bidDto.setId(UUID.fromString(rs.getString("id")));
-        bidDto.setBidAmount(rs.getInt("bidAmount"));
-        bidDto.setBidStatusId(rs.getInt("bidStatusId"));
-        bidDto.setCoordinatorId(UUID.fromString(rs.getString("coordinatorId")));
-        bidDto.setMessageToUser(rs.getString("messageToUser"));
-
-        EventDto event = new EventDto();
+        CoordinatorEventDto event = new CoordinatorEventDto();
         event.setDesiredPostalCode(rs.getString("desiredPostalCode"));
         event.setDesiredCity(rs.getString("desiredCity"));
         event.setAdditionalUserComments(rs.getString("additionalUserComments"));
@@ -34,12 +28,20 @@ public class BidMapper implements RowMapper<BidDto> {
         event.setEventEndDate(eventEndDate != null ? eventEndDate.toInstant().toEpochMilli() : null);
         event.setEventSize(rs.getInt("eventSize"));
         event.setEventTypeId(rs.getInt("eventTypeId"));
-        event.setId(UUID.fromString(rs.getString("id")));
+        event.setEventId(UUID.fromString(rs.getString("eventId")));
         event.setVenueId(venueId != null ? UUID.fromString(venueId) : null);
-        event.setArchived(rs.getBoolean("isArchived"));
-        bidDto.setEvent(event);
 
+        if (bidId != null) {
+            BidDto bidDto = new BidDto();
 
-        return bidDto;
+            bidDto.setBidAmount(rs.getInt("bidAmount"));
+            bidDto.setMessageToUser(rs.getString("messageToUser"));
+            bidDto.setBidStatusId(rs.getInt("bidStatusId"));
+            bidDto.setBidId(UUID.fromString(rs.getString("bidId")));
+
+            event.setBid(bidDto);
+        }
+
+        return event;
     }
 }
