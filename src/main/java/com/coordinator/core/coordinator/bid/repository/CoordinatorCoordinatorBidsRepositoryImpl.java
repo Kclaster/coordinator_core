@@ -1,6 +1,6 @@
 package com.coordinator.core.coordinator.bid.repository;
 
-import com.coordinator.core.coordinator.bid.mappers.BidMapper;
+import com.coordinator.core.coordinator.bid.mappers.BidEntityToDtoMapper;
 import com.coordinator.core.coordinator.bid.models.BidDto;
 import com.coordinator.core.coordinator.bid.models.ImmutableBidEntity;
 import com.coordinator.core.general.main.helpers.SqlHelper;
@@ -18,13 +18,13 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class BidsRepositoryImpl implements IBidsRepository {
+public class CoordinatorCoordinatorBidsRepositoryImpl implements ICoordinatorBidsRepository {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private static final int DEFAULT_BID_STATUS_ID = 1;
 
     @Autowired
-    public BidsRepositoryImpl(
+    public CoordinatorCoordinatorBidsRepositoryImpl(
             @Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
@@ -45,7 +45,7 @@ public class BidsRepositoryImpl implements IBidsRepository {
         return namedParameters.query(
                 sql,
                 params,
-                new BidMapper()
+                new BidEntityToDtoMapper()
         );
     }
 

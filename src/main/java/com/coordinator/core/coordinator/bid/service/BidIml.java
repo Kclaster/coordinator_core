@@ -3,7 +3,7 @@ package com.coordinator.core.coordinator.bid.service;
 import com.coordinator.core.coordinator.bid.models.BidDto;
 import com.coordinator.core.coordinator.bid.models.BidPostRequest;
 import com.coordinator.core.coordinator.bid.models.ImmutableBidEntity;
-import com.coordinator.core.coordinator.bid.repository.IBidsRepository;
+import com.coordinator.core.coordinator.bid.repository.ICoordinatorBidsRepository;
 import com.coordinator.core.general.main.models.QueryOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,18 +16,18 @@ import static com.coordinator.core.coordinator.bid.mappers.BidPostRequestToEntit
 @Service
 public class BidIml implements IBid {
     @Autowired
-    private IBidsRepository iBidsRepository;
+    private ICoordinatorBidsRepository iCoordinatorBidsRepository;
 
     @Override
     public List<BidDto> getAllCoordinatorsBids(
             UUID coordinatorId,
             QueryOptions queryOptions) {
-        return iBidsRepository.getAllCoordinatorsBids(coordinatorId, queryOptions);
+        return iCoordinatorBidsRepository.getAllCoordinatorsBids(coordinatorId, queryOptions);
     }
 
     @Override
     public void createBid(UUID coordinatorId, BidPostRequest bidPostRequest)  {
-        boolean bidExists = iBidsRepository.bidExists(coordinatorId, UUID.fromString(bidPostRequest.getEventId()));
+        boolean bidExists = iCoordinatorBidsRepository.bidExists(coordinatorId, UUID.fromString(bidPostRequest.getEventId()));
 
         if (bidExists) {
             throw new NullPointerException(
@@ -38,7 +38,7 @@ public class BidIml implements IBid {
 
         ImmutableBidEntity bidEntity = mapBidRequestToEntity(bidPostRequest);
 
-            iBidsRepository.createBid(coordinatorId, bidEntity);
+            iCoordinatorBidsRepository.createBid(coordinatorId, bidEntity);
 
     }
 }

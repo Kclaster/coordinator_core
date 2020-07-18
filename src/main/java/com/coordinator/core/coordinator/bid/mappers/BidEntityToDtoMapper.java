@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class BidMapper implements RowMapper<BidDto> {
+public class BidEntityToDtoMapper implements RowMapper<BidDto> {
     public BidDto mapRow(ResultSet rs, int i) throws SQLException {
         Timestamp eventStartDate = rs.getTimestamp("eventStartDate");
         Timestamp eventEndDate = rs.getTimestamp("eventEndDate");
