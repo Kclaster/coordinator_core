@@ -2,27 +2,32 @@ package com.coordinator.core.coordinator.bid.repository;
 
 import com.coordinator.core.coordinator.bid.mappers.BidMapper;
 import com.coordinator.core.coordinator.bid.models.BidDto;
-import com.coordinator.core.general.main.models.QueryOptions;
+import com.coordinator.core.coordinator.bid.models.ImmutableBidEntity;
 import com.coordinator.core.general.main.helpers.SqlHelper;
+import com.coordinator.core.general.main.mappers.RowExistsToBooleanMapper;
+import com.coordinator.core.general.main.models.QueryOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Repository
 public class BidsRepositoryImpl implements IBidsRepository {
-    @Autowired
     private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private static final int DEFAULT_BID_STATUS_ID = 1;
 
     @Autowired
-    public BidsRepositoryImpl(@Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate) {
+    public BidsRepositoryImpl(
+            @Qualifier("coreJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
     }
 
     @Override
@@ -42,5 +47,41 @@ public class BidsRepositoryImpl implements IBidsRepository {
                 params,
                 new BidMapper()
         );
+    }
+
+    @Override
+    public Boolean bidExists(UUID coordinatorId, UUID eventId) {
+        Map<String, Object> params = Map.of(
+                "coordinatorId", coordinatorId,
+                "eventId", eventId
+        );
+        String sql = SqlHelper.sql("check-exists-bid");
+
+        List<Boolean> hasRow = namedParameterJdbcTemplate.query(
+                sql,
+                params,
+                new RowExistsToBooleanMapper()
+        );
+
+        if (hasRow.size() == 1) {
+            return hasRow.get(0);
+        }
+
+        return false;
+    }
+
+    @Override
+    public void createBid(UUID coordinatorId, ImmutableBidEntity bidEntity) {
+        String sql = SqlHelper.sql("insert-bid");
+
+        var params = new HashMap<String, Object>();
+        params.put("bidId", bidEntity.getId());
+        params.put("messageToUser", bidEntity.getMessageToUser());
+        params.put("eventId", bidEntity.getEventId());
+        params.put("coordinatorId", coordinatorId);
+        params.put("bidAmount", bidEntity.getBidAmount());
+        params.put("bidStatusId", bidEntity.getBidStatusId());
+
+        namedParameterJdbcTemplate.update(sql, params);
     }
 }
