@@ -10,7 +10,6 @@ SELECT c.id as id
     , c.level_two_default_bid as levelTwoDefaultBid
     , c.level_three_default_bid as levelThreeDefaultBid
     , c.is_archived as isArchived
-    , c.username as username
 FROM
     coordinators c
 WHERE c.id = :coordinator_id

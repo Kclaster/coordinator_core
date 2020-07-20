@@ -4,9 +4,9 @@ import com.coordinator.core.coordinator.main.mappers.CoordinatorEntityToDtoMappe
 import com.coordinator.core.coordinator.main.models.CoordinatorDto;
 import com.coordinator.core.coordinator.main.models.CoordinatorPutRequest;
 import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
-import com.coordinator.core.general.helpers.SqlHelper;
-import com.coordinator.core.general.mappers.BaseEntityToBaseDtoMapper;
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.helpers.SqlHelper;
+import com.coordinator.core.general.main.mappers.BaseEntityToBaseDtoMapper;
+import com.coordinator.core.general.main.models.BaseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +30,46 @@ public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
     }
 
     @Override
+    public void createCoordinator(ImmutableCoordinatorEntity immutableCoordinatorEntity) {
+        String sql = SqlHelper.sql("insert-coordinator");
+
+
+        var params = new HashMap<String, Object>();
+        params.put("coordinatorId", immutableCoordinatorEntity.getId());
+        params.put("authUserId", immutableCoordinatorEntity.getAuthUserId());
+        params.put("contactEmail", immutableCoordinatorEntity.getContactEmail());
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void createCoordinatorsZipCodes(
+            UUID joinTableId,
+            UUID zipCodeId,
+            UUID coordinatorId
+    ) {
+        String sql = SqlHelper.sql("insert-coordinators-zip-codes");
+
+        var params = new HashMap<String, Object>();
+
+        params.put("zipCodeId", zipCodeId);
+        params.put("joinTableId", joinTableId);
+        params.put("coordinatorId", coordinatorId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void deleteCoordinatorsZipCodes(UUID coordinatorId) {
+        String sql = SqlHelper.sql("delete-coordinators-zip-codes-by-coordinators");
+
+        var params = new HashMap<String, Object>();
+        params.put("coordinatorId", coordinatorId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
     public CoordinatorDto getCoordinator(UUID coordinatorId) {
         Map<String, Object> params = Map.of(
                 "coordinator_id", coordinatorId
@@ -40,6 +80,20 @@ public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
                 sql,
                 params,
                 new CoordinatorEntityToDtoMapper()
+        );
+    }
+
+    @Override
+    public BaseDto getCoordinatorFromAuthUserId(UUID authUserId) {
+        Map<String, Object> params = Map.of(
+                "authUserId", authUserId
+        );
+
+        String sql = SqlHelper.sql("select-coordinator-from-auth-user-id");
+        return namedParameterJdbcTemplate.queryForObject(
+                sql,
+                params,
+                new BaseEntityToBaseDtoMapper()
         );
     }
 
@@ -59,33 +113,6 @@ public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
     }
 
     @Override
-    public void createCoordinator(ImmutableCoordinatorEntity immutableCoordinatorEntity) {
-        String sql = SqlHelper.sql("insert-coordinator");
-
-
-        var params = new HashMap<String, Object>();
-        params.put("coordinatorId", immutableCoordinatorEntity.getId());
-        params.put("authUserId", immutableCoordinatorEntity.getAuthUserId());
-        params.put("contactEmail", immutableCoordinatorEntity.getContactEmail());
-
-        namedParameterJdbcTemplate.update(sql, params);
-    }
-
-    @Override
-    public BaseDto getCoordinatorFromAuthUserId(UUID authUserId) {
-        Map<String, Object> params = Map.of(
-                "authUserId", authUserId
-        );
-
-        String sql = SqlHelper.sql("select-coordinator-from-auth-user-id");
-        return namedParameterJdbcTemplate.queryForObject(
-                sql,
-                params,
-                new BaseEntityToBaseDtoMapper()
-        );
-    }
-
-    @Override
     public void updateCoordinator(UUID coordinatorId, CoordinatorPutRequest coordinatorPutRequest)  throws IllegalStateException {
         String sql = SqlHelper.sql("update-coordinator");
         var params = new HashMap<String, Object>();
@@ -100,7 +127,6 @@ public class CoordinatorRepositoryImpl implements ICoordinatorRepository {
         params.put("levelOneDefaultBid", coordinatorPutRequest.getLevelOneDefaultBid());
         params.put("levelTwoDefaultBid", coordinatorPutRequest.getLevelTwoDefaultBid());
         params.put("levelThreeDefaultBid", coordinatorPutRequest.getLevelThreeDefaultBid());
-        params.put("username", coordinatorPutRequest.getUsername());
 
         int numberOfRowsUpdated = namedParameterJdbcTemplate.update(sql, params);
 

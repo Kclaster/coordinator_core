@@ -1,6 +1,6 @@
 package com.coordinator.core.users.event.repository;
 
-import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.general.main.helpers.SqlHelper;
 import com.coordinator.core.users.event.mappers.EventEntityToDtoMapper;
 import com.coordinator.core.users.event.models.EventDto;
 import com.coordinator.core.users.event.models.ImmutableEventEntity;

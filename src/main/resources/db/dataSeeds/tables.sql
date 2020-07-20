@@ -9,6 +9,9 @@ DROP TABLE IF EXISTS bid_statuses CASCADE;
 DROP TABLE IF EXISTS bids CASCADE;
 DROP TABLE IF EXISTS auth_user_roles CASCADE;
 DROP TABLE IF EXISTS auth_users CASCADE;
+DROP TABLE IF EXISTS zip_codes CASCADE;
+DROP TABLE IF EXISTS coordinators_zip_codes CASCADE;
+
 
 CREATE TABLE event_types
 (
@@ -54,6 +57,11 @@ CREATE TABLE auth_users
     is_enabled boolean NOT NULL DEFAULT TRUE
 );
 
+CREATE TABLE zip_codes (
+    id uuid PRIMARY KEY NOT NULL,
+    title varchar(9)
+);
+
 CREATE TABLE coordinators
 (
     id uuid PRIMARY KEY NOT NULL,
@@ -69,6 +77,13 @@ CREATE TABLE coordinators
     level_three_default_bid integer,
     is_archived boolean NOT NULL DEFAULT FALSE,
     auth_user_id uuid REFERENCES auth_users (id)
+);
+
+CREATE TABLE coordinators_zip_codes
+(
+    id uuid PRIMARY KEY NOT NULL,
+    coordinator_id uuid REFERENCES coordinators (id),
+    zip_code_id uuid REFERENCES zip_codes (id)
 );
 
 CREATE TABLE users

@@ -8,7 +8,6 @@ import java.util.UUID;
 @Value.Immutable
 public abstract class UserEntity {
     public abstract UUID getId();
-    public abstract @Nullable UUID getEventId();
     public abstract UUID getAuthUserId();
 
     @Value.Default

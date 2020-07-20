@@ -16,11 +16,10 @@ public class CoordinatorEntityToDtoMapper implements RowMapper<CoordinatorDto> {
         coordinatorDto.setLevelTwoDefaultBid(rs.getInt("levelTwoDefaultBid"));
         coordinatorDto.setLevelThreeDefaultBid(rs.getInt("levelThreeDefaultBid"));
         coordinatorDto.setContactEmail(rs.getString("contactEmail"));
-        coordinatorDto.setMaxDistanceToClient(rs.getInt("maxDistanceToClient"));
+        coordinatorDto.setMaximumDistanceToClient(rs.getInt("maxDistanceToClient"));
         coordinatorDto.setOfficeAddress(rs.getString("officeAddress"));
         coordinatorDto.setTitle(rs.getString("title"));
         coordinatorDto.setArchived(rs.getBoolean("isArchived"));
-        coordinatorDto.setUsername(rs.getString("username"));
         coordinatorDto.setOfficePostalCode(rs.getString("officePostalCode"));
         coordinatorDto.setOfficeState(rs.getString("officeState"));
         coordinatorDto.setOfficeCity(rs.getString("officeCity"));

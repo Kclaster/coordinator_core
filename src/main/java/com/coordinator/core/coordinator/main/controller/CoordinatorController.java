@@ -40,9 +40,14 @@ public class CoordinatorController {
     @RequestMapping("{coordinatorId}/update")
     @PreAuthorize("hasRole('ROLE_COORDINATOR')")
 
-    public ResponseEntity<CoordinatorDto> updateCoordinator(@PathVariable(value = "coordinatorId") String coordinatorId,
+    public ResponseEntity<?> updateCoordinator(@PathVariable(value = "coordinatorId") String coordinatorId,
                                                             @RequestBody CoordinatorPutRequest coordinatorPutRequest) {
 
-        return ResponseEntity.ok(iCoordinator.updateCoordinator(UUID.fromString(coordinatorId), coordinatorPutRequest));
+        try {
+            return ResponseEntity.ok(iCoordinator.updateCoordinator(UUID.fromString(coordinatorId), coordinatorPutRequest));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

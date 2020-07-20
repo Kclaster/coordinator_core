@@ -6,7 +6,7 @@ import com.coordinator.core.auth.models.AuthUserDto;
 import com.coordinator.core.auth.models.AuthUserRequest;
 import com.coordinator.core.coordinator.main.models.ImmutableCoordinatorEntity;
 import com.coordinator.core.coordinator.main.repository.ICoordinatorRepository;
-import com.coordinator.core.general.helpers.SqlHelper;
+import com.coordinator.core.general.main.helpers.SqlHelper;
 import com.coordinator.core.users.main.models.ImmutableUserEntity;
 import com.coordinator.core.users.main.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,16 +78,16 @@ public class AuthUserRepositoryImpl implements IAuthUserRepository {
 
     }
 
-    private void createRoleId(UUID newAuthUserId, String username, Integer roleId) {
+    private void createRoleId(UUID newAuthUserId, String contactEmail, Integer roleId) {
         switch (roleId) {
             case ApplicationUserRole
                     .Constants.ROLE_USER:
-                ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, username);
+                ImmutableUserEntity immutableUserEntity = mapUserRequestToEntity(newAuthUserId, contactEmail);
                 iUserRepository.createUser(immutableUserEntity);
                 break;
             case ApplicationUserRole
                     .Constants.ROLE_COORDINATOR:
-                ImmutableCoordinatorEntity immutableCoordinatorEntity = mapCoordinatorRequestToEntity(newAuthUserId, username);
+                ImmutableCoordinatorEntity immutableCoordinatorEntity = mapCoordinatorRequestToEntity(newAuthUserId, contactEmail);
                 iCoordinatorRepository.createCoordinator(immutableCoordinatorEntity);
                 break;
             case ApplicationUserRole

@@ -1,6 +1,6 @@
 package com.coordinator.core;
 
-import com.coordinator.core.general.Interceptors.ExceptionInterceptor;
+import com.coordinator.core.general.main.Interceptors.ExceptionInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;

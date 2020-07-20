@@ -14,7 +14,6 @@ public class CoordinatorPutRequest {
     private Integer levelOneDefaultBid;
     private Integer levelTwoDefaultBid;
     private Integer levelThreeDefaultBid;
-    private String username;
 
     public UUID getId() {
         return id;
@@ -94,14 +93,6 @@ public class CoordinatorPutRequest {
 
     public void setLevelThreeDefaultBid(Integer levelThreeDefaultBid) {
         this.levelThreeDefaultBid = levelThreeDefaultBid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getOfficeCity() {

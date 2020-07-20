@@ -1,8 +1,8 @@
 package com.coordinator.core.users.main.repository;
 
-import com.coordinator.core.general.helpers.SqlHelper;
-import com.coordinator.core.general.mappers.BaseEntityToBaseDtoMapper;
-import com.coordinator.core.general.models.BaseDto;
+import com.coordinator.core.general.main.helpers.SqlHelper;
+import com.coordinator.core.general.main.mappers.BaseEntityToBaseDtoMapper;
+import com.coordinator.core.general.main.models.BaseDto;
 import com.coordinator.core.users.main.mappers.UserEntityToDtoMapper;
 import com.coordinator.core.users.main.models.ImmutableUserEntity;
 import com.coordinator.core.users.main.models.UserDto;
