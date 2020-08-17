@@ -1,7 +1,7 @@
 package com.coordinator.api.coordinator.bid.controller;
 
-import com.coordinate.model.BidDto;
-import com.coordinate.model.BidPostRequest;
+import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.bids.BidPostRequest;
 import com.coordinator.api.coordinator.bid.service.IBid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

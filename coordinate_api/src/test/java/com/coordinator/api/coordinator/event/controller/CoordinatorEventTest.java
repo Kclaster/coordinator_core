@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.event.controller;
 
-import com.coordinate.model.CoordinatorEventDto;
+import com.coordinate.model.coordinator.CoordinatorEventDto;
 import com.coordinate.security.repository.AuthAuthUserRepositoryImpl;
 import com.coordinate.security.util.JwtUtil;
 import com.coordinator.api.coordinator.event.service.ICoordinatorEvents;

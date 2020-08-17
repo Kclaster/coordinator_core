@@ -1,9 +1,9 @@
 package com.coordinator.api.coordinator.main.repository;
 
 import com.coordinate.model.BaseDto;
-import com.coordinate.model.CoordinatorDto;
-import com.coordinate.model.CoordinatorPutRequest;
-import com.coordinate.model.ImmutableCoordinatorEntity;
+import com.coordinate.model.coordinator.CoordinatorDto;
+import com.coordinate.model.coordinator.CoordinatorPutRequest;
+import com.coordinate.model.coordinator.ImmutableCoordinatorEntity;
 import com.coordinator.api.coordinator.main.mappers.CoordinatorEntityToDtoMapper;
 import com.coordinator.api.general.main.helpers.SqlHelper;
 import com.coordinator.api.general.main.mappers.BaseEntityToBaseDtoMapper;

@@ -1,14 +1,13 @@
-package com.coordinate.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.coordinate.model.coordinator;
 
 import java.util.UUID;
 
-public class EventDto {
-    private UUID id;
+public class CoordinatorEventDto {
+    private UUID eventId;
     private Long eventStartDate;
     private Long eventEndDate;
     private Integer eventSize;
+    private UUID userId;
     private Integer eventTypeId;
     private Integer desiredServiceId;
     private String additionalUserComments;
@@ -18,17 +17,14 @@ public class EventDto {
     private String desiredPostalCode;
     private UUID coordinatorId;
     private boolean isArchived;
+    private BidDto bid;
 
-    public UUID getId() {
-        return id;
+    public UUID getEventId() {
+        return eventId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Integer getEventSize() {
-        return eventSize;
+    public void setEventId(UUID eventId) {
+        this.eventId = eventId;
     }
 
     public Long getEventStartDate() {
@@ -47,8 +43,20 @@ public class EventDto {
         this.eventEndDate = eventEndDate;
     }
 
+    public Integer getEventSize() {
+        return eventSize;
+    }
+
     public void setEventSize(Integer eventSize) {
         this.eventSize = eventSize;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public Integer getEventTypeId() {
@@ -115,12 +123,19 @@ public class EventDto {
         this.coordinatorId = coordinatorId;
     }
 
-    @JsonProperty(value="isArchived")
     public boolean isArchived() {
         return isArchived;
     }
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public BidDto getBid() {
+        return bid;
+    }
+
+    public void setBid(BidDto bid) {
+        this.bid = bid;
     }
 }

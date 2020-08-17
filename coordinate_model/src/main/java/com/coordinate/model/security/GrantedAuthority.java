@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.security;
 
 public enum GrantedAuthority {
     COORDINATOR_READ("coordinator:read"),

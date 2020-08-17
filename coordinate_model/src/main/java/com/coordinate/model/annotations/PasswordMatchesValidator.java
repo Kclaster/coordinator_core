@@ -1,6 +1,6 @@
 package com.coordinate.model.annotations;
 
-import com.coordinate.model.AuthUserRequest;
+import com.coordinate.model.security.AuthUserRequest;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

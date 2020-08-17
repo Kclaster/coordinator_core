@@ -1,8 +1,8 @@
 package com.coordinator.api.coordinator.bid.repository;
 
-import com.coordinate.model.BidDto;
-import com.coordinate.model.ImmutableBidEntity;
 import com.coordinate.model.QueryOptions;
+import com.coordinate.model.bids.ImmutableBidEntity;
+import com.coordinate.model.coordinator.BidDto;
 import com.coordinator.api.coordinator.bid.mappers.BidEntityToDtoMapper;
 import com.coordinator.api.general.main.helpers.SqlHelper;
 import com.coordinator.api.general.main.mappers.RowExistsToBooleanMapper;

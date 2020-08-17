@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.main.service;
 
-import com.coordinate.model.CoordinatorPutRequest;
+import com.coordinate.model.coordinator.CoordinatorPutRequest;
 
 import java.util.UUID;
 

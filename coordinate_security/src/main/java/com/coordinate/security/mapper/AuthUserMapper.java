@@ -1,8 +1,8 @@
 package com.coordinate.security.mapper;
 
 
-import com.coordinate.model.User;
-import com.coordinate.model.UserRole;
+import com.coordinate.model.user.User;
+import com.coordinate.model.user.UserRole;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

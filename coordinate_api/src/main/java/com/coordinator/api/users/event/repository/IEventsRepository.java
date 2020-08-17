@@ -1,7 +1,7 @@
 package com.coordinator.api.users.event.repository;
 
-import com.coordinate.model.EventDto;
-import com.coordinate.model.ImmutableEventEntity;
+import com.coordinate.model.event.EventDto;
+import com.coordinate.model.event.ImmutableEventEntity;
 
 import java.util.UUID;
 

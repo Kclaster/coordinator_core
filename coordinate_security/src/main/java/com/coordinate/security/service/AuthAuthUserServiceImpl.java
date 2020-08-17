@@ -1,6 +1,6 @@
 package com.coordinate.security.service;
 
-import com.coordinate.model.AuthUserRequest;
+import com.coordinate.model.security.AuthUserRequest;
 import com.coordinate.security.repository.IAuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

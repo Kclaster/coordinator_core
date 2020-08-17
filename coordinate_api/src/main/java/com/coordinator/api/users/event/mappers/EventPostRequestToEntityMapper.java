@@ -1,7 +1,7 @@
 package com.coordinator.api.users.event.mappers;
 
-import com.coordinate.model.EventPostRequest;
-import com.coordinate.model.ImmutableEventEntity;
+import com.coordinate.model.event.EventPostRequest;
+import com.coordinate.model.event.ImmutableEventEntity;
 
 import java.sql.Timestamp;
 import java.util.UUID;

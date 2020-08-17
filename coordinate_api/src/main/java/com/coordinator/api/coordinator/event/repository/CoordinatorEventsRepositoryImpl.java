@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.event.repository;
 
-import com.coordinate.model.CoordinatorEventDto;
+import com.coordinate.model.coordinator.CoordinatorEventDto;
 import com.coordinate.model.QueryOptions;
 import com.coordinator.api.coordinator.event.mappers.CoordinatorEventEntityToCoordinatorEventDtoMapper;
 import com.coordinator.api.general.main.helpers.SqlHelper;

@@ -1,8 +1,8 @@
 package com.coordinator.api.users.event.service;
 
-import com.coordinate.model.EventDto;
-import com.coordinate.model.EventPostRequest;
-import com.coordinate.model.ImmutableEventEntity;
+import com.coordinate.model.event.EventDto;
+import com.coordinate.model.event.EventPostRequest;
+import com.coordinate.model.event.ImmutableEventEntity;
 import com.coordinator.api.users.event.repository.IEventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

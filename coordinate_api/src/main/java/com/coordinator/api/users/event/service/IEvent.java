@@ -1,7 +1,7 @@
 package com.coordinator.api.users.event.service;
 
-import com.coordinate.model.EventDto;
-import com.coordinate.model.EventPostRequest;
+import com.coordinate.model.event.EventDto;
+import com.coordinate.model.event.EventPostRequest;
 
 import java.util.UUID;
 

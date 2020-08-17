@@ -1,7 +1,7 @@
 package com.coordinator.api.coordinator.main.mappers;
 
 
-import com.coordinate.model.ImmutableCoordinatorEntity;
+import com.coordinate.model.coordinator.ImmutableCoordinatorEntity;
 
 import java.util.UUID;
 

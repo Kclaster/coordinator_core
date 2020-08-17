@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.main.mappers;
 
-import com.coordinate.model.CoordinatorDto;
+import com.coordinate.model.coordinator.CoordinatorDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,6 +1,6 @@
 package com.coordinate.security.service;
 
-import com.coordinate.model.AuthUserRequest;
+import com.coordinate.model.security.AuthUserRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

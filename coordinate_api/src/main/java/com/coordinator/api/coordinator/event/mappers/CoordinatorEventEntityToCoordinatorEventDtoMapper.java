@@ -1,7 +1,7 @@
 package com.coordinator.api.coordinator.event.mappers;
 
-import com.coordinate.model.BidDto;
-import com.coordinate.model.CoordinatorEventDto;
+import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.coordinator.CoordinatorEventDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

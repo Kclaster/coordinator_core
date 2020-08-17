@@ -1,6 +1,7 @@
 package com.coordinator.api.users.main.mappers;
 
-import com.coordinate.model.ImmutableUserEntity;
+
+import com.coordinate.model.user.ImmutableUserEntity;
 
 import java.util.UUID;
 

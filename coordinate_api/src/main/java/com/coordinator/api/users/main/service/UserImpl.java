@@ -1,6 +1,6 @@
 package com.coordinator.api.users.main.service;
 
-import com.coordinate.model.UserDto;
+import com.coordinate.model.user.UserDto;
 import com.coordinator.api.users.main.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

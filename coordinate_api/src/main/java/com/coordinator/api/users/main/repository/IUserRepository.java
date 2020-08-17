@@ -1,8 +1,8 @@
 package com.coordinator.api.users.main.repository;
 
 import com.coordinate.model.BaseDto;
-import com.coordinate.model.ImmutableUserEntity;
-import com.coordinate.model.UserDto;
+import com.coordinate.model.user.ImmutableUserEntity;
+import com.coordinate.model.user.UserDto;
 
 import java.util.List;
 import java.util.UUID;

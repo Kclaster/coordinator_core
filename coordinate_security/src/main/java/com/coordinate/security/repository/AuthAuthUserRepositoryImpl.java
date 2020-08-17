@@ -1,7 +1,8 @@
 package com.coordinate.security.repository;
 
-import com.coordinate.model.*;
 import com.coordinate.model.helpers.SqlHelper;
+import com.coordinate.model.security.AuthUserRequest;
+import com.coordinate.model.user.User;
 import com.coordinate.security.mapper.AuthUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,7 +1,7 @@
 package com.coordinator.api.users.event.controller;
 
-import com.coordinate.model.EventDto;
-import com.coordinate.model.EventPostRequest;
+import com.coordinate.model.event.EventDto;
+import com.coordinate.model.event.EventPostRequest;
 import com.coordinator.api.users.event.service.IEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.coordinator.api.users.main.controller;
 
-import com.coordinate.model.UserDto;
+import com.coordinate.model.user.UserDto;
 import com.coordinator.api.users.main.service.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

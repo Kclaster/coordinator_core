@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.security;
 
 public class AuthenticationRequest {
     private String username;

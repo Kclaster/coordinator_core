@@ -1,7 +1,7 @@
 package com.coordinator.api.general.user.controller;
 
-import com.coordinate.model.AuthUserRequest;
-import com.coordinate.model.AuthenticationRequest;
+import com.coordinate.model.security.AuthUserRequest;
+import com.coordinate.model.security.AuthenticationRequest;
 import com.coordinate.security.config.JwtConfig;
 import com.coordinate.security.service.IAuthUserService;
 import com.coordinate.security.util.JwtUtil;

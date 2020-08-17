@@ -1,7 +1,7 @@
 package com.coordinator.api.coordinator.bid.service;
 
-import com.coordinate.model.BidDto;
-import com.coordinate.model.BidPostRequest;
+import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.bids.BidPostRequest;
 import com.coordinate.model.QueryOptions;
 
 import java.util.List;

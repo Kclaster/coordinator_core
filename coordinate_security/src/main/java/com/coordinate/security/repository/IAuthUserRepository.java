@@ -1,8 +1,8 @@
 package com.coordinate.security.repository;
 
 
-import com.coordinate.model.AuthUserRequest;
-import com.coordinate.model.User;
+import com.coordinate.model.security.AuthUserRequest;
+import com.coordinate.model.user.User;
 
 import java.util.Optional;
 import java.util.UUID;

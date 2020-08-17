@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.user;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

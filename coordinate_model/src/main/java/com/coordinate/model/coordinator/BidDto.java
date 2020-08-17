@@ -1,4 +1,6 @@
-package com.coordinate.model;
+package com.coordinate.model.coordinator;
+
+import com.coordinate.model.event.EventDto;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.user;
 
 import org.immutables.value.Value;
 

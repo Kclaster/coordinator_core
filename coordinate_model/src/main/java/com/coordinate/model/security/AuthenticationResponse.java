@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.security;
 
 public class AuthenticationResponse {
     private final String jwt;

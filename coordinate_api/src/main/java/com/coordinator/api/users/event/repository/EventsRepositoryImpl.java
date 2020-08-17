@@ -1,7 +1,7 @@
 package com.coordinator.api.users.event.repository;
 
-import com.coordinate.model.EventDto;
-import com.coordinate.model.ImmutableEventEntity;
+import com.coordinate.model.event.EventDto;
+import com.coordinate.model.event.ImmutableEventEntity;
 import com.coordinator.api.general.main.helpers.SqlHelper;
 import com.coordinator.api.users.event.mappers.EventEntityToDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;

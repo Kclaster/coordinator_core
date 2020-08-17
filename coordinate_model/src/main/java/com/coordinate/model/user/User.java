@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

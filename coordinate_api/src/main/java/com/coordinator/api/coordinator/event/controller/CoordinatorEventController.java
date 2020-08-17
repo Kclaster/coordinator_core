@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.event.controller;
 
-import com.coordinate.model.CoordinatorEventDto;
+import com.coordinate.model.coordinator.CoordinatorEventDto;
 import com.coordinator.api.coordinator.event.service.ICoordinatorEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

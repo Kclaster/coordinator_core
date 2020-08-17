@@ -1,8 +1,9 @@
 package com.coordinator.api.general.user.service;
 
-import com.coordinate.model.ImmutableCoordinatorEntity;
-import com.coordinate.model.ImmutableUserEntity;
-import com.coordinate.model.UserRole;
+
+import com.coordinate.model.coordinator.ImmutableCoordinatorEntity;
+import com.coordinate.model.user.ImmutableUserEntity;
+import com.coordinate.model.user.UserRole;
 import com.coordinator.api.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinator.api.users.main.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

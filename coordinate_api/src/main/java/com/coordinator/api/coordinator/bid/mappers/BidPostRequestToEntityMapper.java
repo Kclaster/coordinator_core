@@ -1,7 +1,7 @@
 package com.coordinator.api.coordinator.bid.mappers;
 
-import com.coordinate.model.BidPostRequest;
-import com.coordinate.model.ImmutableBidEntity;
+import com.coordinate.model.bids.BidPostRequest;
+import com.coordinate.model.bids.ImmutableBidEntity;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.main.service;
 
-import com.coordinate.model.CoordinatorPutRequest;
+import com.coordinate.model.coordinator.CoordinatorPutRequest;
 import com.coordinator.api.coordinator.main.repository.ICoordinatorRepository;
 import com.coordinate.model.ZipCode;
 import com.coordinate.model.ZipCodes;

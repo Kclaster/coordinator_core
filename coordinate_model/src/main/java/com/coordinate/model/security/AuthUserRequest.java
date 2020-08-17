@@ -1,4 +1,4 @@
-package com.coordinate.model;
+package com.coordinate.model.security;
 
 
 import com.coordinate.model.annotations.PasswordMatches;

@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.coordinate.model.UserRole.*;
+import static com.coordinate.model.user.UserRole.*;
 
 @Configuration
 @EnableWebSecurity

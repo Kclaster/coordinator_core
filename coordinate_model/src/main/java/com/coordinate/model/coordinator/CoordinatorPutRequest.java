@@ -1,22 +1,33 @@
-package com.coordinate.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.coordinate.model.coordinator;
 
 import java.util.UUID;
 
-public class CoordinatorDto {
+public class CoordinatorPutRequest {
     private UUID id;
     private String title;
     private String officeState;
     private String officeAddress;
-    private String officeCity;
     private String officePostalCode;
+    private String officeCity;
     private String contactEmail;
     private Integer maximumDistanceToClient;
     private Integer levelOneDefaultBid;
     private Integer levelTwoDefaultBid;
     private Integer levelThreeDefaultBid;
-    private boolean isArchived;
+
+    public CoordinatorPutRequest(UUID id, String title, String officeState, String officeAddress, String officePostalCode, String officeCity, String contactEmail, Integer maximumDistanceToClient, Integer levelOneDefaultBid, Integer levelTwoDefaultBid, Integer levelThreeDefaultBid) {
+        this.id = id;
+        this.title = title;
+        this.officeState = officeState;
+        this.officeAddress = officeAddress;
+        this.officePostalCode = officePostalCode;
+        this.officeCity = officeCity;
+        this.contactEmail = contactEmail;
+        this.maximumDistanceToClient = maximumDistanceToClient;
+        this.levelOneDefaultBid = levelOneDefaultBid;
+        this.levelTwoDefaultBid = levelTwoDefaultBid;
+        this.levelThreeDefaultBid = levelThreeDefaultBid;
+    }
 
     public UUID getId() {
         return id;
@@ -50,6 +61,14 @@ public class CoordinatorDto {
         this.officeAddress = officeAddress;
     }
 
+    public String getOfficePostalCode() {
+        return officePostalCode;
+    }
+
+    public void setOfficePostalCode(String officePostalCode) {
+        this.officePostalCode = officePostalCode;
+    }
+
     public String getContactEmail() {
         return contactEmail;
     }
@@ -64,10 +83,6 @@ public class CoordinatorDto {
 
     public void setMaximumDistanceToClient(Integer maximumDistanceToClient) {
         this.maximumDistanceToClient = maximumDistanceToClient;
-    }
-
-    public boolean isArchived() {
-        return isArchived;
     }
 
     public Integer getLevelOneDefaultBid() {
@@ -92,23 +107,6 @@ public class CoordinatorDto {
 
     public void setLevelThreeDefaultBid(Integer levelThreeDefaultBid) {
         this.levelThreeDefaultBid = levelThreeDefaultBid;
-    }
-
-    @JsonProperty(value="isArchived")
-    public boolean getIsArchived() {
-        return isArchived;
-    }
-
-    public void setArchived(boolean archived) {
-        isArchived = archived;
-    }
-
-    public String getOfficePostalCode() {
-        return officePostalCode;
-    }
-
-    public void setOfficePostalCode(String officePostalCode) {
-        this.officePostalCode = officePostalCode;
     }
 
     public String getOfficeCity() {
