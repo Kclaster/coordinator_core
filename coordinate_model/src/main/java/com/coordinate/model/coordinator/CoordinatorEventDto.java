@@ -17,7 +17,7 @@ public class CoordinatorEventDto {
     private String desiredPostalCode;
     private UUID coordinatorId;
     private boolean isArchived;
-    private BidDto bid;
+    private CoordinatorBidDto bid;
 
     public UUID getEventId() {
         return eventId;
@@ -131,11 +131,11 @@ public class CoordinatorEventDto {
         isArchived = archived;
     }
 
-    public BidDto getBid() {
+    public CoordinatorBidDto getBid() {
         return bid;
     }
 
-    public void setBid(BidDto bid) {
+    public void setBid(CoordinatorBidDto bid) {
         this.bid = bid;
     }
 }

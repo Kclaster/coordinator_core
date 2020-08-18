@@ -4,7 +4,7 @@ import com.coordinate.model.event.EventDto;
 
 import java.util.UUID;
 
-public class BidDto {
+public class CoordinatorBidDto {
     private EventDto event;
     private UUID id;
     private Integer bidStatusId;

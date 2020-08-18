@@ -1,8 +1,8 @@
 package com.coordinator.api.coordinator.bid.controller;
 
-import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.coordinator.CoordinatorBidDto;
 import com.coordinate.model.bids.BidPostRequest;
-import com.coordinator.api.coordinator.bid.service.IBid;
+import com.coordinator.api.coordinator.bid.service.ICoordinatorBid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -17,14 +17,14 @@ import static com.coordinator.api.general.main.helpers.QueryOptionsHelper.fromQu
 
 @RestController
 @RequestMapping("/api/v1/coordinators/{coordinatorId}/bids")
-public class BidController {
+public class CoordinatorBidController {
     @Autowired
-    private IBid iBid;
+    private ICoordinatorBid iCoordinatorBid;
 
     @GetMapping
-    public ResponseEntity<List<BidDto>> getAllCoordinatorsBids(@PathVariable(value = "coordinatorId") String coordinatorId,
-                                                               @RequestParam Map<String, String> queryOptions) {
-        return ResponseEntity.ok(iBid.getAllCoordinatorsBids(
+    public ResponseEntity<List<CoordinatorBidDto>> getAllCoordinatorsBids(@PathVariable(value = "coordinatorId") String coordinatorId,
+                                                                          @RequestParam Map<String, String> queryOptions) {
+        return ResponseEntity.ok(iCoordinatorBid.getAllCoordinatorsBids(
                 UUID.fromString(coordinatorId),
                 fromQueryParameters(queryOptions)
         ));
@@ -38,7 +38,7 @@ public class BidController {
             ResponseEntity.badRequest().body(errors.getFieldErrors());
         }
 
-        iBid.createBid(UUID.fromString(coordinatorId), postRequest);
+        iCoordinatorBid.createBid(UUID.fromString(coordinatorId), postRequest);
 
         return ResponseEntity.ok().build();
     }

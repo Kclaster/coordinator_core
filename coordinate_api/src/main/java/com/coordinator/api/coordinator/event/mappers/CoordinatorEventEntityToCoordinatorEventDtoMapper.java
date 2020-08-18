@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.event.mappers;
 
-import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.coordinator.CoordinatorBidDto;
 import com.coordinate.model.coordinator.CoordinatorEventDto;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -32,14 +32,14 @@ public class CoordinatorEventEntityToCoordinatorEventDtoMapper implements RowMap
         event.setVenueId(venueId != null ? UUID.fromString(venueId) : null);
 
         if (bidId != null) {
-            BidDto bidDto = new BidDto();
+            CoordinatorBidDto coordinatorBidDto = new CoordinatorBidDto();
 
-            bidDto.setBidAmount(rs.getInt("bidAmount"));
-            bidDto.setMessageToUser(rs.getString("messageToUser"));
-            bidDto.setBidStatusId(rs.getInt("bidStatusId"));
-            bidDto.setId(UUID.fromString(rs.getString("bidId")));
+            coordinatorBidDto.setBidAmount(rs.getInt("bidAmount"));
+            coordinatorBidDto.setMessageToUser(rs.getString("messageToUser"));
+            coordinatorBidDto.setBidStatusId(rs.getInt("bidStatusId"));
+            coordinatorBidDto.setId(UUID.fromString(rs.getString("bidId")));
 
-            event.setBid(bidDto);
+            event.setBid(coordinatorBidDto);
         }
 
         return event;

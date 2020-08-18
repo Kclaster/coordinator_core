@@ -2,7 +2,7 @@ package com.coordinator.api.coordinator.bid.repository;
 
 import com.coordinate.model.QueryOptions;
 import com.coordinate.model.bids.ImmutableBidEntity;
-import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.coordinator.CoordinatorBidDto;
 import com.coordinator.api.coordinator.bid.mappers.BidEntityToDtoMapper;
 import com.coordinator.api.general.main.helpers.SqlHelper;
 import com.coordinator.api.general.main.mappers.RowExistsToBooleanMapper;
@@ -31,7 +31,7 @@ public class CoordinatorCoordinatorBidsRepositoryImpl implements ICoordinatorBid
     }
 
     @Override
-    public List<BidDto> getAllCoordinatorsBids(UUID coordinatorId,  QueryOptions queryOptions) {
+    public List<CoordinatorBidDto> getAllCoordinatorsBids(UUID coordinatorId, QueryOptions queryOptions) {
         NamedParameterJdbcTemplate namedParameters = new NamedParameterJdbcTemplate(jdbcTemplate);
         Map<String, Object> params = Map.of(
                 "coordinator_id", coordinatorId,

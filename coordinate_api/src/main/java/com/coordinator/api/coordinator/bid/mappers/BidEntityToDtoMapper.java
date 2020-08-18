@@ -1,6 +1,6 @@
 package com.coordinator.api.coordinator.bid.mappers;
 
-import com.coordinate.model.coordinator.BidDto;
+import com.coordinate.model.coordinator.CoordinatorBidDto;
 import com.coordinate.model.event.EventDto;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -9,19 +9,19 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class BidEntityToDtoMapper implements RowMapper<BidDto> {
-    public BidDto mapRow(ResultSet rs, int i) throws SQLException {
+public class BidEntityToDtoMapper implements RowMapper<CoordinatorBidDto> {
+    public CoordinatorBidDto mapRow(ResultSet rs, int i) throws SQLException {
         Timestamp eventStartDate = rs.getTimestamp("eventStartDate");
         Timestamp eventEndDate = rs.getTimestamp("eventEndDate");
         String coordinatorId = rs.getString("coordinatorId");
         String venueId = rs.getString("venueId");
 
-        BidDto bidDto = new BidDto();
-        bidDto.setId(UUID.fromString(rs.getString("id")));
-        bidDto.setBidAmount(rs.getInt("bidAmount"));
-        bidDto.setBidStatusId(rs.getInt("bidStatusId"));
-        bidDto.setCoordinatorId(UUID.fromString(rs.getString("coordinatorId")));
-        bidDto.setMessageToUser(rs.getString("messageToUser"));
+        CoordinatorBidDto coordinatorBidDto = new CoordinatorBidDto();
+        coordinatorBidDto.setId(UUID.fromString(rs.getString("id")));
+        coordinatorBidDto.setBidAmount(rs.getInt("bidAmount"));
+        coordinatorBidDto.setBidStatusId(rs.getInt("bidStatusId"));
+        coordinatorBidDto.setCoordinatorId(UUID.fromString(rs.getString("coordinatorId")));
+        coordinatorBidDto.setMessageToUser(rs.getString("messageToUser"));
 
         EventDto event = new EventDto();
         event.setDesiredPostalCode(rs.getString("desiredPostalCode"));
@@ -37,9 +37,9 @@ public class BidEntityToDtoMapper implements RowMapper<BidDto> {
         event.setId(UUID.fromString(rs.getString("id")));
         event.setVenueId(venueId != null ? UUID.fromString(venueId) : null);
         event.setArchived(rs.getBoolean("isArchived"));
-        bidDto.setEvent(event);
+        coordinatorBidDto.setEvent(event);
 
 
-        return bidDto;
+        return coordinatorBidDto;
     }
 }

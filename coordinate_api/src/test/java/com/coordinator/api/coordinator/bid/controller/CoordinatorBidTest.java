@@ -1,10 +1,10 @@
-package com.coordinator.api.coordinator.main.controller;
+package com.coordinator.api.coordinator.bid.controller;
 
-import com.coordinate.model.coordinator.CoordinatorDto;
-import com.coordinate.model.coordinator.CoordinatorPutRequest;
+import com.coordinate.model.bids.BidPostRequest;
+import com.coordinate.model.coordinator.CoordinatorBidDto;
 import com.coordinate.security.repository.AuthAuthUserRepositoryImpl;
 import com.coordinate.security.util.JwtUtil;
-import com.coordinator.api.coordinator.main.service.ICoordinator;
+import com.coordinator.api.coordinator.bid.service.ICoordinatorBid;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,17 +19,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.UUID;
+import java.util.*;
 
+import static com.coordinator.api.general.main.helpers.QueryOptionsHelper.fromQueryParameters;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CoordinatorController.class)
-public class CoordinatorTest {
+@WebMvcTest(CoordinatorBidController.class)
+public class CoordinatorBidTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -37,7 +39,7 @@ public class CoordinatorTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ICoordinator iCoordinator;
+    private ICoordinatorBid iCoordinatorBid;
 
     @MockBean
     private AuthAuthUserRepositoryImpl authAuthUserRepository;
@@ -55,12 +57,15 @@ public class CoordinatorTest {
 
     @WithMockUser(value = "spring")
     @Test
-    public void shouldFetchCoordinator() throws Exception {
+    public void shouldFetchCoordinatorBids() throws Exception {
         var coordinatorId = UUID.randomUUID();
-        var url = String.format("/api/v1/coordinators/%s", coordinatorId);
+        var url = String.format("/api/v1/coordinators/%s/bids", coordinatorId);
 
-        when(iCoordinator.getCoordinator(coordinatorId))
-                .thenReturn(dummyCoordinatorDto());
+        Map<String, String> dummyQueryOptions = new HashMap<String, String>();
+        dummyQueryOptions.put("page", "1");
+
+        when(iCoordinatorBid.getAllCoordinatorsBids(UUID.randomUUID(), fromQueryParameters(dummyQueryOptions)))
+                .thenReturn(dummyCoordinatorBidDtoList());
 
         mockMvc.perform(get(url).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -68,39 +73,35 @@ public class CoordinatorTest {
 
     @WithMockUser(username = "spring", roles={"COORDINATOR"})
     @Test
-    public void shouldUpdateCoordinator() throws Exception {
+    public void shouldCreateBid() throws Exception {
         var coordinatorId = UUID.randomUUID();
-        var url = String.format("/api/v1/coordinators/%s/update", coordinatorId);
-        var coordinatorPutRequest = new CoordinatorPutRequest(
+        var url = String.format("/api/v1/coordinators/%s/bids", coordinatorId);
+        var bidPostRequest = new BidPostRequest(
                 UUID.randomUUID(),
                 "foo",
-                "bar",
-                "foobar",
-                "12345",
-                "foobar",
-                "foo@gmail.com",
-                1,
-                100,
-                150,
-                200);
+                "foo",
+                "foo",
+                100);
 
-        when(iCoordinator.getCoordinator(coordinatorId))
-                .thenReturn(dummyCoordinatorDto());
-        when(iCoordinator.updateCoordinator(coordinatorId, coordinatorPutRequest))
-                .thenReturn(dummyCoordinatorDto());
+        doNothing().when(iCoordinatorBid).createBid(coordinatorId, bidPostRequest);
 
         ObjectMapper mapper = new ObjectMapper();
-        mockMvc.perform(put(url).contentType(MediaType.APPLICATION_JSON)
-        .content(mapper.writeValueAsString(coordinatorPutRequest)))
+        mockMvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(bidPostRequest)))
                 .andExpect(status().isOk());
     }
 
-    private CoordinatorDto dummyCoordinatorDto() {
-        var mockCoordinatorDto = new CoordinatorDto();
+    private List<CoordinatorBidDto> dummyCoordinatorBidDtoList() {
+        var dummyList = new ArrayList<CoordinatorBidDto>();
+        var mockCoordinatorBidDto = new CoordinatorBidDto();
 
-        mockCoordinatorDto.setContactEmail("foo");
-        mockCoordinatorDto.setArchived(false);
+        mockCoordinatorBidDto.setBidAmount(200);
+        mockCoordinatorBidDto.setBidStatusId(1);
+        mockCoordinatorBidDto.setCoordinatorId(UUID.randomUUID());
+        mockCoordinatorBidDto.setId(UUID.randomUUID());
 
-        return mockCoordinatorDto;
+        dummyList.add(mockCoordinatorBidDto);
+
+        return dummyList;
     }
 }

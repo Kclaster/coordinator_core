@@ -17,6 +17,22 @@ public class BidPostRequest {
     @NotNull
     private Integer bidAmount;
 
+    public BidPostRequest(
+            UUID id,
+            String messageToUser,
+            @NotNull @NotEmpty String eventId,
+            String coordinatorId,
+            @NotNull Integer bidAmount
+    ) {
+        this.id = id;
+        this.messageToUser = messageToUser;
+        this.eventId = eventId;
+        this.coordinatorId = coordinatorId;
+        this.bidAmount = bidAmount;
+    }
+
+    public BidPostRequest() {}
+
     public UUID getId() {
         return id;
     }
