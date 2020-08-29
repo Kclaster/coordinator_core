@@ -2,10 +2,12 @@ package com.coordinator.api.general.user.controller;
 
 import com.coordinate.model.security.AuthUserRequest;
 import com.coordinate.model.security.AuthenticationRequest;
+import com.coordinate.model.user.AuthUser;
 import com.coordinate.security.config.JwtConfig;
 import com.coordinate.security.service.IAuthUserService;
 import com.coordinate.security.util.JwtUtil;
-import com.coordinator.api.general.user.service.IUserService;
+import com.coordinator.api.general.user.service.IOperatorService;
+import com.coordinator.api.users.main.service.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,28 +22,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-public class UserController {
+public class AuthUserController {
     private final AuthenticationManager authenticationManager;
-    private final IAuthUserService iAuthUserService;
-    private final IUserService iUserService;
+    private final IOperatorService iOperatorService;
     private final JwtUtil jwtUtil;
     private final JwtConfig jwtConfig;
+    private final IAuthUserService iAuthUserService;
+    private final IUser iUser;
 
     @Autowired
-    public UserController(
+    public AuthUserController(
             AuthenticationManager authenticationManager,
-            IAuthUserService iAuthUserService,
+            IOperatorService iOperatorService,
             JwtUtil jwtUtil, JwtConfig jwtConfig,
-            IUserService iUserService
+            IAuthUserService iAuthUserService,
+            IUser iUser
     ) {
         this.authenticationManager = authenticationManager;
-        this.iAuthUserService = iAuthUserService;
+        this.iOperatorService = iOperatorService;
         this.jwtUtil = jwtUtil;
         this.jwtConfig = jwtConfig;
-        this.iUserService = iUserService;
+        this.iAuthUserService = iAuthUserService;
+        this.iUser = iUser;
     }
 
     @PostMapping("/register")
@@ -54,7 +59,7 @@ public class UserController {
         }
         try {
             var authUserId = iAuthUserService.registerNewUserAccount(authUserRequest);
-            iUserService.createRoleId(authUserId, authUserRequest.getUsername(), authUserRequest.getRoleId());
+            iOperatorService.createRoleId(authUserId, authUserRequest.getUsername(), authUserRequest.getRoleId());
 
 
             return ResponseEntity.ok().build();
@@ -65,7 +70,8 @@ public class UserController {
 
     @RequestMapping(value = "/authenticate")
     @PostMapping
-    public ResponseEntity<Void> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        // Prove I am who I say I am
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
@@ -74,15 +80,29 @@ public class UserController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = iAuthUserService
-                .loadUserByUsername(authenticationRequest.getUsername());
+        try {
+            final AuthUser authUser = iAuthUserService
+                    .loadUserByUsername(authenticationRequest.getUsername());
 
-        final String jwt = jwtUtil.generateToken(userDetails);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + jwt);
+            var operatorId = iOperatorService.loadOperatorIdByUsername(
+                    authUser.getId(),
+                    authUser.getRoleId());
 
+            var claims = new HashMap<String, Object>();
+            claims.put("operatorId", operatorId.getId());
+            claims.put("roleId", authUser.getRoleId());
 
-        return new ResponseEntity<>(responseHeaders, HttpStatus.OK);
+            // Add new instance of jwt token to custom header
+            final String jwt = jwtUtil.generateToken(authUser, claims);
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + jwt);
+
+            return new ResponseEntity(responseHeaders, HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return ResponseEntity.badRequest().body(e);
+        }
 
     }
 }

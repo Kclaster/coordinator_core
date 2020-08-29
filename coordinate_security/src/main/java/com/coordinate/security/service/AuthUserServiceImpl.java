@@ -1,9 +1,9 @@
 package com.coordinate.security.service;
 
 import com.coordinate.model.security.AuthUserRequest;
+import com.coordinate.model.user.AuthUser;
 import com.coordinate.security.repository.IAuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
-public class AuthAuthUserServiceImpl implements IAuthUserService {
+public class AuthUserServiceImpl implements IAuthUserService {
     private final IAuthUserRepository iAuthUserRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthAuthUserServiceImpl(
+    public AuthUserServiceImpl(
             IAuthUserRepository iAuthUserRepository,
             PasswordEncoder passwordEncoder
     ) {
@@ -26,7 +26,7 @@ public class AuthAuthUserServiceImpl implements IAuthUserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
+    public AuthUser loadUserByUsername(String username) {
         return iAuthUserRepository
                 .selectUserByUsername(username)
                 .orElseThrow(() ->

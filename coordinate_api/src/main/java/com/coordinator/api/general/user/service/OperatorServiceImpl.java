@@ -1,6 +1,7 @@
 package com.coordinator.api.general.user.service;
 
 
+import com.coordinate.model.BaseDto;
 import com.coordinate.model.coordinator.ImmutableCoordinatorEntity;
 import com.coordinate.model.user.ImmutableUserEntity;
 import com.coordinate.model.user.UserRole;
@@ -15,12 +16,12 @@ import static com.coordinator.api.coordinator.main.mappers.CoordinatorPostReques
 import static com.coordinator.api.users.main.mappers.UserPostRequestToEntityMapper.mapUserRequestToEntity;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class OperatorServiceImpl implements IOperatorService {
     private final IUserRepository iUserRepository;
     private final ICoordinatorRepository iCoordinatorRepository;
 
     @Autowired
-    public UserServiceImpl(
+    public OperatorServiceImpl(
             IUserRepository iUserRepository,
             ICoordinatorRepository iCoordinatorRepository
     ) {
@@ -44,6 +45,16 @@ public class UserServiceImpl implements IUserService {
             case UserRole
                     .Constants.ROLE_ADMIN:
                 break;
+        }
+    }
+
+    @Override
+    public BaseDto loadOperatorIdByUsername(UUID authUserId, Integer roleId) {
+        switch (roleId) {
+            case UserRole.Constants.ROLE_USER:
+                return iUserRepository.getUserFromAuthUserId(authUserId);
+            default:
+                return iCoordinatorRepository.getCoordinatorFromAuthUserId(authUserId);
         }
     }
 }

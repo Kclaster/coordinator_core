@@ -1,7 +1,7 @@
 package com.coordinate.security.service;
 
 import com.coordinate.model.security.AuthUserRequest;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.coordinate.model.user.AuthUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.UUID;
@@ -9,5 +9,5 @@ import java.util.UUID;
 public interface IAuthUserService extends UserDetailsService {
     UUID registerNewUserAccount(AuthUserRequest authUserRequest) throws Exception;
 
-    UserDetails loadUserByUsername(String username);
+    AuthUser loadUserByUsername(String username);
 }

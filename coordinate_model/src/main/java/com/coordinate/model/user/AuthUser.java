@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
-public class User implements UserDetails {
+public class AuthUser implements UserDetails {
     private final UUID id;
     private final Set<? extends GrantedAuthority> grantedAuthorities;
     private final String password;
@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private final boolean isEnabled;
 
 
-    public User(
+    public AuthUser(
             UUID id,
             String username,
             String password,

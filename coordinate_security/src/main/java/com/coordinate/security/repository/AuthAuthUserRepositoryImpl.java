@@ -2,7 +2,7 @@ package com.coordinate.security.repository;
 
 import com.coordinate.model.helpers.SqlHelper;
 import com.coordinate.model.security.AuthUserRequest;
-import com.coordinate.model.user.User;
+import com.coordinate.model.user.AuthUser;
 import com.coordinate.security.mapper.AuthUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,17 +29,17 @@ public class AuthAuthUserRepositoryImpl implements IAuthUserRepository {
     }
 
     @Override
-    public Optional<User> selectUserByUsername(String username) {
+    public Optional<AuthUser> selectUserByUsername(String username) {
         String sql = SqlHelper.sql("select-auth-user");
         try {
-            List<User> authUserEntities = jdbcTemplate.query(
+            List<AuthUser> authAuthUserEntities = jdbcTemplate.query(
                     sql,
                     new AuthUserMapper(),
                     username
             );
 
-            if (authUserEntities.size() == 1) {
-                return Optional.of(authUserEntities.get(0));
+            if (authAuthUserEntities.size() == 1) {
+                return Optional.of(authAuthUserEntities.get(0));
             }
             return Optional.empty();
         } catch (Exception e) {
