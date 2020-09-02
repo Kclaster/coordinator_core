@@ -1,0 +1,4 @@
+## Clear Database
+heroku pg:reset DATABASE_URL --app coordinate-core --confirm coordinate-core
+## Import Changes to Database
+PGUSER=postgres PGPASSWORD=Elijah@2018 heroku pg:push coordinate DATABASE_URL --app coordinate-core
