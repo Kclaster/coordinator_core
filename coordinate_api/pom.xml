@@ -95,7 +95,7 @@
                         <archive>
                             <manifest>
                                 <mainClass>
-                                    com.coordinate.api.CoreApplication
+                                    com.coordinator.api.CoreApplication
                                 </mainClass>
                             </manifest>
                         </archive>
