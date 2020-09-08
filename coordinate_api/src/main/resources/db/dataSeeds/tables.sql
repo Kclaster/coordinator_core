@@ -10,7 +10,13 @@ DROP TABLE IF EXISTS bids CASCADE;
 DROP TABLE IF EXISTS auth_user_roles CASCADE;
 DROP TABLE IF EXISTS auth_users CASCADE;
 DROP TABLE IF EXISTS zip_codes CASCADE;
+DROP TABLE IF EXISTS event_size_type CASCADE;
+DROP TABLE IF EXISTS service_date_place CASCADE;
+DROP TABLE IF EXISTS event_desired_service CASCADE;
+DROP TABLE IF EXISTS event_desired_service_service_date_place CASCADE;
 DROP TABLE IF EXISTS coordinators_zip_codes CASCADE;
+DROP TABLE IF EXISTS event_desired_service_data CASCADE;
+DROP TABLE IF EXISTS service_type CASCADE;
 
 
 CREATE TABLE event_types
@@ -25,18 +31,6 @@ CREATE TABLE desired_services
     id integer PRIMARY KEY NOT NULL,
     title varchar(30) NOT NULL,
     description varchar(300)
-);
-
-CREATE TABLE venues
-(
-    id uuid PRIMARY KEY NOT NULL,
-    title varchar(30) NOT NULL,
-    state varchar(2) NOT NULL,
-    city varchar(30) NOT NULL,
-    street_address varchar(30) NOT NULL,
-    postal_code varchar(9) NOT NULL,
-    is_meal_provided boolean,
-    is_archived boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE auth_user_roles
@@ -96,17 +90,79 @@ CREATE TABLE users
     auth_user_id uuid REFERENCES auth_users (id)
 );
 
+CREATE TABLE event_size_type
+(
+    id integer PRIMARY KEY NOT NULL,
+    title varchar(30)
+);
+
+CREATE TABLE service_type
+(
+    id integer PRIMARY KEY NOT NULL,
+    title varchar(30)
+);
+
+CREATE TABLE service_date_place
+(
+    id uuid PRIMARY KEY NOT NULL,
+    address varchar(30),
+    zip_code varchar(10),
+    title varchar(30),
+    contact_phone_number varchar(30),
+    service_date timestamptz,
+    is_selected bool,
+    service_type_id integer REFERENCES service_type (id)
+);
+
+CREATE TABLE event_desired_service_data
+(
+    id uuid PRIMARY KEY NOT NULL,
+    service_type_id integer REFERENCES service_type (id)
+);
+
+CREATE TABLE event_desired_service
+(
+    id uuid PRIMARY KEY NOT NULL,
+    floral bool,
+    dress bool,
+    party_attire bool,
+    catering bool,
+    security bool,
+    bar bool,
+    photographer bool,
+    videographer bool,
+    musician bool,
+    cosmetician bool,
+    baby_sitter bool,
+    other bool,
+    budget_planning bool,
+    cleanup bool,
+    seating_chart bool,
+    scheduling bool,
+    party_gifts bool,
+    invitations_and_responses bool
+);
+
+CREATE TABLE event_desired_service_service_date_place
+(
+    id uuid PRIMARY KEY NOT NULL,
+    event_desired_service_id uuid REFERENCES event_desired_service_data (id),
+    service_date_place_id uuid REFERENCES service_date_place (id)
+);
+
 CREATE TABLE events
 (
     id uuid PRIMARY KEY NOT NULL,
     event_end_date timestamptz,
     event_start_date timestamptz,
-    event_size integer,
+    event_size integer REFERENCES event_size_type (id),
     user_id UUID NOT NULL REFERENCES users (id),
     event_type_id integer NOT NULL REFERENCES event_types (id),
+    -- event_desired_services represents all the services required
+    event_desired_services_data_id uuid REFERENCES event_desired_service (id),
+    -- desired_service represents either dayOf, partial, full service
     desired_service_id integer REFERENCES desired_services (id),
     additional_user_comments varchar(300),
-    venue_id uuid REFERENCES venues (id),
     desired_state varchar(2),
     desired_city varchar(30),
     desired_postal_code varchar(9),

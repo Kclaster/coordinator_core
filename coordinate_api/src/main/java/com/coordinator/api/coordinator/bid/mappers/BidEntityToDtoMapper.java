@@ -35,7 +35,6 @@ public class BidEntityToDtoMapper implements RowMapper<CoordinatorBidDto> {
         event.setEventSize(rs.getInt("eventSize"));
         event.setEventTypeId(rs.getInt("eventTypeId"));
         event.setId(UUID.fromString(rs.getString("id")));
-        event.setVenueId(venueId != null ? UUID.fromString(venueId) : null);
         event.setArchived(rs.getBoolean("isArchived"));
         coordinatorBidDto.setEvent(event);
 

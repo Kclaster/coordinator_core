@@ -1,7 +1,6 @@
 package com.coordinator.api.users.event.repository;
 
-import com.coordinate.model.event.EventDto;
-import com.coordinate.model.event.ImmutableEventEntity;
+import com.coordinate.model.event.*;
 import com.coordinator.api.general.main.helpers.SqlHelper;
 import com.coordinator.api.users.event.mappers.EventEntityToDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +62,86 @@ public class EventsRepositoryImpl implements IEventsRepository {
         params.put("desiredState", eventEntity.getDesiredState());
         params.put("desiredCity", eventEntity.getDesiredCity());
         params.put("desiredPostalCode", eventEntity.getDesiredPostalCode());
-        params.put("venueId", eventEntity.getVenueId());
         params.put("coordinatorId", eventEntity.getCoordinatorId());
         params.put("userId", userId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void addServicesToEvents(UUID eventId, UUID desiredServiceId) {
+        String sql = SqlHelper.sql("update-event-add-event-desired-service");
+
+        var params = new HashMap<String, Object>();
+        params.put("eventId", eventId);
+        params.put("eventDesiredServiceDataId", desiredServiceId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void addEventDesiredServiceServiceDatePlace(UUID eventDesiredServiceId, UUID serviceDatePlaceId) {
+        String sql = SqlHelper.sql("insert-event-desired-service-service-date-place");
+
+        var params = new HashMap<String, Object>();
+        params.put("id", UUID.randomUUID());
+        params.put("eventDesiredServiceId", eventDesiredServiceId);
+        params.put("serviceDatePlaceId", serviceDatePlaceId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void createEventDesiredService(ImmutableEventDesiredServiceEntity eventServicesPostRequest) {
+        String sql = SqlHelper.sql("insert-event-desired-service");
+
+        var params = new HashMap<String, Object>();
+        params.put("eventDesiredServiceId", eventServicesPostRequest.getId());
+        params.put("floral", eventServicesPostRequest.getFloral());
+        params.put("dress", eventServicesPostRequest.getDress());
+        params.put("partyAttire", eventServicesPostRequest.getPartyAttire());
+        params.put("catering", eventServicesPostRequest.getCatering());
+        params.put("security", eventServicesPostRequest.getSecurity());
+        params.put("bar", eventServicesPostRequest.getBar());
+        params.put("photographer", eventServicesPostRequest.getPhotographer());
+        params.put("videographer", eventServicesPostRequest.getVideographer());
+        params.put("musician", eventServicesPostRequest.getMusician());
+        params.put("cosmetician", eventServicesPostRequest.getCosmetician());
+        params.put("babySitter", eventServicesPostRequest.getBabySitter());
+        params.put("other", eventServicesPostRequest.getOther());
+        params.put("budgetPlanning", eventServicesPostRequest.getBudgetPlanning());
+        params.put("cleanup", eventServicesPostRequest.getCleanup());
+        params.put("seatingChart", eventServicesPostRequest.getSeatingChart());
+        params.put("scheduling", eventServicesPostRequest.getScheduling());
+        params.put("partyGifts", eventServicesPostRequest.getPartyGifts());
+        params.put("invitationsAndResponses", eventServicesPostRequest.getInvitationsAndResponses());
+
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    public void createEventDesiredServiceData(UUID eventDesiredServiceDataID, Integer serviceTypeId) {
+        String sql = SqlHelper.sql("insert-event-desired-service-data");
+
+        var params = new HashMap<String, Object>();
+        params.put("id", eventDesiredServiceDataID);
+        params.put("serviceTypeId", serviceTypeId);
+
+        namedParameterJdbcTemplate.update(sql, params);
+    }
+
+    @Override
+    public void createServiceDatePlace(UUID serviceDatePlaceId, ImmutableServiceDatePlaceEntity serviceDatePlaceEntity) {
+        String sql = SqlHelper.sql("insert-service-date-place");
+
+        var params = new HashMap<String, Object>();
+        params.put("serviceDatePlaceId", serviceDatePlaceId);
+        params.put("address", serviceDatePlaceEntity.getAddress());
+        params.put("zipCode", serviceDatePlaceEntity.getZipCode());
+        params.put("title", serviceDatePlaceEntity.getTitle());
+        params.put("contactPhoneNumber", serviceDatePlaceEntity.getContactPhoneNumber());
+        params.put("serviceDate", serviceDatePlaceEntity.getServiceDate());
+        params.put("isSelected", serviceDatePlaceEntity.getIsSelected());
 
         namedParameterJdbcTemplate.update(sql, params);
     }

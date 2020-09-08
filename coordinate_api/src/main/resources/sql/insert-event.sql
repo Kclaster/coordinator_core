@@ -9,7 +9,6 @@ INSERT INTO events (
     , desired_state
     , desired_city
     , desired_postal_code
-    , venue_id
     , is_archived
     , user_id
     )
@@ -24,7 +23,6 @@ INSERT INTO events (
     , :desiredState
     , :desiredCity
     , :desiredPostalCode
-    , :venueId
     , 'false'
     , :userId
 )

@@ -12,7 +12,6 @@ public class EventDto {
     private Integer eventTypeId;
     private Integer desiredServiceId;
     private String additionalUserComments;
-    private UUID venueId;
     private String desiredState;
     private String desiredCity;
     private String desiredPostalCode;
@@ -73,14 +72,6 @@ public class EventDto {
 
     public void setAdditionalUserComments(String additionalUserComments) {
         this.additionalUserComments = additionalUserComments;
-    }
-
-    public UUID getVenueId() {
-        return venueId;
-    }
-
-    public void setVenueId(UUID venueId) {
-        this.venueId = venueId;
     }
 
     public String getDesiredState() {

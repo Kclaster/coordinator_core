@@ -7,10 +7,6 @@ INSERT INTO event_types (id, title, description) VALUES
 (1, 'Wedding', 'Getting hitched'),
 (2, 'Corporate', 'Celebrate that money');
 
-INSERT INTO venues (id, title, state, city, street_address, postal_code, is_meal_provided, is_archived) VALUES
-('9e2d7974-a127-11ea-bb37-0242ac130002', 'Hogwarts', 'UK', 'London', '1234 Hogsmead', '4321', FALSE, FALSE),
-('9e2d7974-a127-11ea-bb37-0242ac130012', 'The Woods', 'OK', 'Tulsa', '4323 JustUnderTheBridge', '7594', TRUE, FALSE);
-
 INSERT INTO auth_user_roles (id, title) VALUES
 (1, 'admin'),
 (2, 'user'),
@@ -45,10 +41,29 @@ INSERT INTO users (id, name, contact_email, contact_phone_number, is_archived, a
 ('7e2d7974-a127-11ea-bb37-0242ac130004', 'Andrew', 'andrew@gmail.com', '6666666666', FALSE, '8e2d7974-a148-11ea-bb37-1242ac130004'),
 ('6e2d7974-a127-11ea-bb37-0242ac130004', 'Adnan', 'adnan@gmail.com', '4444444444', FALSE, '8e2d7974-a158-11ea-bb37-2342ac130004');
 
-INSERT INTO events (id, user_id, event_start_date, event_size, event_type_id, desired_service_id, additional_user_comments, venue_id, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
-('9e2d7974-a127-11ea-bb37-0242ac130003', '8e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130002', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
-('9e2d7974-a127-11ea-bb37-0242ac130004', '7e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
-('9e2d7974-a127-11ea-bb37-0242ac130005', '6e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 120, 1, 1,'all white', '9e2d7974-a127-11ea-bb37-0242ac130012', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);
+INSERT INTO service_type VALUES
+(1, 'floral'),
+(2, 'dress'),
+(3, 'party attire'),
+(4, 'catering'),
+(5, 'security'),
+(6, 'bar'),
+(7, 'photographer'),
+(8, 'videographer'),
+(9, 'musician'),
+(10, 'cosmetician'),
+(11, 'baby sitter'),
+(12, 'other');
+
+INSERT INTO event_size_type(id, title) VALUES
+(1, '0-50'),
+(2, '51-100'),
+(3, '101-150');
+
+INSERT INTO events (id, user_id, event_start_date, event_size, event_type_id, desired_service_id, additional_user_comments, desired_state, desired_city, desired_postal_code, coordinator_id, is_archived) VALUES
+('9e2d7974-a127-11ea-bb37-0242ac130003', '8e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 1, 1, 1,'all white', 'TX', 'Dallas', '75761', '9e2d7973-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130004', '7e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 1, 1, 1,'all white', 'TX', 'Dallas', '75761', '9e2d7975-a127-11ea-bb37-0242ac130002', FALSE),
+('9e2d7974-a127-11ea-bb37-0242ac130005', '6e2d7974-a127-11ea-bb37-0242ac130004', NOW() + interval '110 days', 1, 1, 1,'all white', 'TX', 'Dallas', '75761', '9e2d7976-a127-11ea-bb37-0242ac130002', FALSE);
 
 INSERT INTO roles (id, title) VALUES
 (1, 'bride'),

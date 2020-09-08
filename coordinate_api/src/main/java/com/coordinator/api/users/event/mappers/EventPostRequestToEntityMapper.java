@@ -12,7 +12,7 @@ public class EventPostRequestToEntityMapper {
         Long eventEndDate = eventPostRequest.getEventEndDate();
 
 
-        ImmutableEventEntity eventEntity = ImmutableEventEntity.builder()
+        return ImmutableEventEntity.builder()
                 .id(UUID.randomUUID())
                 .eventStartDate(eventStartDate != null ? new Timestamp(eventStartDate) : null)
                 .eventEndDate(eventEndDate != null ? new Timestamp(eventEndDate) : null)
@@ -23,11 +23,8 @@ public class EventPostRequestToEntityMapper {
                 .desiredState(eventPostRequest.getDesiredState())
                 .desiredCity(eventPostRequest.getDesiredCity())
                 .desiredPostalCode(eventPostRequest.getDesiredPostalCode())
-                .venueId(eventPostRequest.getVenueId())
                 .coordinatorId(eventPostRequest.getCoordinatorId())
                 .build();
-
-        return eventEntity;
     }
 
 }

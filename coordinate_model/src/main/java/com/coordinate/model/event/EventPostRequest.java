@@ -23,7 +23,6 @@ public class EventPostRequest {
     private String desiredPostalCode;
     private Long eventStartDate;
     private Long eventEndDate;
-    private UUID venueId;
     private UUID coordinatorId;
     private int desiredServiceId;
     private int eventSize;
@@ -84,14 +83,6 @@ public class EventPostRequest {
 
     public void setEventEndDate(Long eventEndDate) {
         this.eventEndDate = eventEndDate;
-    }
-
-    public UUID getVenueId() {
-        return venueId;
-    }
-
-    public void setVenueId(UUID venueId) {
-        this.venueId = venueId;
     }
 
     public UUID getCoordinatorId() {
