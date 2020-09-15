@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Value.Immutable
 public abstract class ServiceDatePlaceEntity {
-    public abstract UUID getId();
     public abstract @Nullable String getAddress();
     public abstract @Nullable String getZipCode();
     public abstract @Nullable String getTitle();

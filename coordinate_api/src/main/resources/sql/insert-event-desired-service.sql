@@ -18,6 +18,7 @@ INSERT INTO event_desired_service (
     , scheduling
     , party_gifts
     , invitations_and_responses
+    , event_id
 ) VALUES (
     :eventDesiredServiceId
     , :floral
@@ -38,4 +39,5 @@ INSERT INTO event_desired_service (
     , :scheduling
     , :partyGifts
     , :invitationsAndResponses
+    , :eventId
 )

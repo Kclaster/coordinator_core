@@ -6,9 +6,9 @@ import com.coordinate.model.event.ImmutableEventDesiredServiceEntity;
 import java.util.UUID;
 
 public class EventServicePostRequestToEventDesiredServiceEntity {
-    public static ImmutableEventDesiredServiceEntity mapEventRequestToDesiredServiceEntity(UUID desiredServiceId, EventServicesPostRequest eventServicesPostRequest) {
+    public static ImmutableEventDesiredServiceEntity mapEventRequestToDesiredServiceEntity(EventServicesPostRequest eventServicesPostRequest) {
         return ImmutableEventDesiredServiceEntity.builder()
-                .id(desiredServiceId)
+                .id(UUID.randomUUID())
                 .floral(eventServicesPostRequest.getShouldProvideFloral())
                 .dress(eventServicesPostRequest.getShouldProvideDress())
                 .partyAttire(eventServicesPostRequest.getShouldProvidePartyAttire())

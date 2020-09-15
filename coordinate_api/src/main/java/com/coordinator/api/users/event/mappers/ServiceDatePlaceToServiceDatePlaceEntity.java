@@ -7,11 +7,10 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class ServiceDatePlaceToServiceDatePlaceEntity {
-    public static ImmutableServiceDatePlaceEntity mapServiceDatePlaceToServiceDatePlaceEntity(UUID desiredServiceId, ServiceDatePlace serviceDatePlace) {
+    public static ImmutableServiceDatePlaceEntity mapServiceDatePlaceToServiceDatePlaceEntity(ServiceDatePlace serviceDatePlace) {
         var serviceDate = serviceDatePlace.getServiceDate();
 
         return ImmutableServiceDatePlaceEntity.builder()
-                .id(desiredServiceId)
                 .address(serviceDatePlace.getAddress())
                 .zipCode(serviceDatePlace.getZipCode())
                 .title(serviceDatePlace.getTitle())

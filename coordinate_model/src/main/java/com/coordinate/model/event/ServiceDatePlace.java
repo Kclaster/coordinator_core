@@ -2,9 +2,6 @@ package com.coordinate.model.event;
 
 import org.immutables.value.Value;
 
-import java.util.Date;
-import java.util.UUID;
-
 @Value.Immutable
 public class ServiceDatePlace {
     private String address;

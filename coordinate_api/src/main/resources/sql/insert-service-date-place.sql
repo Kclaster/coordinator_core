@@ -7,6 +7,7 @@ INSERT INTO service_date_place
     , contact_phone_number
     , service_date
     , is_selected
+    , service_type_id
 ) VALUES (
     :serviceDatePlaceId
     , :address
@@ -15,4 +16,5 @@ INSERT INTO service_date_place
     , :contactPhoneNumber
     , :serviceDate
     , :isSelected
+    , :serviceTypeId
 )

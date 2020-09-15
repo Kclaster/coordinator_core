@@ -14,7 +14,7 @@ public interface IEventsRepository {
 
     void addServicesToEvents(UUID eventId, UUID desiredServiceId);
 
-    void createEventDesiredService(ImmutableEventDesiredServiceEntity eventServicesPostRequest);
+    void createEventDesiredService(UUID eventId, ImmutableEventDesiredServiceEntity eventServicesPostRequest);
 
     void addEventDesiredServiceServiceDatePlace(UUID eventDesiredServiceId, UUID serviceDatePlaceId);
 

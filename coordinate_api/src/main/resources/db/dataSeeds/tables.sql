@@ -120,6 +120,33 @@ CREATE TABLE event_desired_service_data
     service_type_id integer REFERENCES service_type (id)
 );
 
+CREATE TABLE event_desired_service_service_date_place
+(
+    id uuid PRIMARY KEY NOT NULL,
+    event_desired_service_id uuid REFERENCES event_desired_service_data (id),
+    service_date_place_id uuid REFERENCES service_date_place (id)
+);
+
+CREATE TABLE events
+(
+    id uuid PRIMARY KEY NOT NULL,
+    event_end_date timestamptz,
+    event_start_date timestamptz,
+    event_size integer REFERENCES event_size_type (id),
+    user_id UUID NOT NULL REFERENCES users (id),
+    event_type_id integer NOT NULL REFERENCES event_types (id),
+    -- event_desired_services represents all the services required
+    event_desired_services_data_id uuid REFERENCES event_desired_service_data (id),
+    -- desired_service represents either dayOf, partial, full service
+    desired_service_id integer REFERENCES desired_services (id),
+    additional_user_comments varchar(300),
+    desired_state varchar(2),
+    desired_city varchar(30),
+    desired_postal_code varchar(9),
+    coordinator_id uuid REFERENCES coordinators (id),
+    is_archived boolean NOT NULL DEFAULT FALSE
+);
+
 CREATE TABLE event_desired_service
 (
     id uuid PRIMARY KEY NOT NULL,
@@ -140,34 +167,8 @@ CREATE TABLE event_desired_service
     seating_chart bool,
     scheduling bool,
     party_gifts bool,
-    invitations_and_responses bool
-);
-
-CREATE TABLE event_desired_service_service_date_place
-(
-    id uuid PRIMARY KEY NOT NULL,
-    event_desired_service_id uuid REFERENCES event_desired_service_data (id),
-    service_date_place_id uuid REFERENCES service_date_place (id)
-);
-
-CREATE TABLE events
-(
-    id uuid PRIMARY KEY NOT NULL,
-    event_end_date timestamptz,
-    event_start_date timestamptz,
-    event_size integer REFERENCES event_size_type (id),
-    user_id UUID NOT NULL REFERENCES users (id),
-    event_type_id integer NOT NULL REFERENCES event_types (id),
-    -- event_desired_services represents all the services required
-    event_desired_services_data_id uuid REFERENCES event_desired_service (id),
-    -- desired_service represents either dayOf, partial, full service
-    desired_service_id integer REFERENCES desired_services (id),
-    additional_user_comments varchar(300),
-    desired_state varchar(2),
-    desired_city varchar(30),
-    desired_postal_code varchar(9),
-    coordinator_id uuid REFERENCES coordinators (id),
-    is_archived boolean NOT NULL DEFAULT FALSE
+    invitations_and_responses bool,
+    event_id uuid REFERENCES events (id)
 );
 
 CREATE TABLE roles

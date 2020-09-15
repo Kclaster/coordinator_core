@@ -92,7 +92,7 @@ public class EventsRepositoryImpl implements IEventsRepository {
     }
 
     @Override
-    public void createEventDesiredService(ImmutableEventDesiredServiceEntity eventServicesPostRequest) {
+    public void createEventDesiredService(UUID eventId, ImmutableEventDesiredServiceEntity eventServicesPostRequest) {
         String sql = SqlHelper.sql("insert-event-desired-service");
 
         var params = new HashMap<String, Object>();
@@ -115,6 +115,7 @@ public class EventsRepositoryImpl implements IEventsRepository {
         params.put("scheduling", eventServicesPostRequest.getScheduling());
         params.put("partyGifts", eventServicesPostRequest.getPartyGifts());
         params.put("invitationsAndResponses", eventServicesPostRequest.getInvitationsAndResponses());
+        params.put("eventId", eventId);
 
 
         namedParameterJdbcTemplate.update(sql, params);
@@ -142,6 +143,7 @@ public class EventsRepositoryImpl implements IEventsRepository {
         params.put("contactPhoneNumber", serviceDatePlaceEntity.getContactPhoneNumber());
         params.put("serviceDate", serviceDatePlaceEntity.getServiceDate());
         params.put("isSelected", serviceDatePlaceEntity.getIsSelected());
+        params.put("serviceTypeId", serviceDatePlaceEntity.getServiceTypeId());
 
         namedParameterJdbcTemplate.update(sql, params);
     }

@@ -4,12 +4,9 @@ import com.coordinate.model.event.*;
 import com.coordinator.api.users.event.mappers.EventServicePostRequestToEventDesiredServiceEntity;
 import com.coordinator.api.users.event.mappers.ServiceDatePlaceToServiceDatePlaceEntity;
 import com.coordinator.api.users.event.repository.IEventsRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.UUID;
 
 import static com.coordinator.api.users.event.mappers.EventPostRequestToEntityMapper.mapEventRequestToEntity;
@@ -42,30 +39,26 @@ public class EventImpl implements IEvent {
 
     @Override
     public void createEventService(UUID eventId, EventServicesPostRequest eventServicesPostRequest) {
-        var desiredServiceId = UUID.randomUUID();
-        var eventDesiredServiceEntity = EventServicePostRequestToEventDesiredServiceEntity.mapEventRequestToDesiredServiceEntity(desiredServiceId, eventServicesPostRequest);
+        // TODO: serviceTypeId is not being populated in the service_date_place
+        var eventDesiredServiceEntity = EventServicePostRequestToEventDesiredServiceEntity.mapEventRequestToDesiredServiceEntity(eventServicesPostRequest);
 
-        iEventsRepository.createEventDesiredService(eventDesiredServiceEntity);
+        eventServicesPostRequest.getServiceDatePlace().forEach(floralServiceDatePlace -> saveServiceDatePlace(eventId, floralServiceDatePlace));
 
-        eventServicesPostRequest.getServiceDatePlace().forEach(floralServiceDatePlace -> saveServiceDatePlace(desiredServiceId, floralServiceDatePlace));
-
-        iEventsRepository.addServicesToEvents(eventId, desiredServiceId);
-
+        iEventsRepository.createEventDesiredService(eventId, eventDesiredServiceEntity);
     }
 
-    private void saveServiceDatePlace(UUID desiredServiceId, ServiceDatePlace serviceDatePlace) {
+    private void saveServiceDatePlace(UUID eventId, ServiceDatePlace serviceDatePlace) {
         var serviceDatePlaceId = UUID.randomUUID();
         var eventDesiredServiceDataId = UUID.randomUUID();
-        var serviceDatePlaceEntity = ServiceDatePlaceToServiceDatePlaceEntity.mapServiceDatePlaceToServiceDatePlaceEntity(desiredServiceId, serviceDatePlace);
+        var serviceDatePlaceEntity = ServiceDatePlaceToServiceDatePlaceEntity.mapServiceDatePlaceToServiceDatePlaceEntity(serviceDatePlace);
 
         iEventsRepository.createServiceDatePlace(serviceDatePlaceId, serviceDatePlaceEntity);
 
         iEventsRepository.createEventDesiredServiceData(eventDesiredServiceDataId, serviceDatePlaceEntity.getServiceTypeId());
 
+        iEventsRepository.addServicesToEvents(eventId, eventDesiredServiceDataId);
+
         iEventsRepository.addEventDesiredServiceServiceDatePlace(eventDesiredServiceDataId, serviceDatePlaceId);
     }
-
-
-
 
 }
